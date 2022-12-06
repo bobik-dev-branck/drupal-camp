@@ -1,0 +1,29 @@
+uuid: c6a44202-da12-4cac-bcd8-8b906d5f801c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_special_content
+    - node.type.newsweek_article
+    - taxonomy.vocabulary.special_content
+id: node.newsweek_article.field_special_content
+field_name: field_special_content
+entity_type: node
+bundle: newsweek_article
+label: 'Special content'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      special_content: special_content
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference
