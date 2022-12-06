@@ -27,3 +27,4 @@ web/sites/simpletest
 .env
 
 .idea/
+*.sql
