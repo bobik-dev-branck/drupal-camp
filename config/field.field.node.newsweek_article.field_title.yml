@@ -1,0 +1,21 @@
+uuid: 883ac832-6e4e-4f2e-a097-0604c592e5c3
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_title
+    - node.type.newsweek_article
+  module:
+    - options
+id: node.newsweek_article.field_title
+field_name: field_title
+entity_type: node
+bundle: newsweek_article
+label: Title
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string
