@@ -1,0 +1,8 @@
+uuid: 6c9971ce-c6c4-4b63-8e6d-7c3961bc81e9
+langcode: en
+status: true
+dependencies: {  }
+name: 'Special content'
+vid: special_content
+description: 'Special content only our site'
+weight: 0
