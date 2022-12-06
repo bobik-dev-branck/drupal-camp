@@ -1,9 +1,10 @@
-uuid: df6e94af-1317-44dc-b44a-bab08e0e2001
+uuid: 4c1f0b99-d656-40c4-a004-ae25d604309f
 langcode: en
 status: true
 dependencies:
   config:
     - core.entity_view_display.comment.comment.default
+    - core.entity_view_mode.node.full
     - field.field.node.newsweek_article.body
     - field.field.node.newsweek_article.comment
     - field.field.node.newsweek_article.field_main_image
@@ -13,20 +14,26 @@ dependencies:
     - node.type.newsweek_article
   module:
     - comment
+    - layout_builder
+    - media
     - options
     - text
     - user
-id: node.newsweek_article.default
+third_party_settings:
+  layout_builder:
+    enabled: false
+    allow_custom: false
+id: node.newsweek_article.full
 targetEntityType: node
 bundle: newsweek_article
-mode: default
+mode: full
 content:
   body:
     type: text_default
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    weight: 4
+    weight: 3
     region: content
   comment:
     type: comment_default
@@ -35,43 +42,34 @@ content:
       view_mode: default
       pager_id: 0
     third_party_settings: {  }
-    weight: 5
+    weight: 4
     region: content
   field_main_image:
-    type: entity_reference_entity_view
-    label: above
+    type: media_thumbnail
+    label: hidden
     settings:
-      view_mode: default
-      link: false
-    third_party_settings: {  }
-    weight: 1
-    region: content
-  field_special_content:
-    type: entity_reference_label
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 6
-    region: content
-  field_tags:
-    type: entity_reference_label
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 2
-    region: content
-  field_title:
-    type: list_default
-    label: above
-    settings: {  }
-    third_party_settings: {  }
-    weight: 3
-    region: content
-  links:
-    settings: {  }
+      image_link: ''
+      image_style: ''
+      image_loading:
+        attribute: lazy
     third_party_settings: {  }
     weight: 0
     region: content
-hidden: {  }
+  field_tags:
+    type: entity_reference_label
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_title:
+    type: list_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 2
+    region: content
+hidden:
+  field_special_content: true
+  links: true
