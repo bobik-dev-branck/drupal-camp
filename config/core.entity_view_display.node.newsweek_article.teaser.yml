@@ -14,6 +14,7 @@ dependencies:
   module:
     - media
     - options
+    - text
     - user
 id: node.newsweek_article.teaser
 targetEntityType: node
@@ -46,8 +47,20 @@ content:
     third_party_settings: {  }
     weight: 2
     region: content
+  body:
+    type: text_summary_or_trimmed
+    label: hidden
+    settings:
+      trim_length: 600
+    third_party_settings: {  }
+    weight: 101
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
 hidden:
-  body: true
   comment: true
   field_special_content: true
   links: true
