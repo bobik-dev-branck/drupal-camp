@@ -1,0 +1,10 @@
+uuid: 40b0f791-8a3e-49e1-84f3-b13b0b1d5517
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.meta_info
+label: Meta-info
+targetEntityType: node
+cache: true
