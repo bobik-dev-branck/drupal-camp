@@ -14,6 +14,7 @@ dependencies:
   module:
     - media
     - options
+    - text
     - user
 id: node.newsweek_article.teaser
 targetEntityType: node
@@ -30,6 +31,21 @@ content:
         attribute: lazy
     third_party_settings: {  }
     weight: 0
+    region: content
+  field_tags:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_title:
+    type: list_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 2
     region: content
   field_tags:
     type: entity_reference_label
