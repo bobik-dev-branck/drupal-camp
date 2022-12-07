@@ -1,0 +1,63 @@
+uuid: 66a28c30-1806-4972-8063-a6b812aeb9c4
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser_full
+    - field.field.node.newsweek_article.body
+    - field.field.node.newsweek_article.comment
+    - field.field.node.newsweek_article.field_main_image
+    - field.field.node.newsweek_article.field_special_content
+    - field.field.node.newsweek_article.field_tags
+    - field.field.node.newsweek_article.field_title
+    - node.type.newsweek_article
+  module:
+    - layout_builder
+    - options
+    - text
+    - user
+third_party_settings:
+  layout_builder:
+    enabled: false
+    allow_custom: false
+id: node.newsweek_article.teaser_full
+targetEntityType: node
+bundle: newsweek_article
+mode: teaser_full
+content:
+  body:
+    type: text_summary_or_trimmed
+    label: hidden
+    settings:
+      trim_length: 200
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  field_main_image:
+    type: entity_reference_entity_view
+    label: above
+    settings:
+      view_mode: default
+      link: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_tags:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_title:
+    type: list_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 2
+    region: content
+hidden:
+  comment: true
+  field_special_content: true
+  links: true
