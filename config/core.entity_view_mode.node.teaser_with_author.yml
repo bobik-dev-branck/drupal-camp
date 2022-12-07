@@ -1,0 +1,10 @@
+uuid: c876f1ca-a487-406d-a1bb-02eabc8cd3a5
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.teaser_with_author
+label: 'Teaser with author'
+targetEntityType: node
+cache: true
