@@ -12,6 +12,8 @@ dependencies:
     - field.field.node.newsweek_article.field_title
     - node.type.newsweek_article
   module:
+    - media
+    - options
     - text
     - user
 id: node.newsweek_article.teaser
@@ -19,6 +21,32 @@ targetEntityType: node
 bundle: newsweek_article
 mode: teaser
 content:
+  field_main_image:
+    type: media_thumbnail
+    label: hidden
+    settings:
+      image_link: ''
+      image_style: ''
+      image_loading:
+        attribute: lazy
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_tags:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_title:
+    type: list_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 2
+    region: content
   body:
     type: text_summary_or_trimmed
     label: hidden
@@ -34,7 +62,5 @@ content:
     region: content
 hidden:
   comment: true
-  field_main_image: true
   field_special_content: true
-  field_tags: true
-  field_title: true
+  links: true
