@@ -3,13 +3,16 @@ langcode: en
 status: true
 dependencies:
   config:
+    - media.type.image
     - node.type.article
+    - node.type.newsweek_article
     - node.type.page
     - taxonomy.vocabulary.tags
   module:
     - comment
     - contextual
     - file
+    - media
     - node
     - path
     - system
@@ -31,6 +34,8 @@ permissions:
   - 'access tour'
   - 'administer url aliases'
   - 'create article content'
+  - 'create image media'
+  - 'create newsweek_article content'
   - 'create page content'
   - 'create terms in tags'
   - 'create url aliases'

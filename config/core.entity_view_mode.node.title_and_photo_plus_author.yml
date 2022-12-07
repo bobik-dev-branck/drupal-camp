@@ -1,0 +1,10 @@
+uuid: 70037310-cead-44cd-a614-8a3df7b656ea
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.title_and_photo_plus_author
+label: 'Title and photo plus author'
+targetEntityType: node
+cache: true
