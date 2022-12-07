@@ -1,0 +1,10 @@
+uuid: 9b63e4eb-24df-4c0b-9fbf-323fd8d566a9
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.title_and_photo
+label: 'Title and photo'
+targetEntityType: node
+cache: true
