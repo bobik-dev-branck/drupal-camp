@@ -3,10 +3,15 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.user.user.field_about_author
+    - field.field.user.user.field_home_page
+    - field.field.user.user.field_social_media
     - field.field.user.user.user_picture
     - image.style.thumbnail
   module:
     - image
+    - link
+    - text
     - user
 _core:
   default_config_hash: FaQ9Ptcpxpg30AtiqRDtl_8zbJArHP1LPfug_s59TOA
@@ -21,6 +26,30 @@ content:
   contact:
     weight: 5
     region: content
+  field_about_author:
+    type: text_textfield
+    weight: 7
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_home_page:
+    type: link_default
+    weight: 9
+    region: content
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+  field_social_media:
+    type: link_default
+    weight: 8
+    region: content
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
   language:
     weight: 0
     region: content

@@ -1,0 +1,19 @@
+uuid: dffc1935-30f4-4271-9138-46def9c925b7
+langcode: en
+status: true
+dependencies:
+  module:
+    - link
+    - user
+id: user.field_home_page
+field_name: field_home_page
+entity_type: user
+type: link
+settings: {  }
+module: link
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false
