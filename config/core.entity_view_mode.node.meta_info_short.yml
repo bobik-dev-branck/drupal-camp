@@ -1,0 +1,10 @@
+uuid: 24eb055f-8741-473e-9859-8f40e0384c2f
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.meta_info_short
+label: 'Meta info short'
+targetEntityType: node
+cache: true
