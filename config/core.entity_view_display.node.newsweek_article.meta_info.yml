@@ -32,6 +32,14 @@ content:
     third_party_settings: {  }
     weight: 0
     region: content
+  field_tags:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 2
+    region: content
   field_title:
     type: list_default
     label: above
@@ -43,5 +51,4 @@ hidden:
   body: true
   comment: true
   field_main_image: true
-  field_tags: true
   links: true
