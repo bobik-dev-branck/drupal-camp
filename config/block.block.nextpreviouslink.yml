@@ -1,0 +1,33 @@
+uuid: ad46ca61-d1a6-4545-b76e-4c1758eee298
+langcode: en
+status: true
+dependencies:
+  module:
+    - nextpre
+    - node
+  theme:
+    - olivero
+id: nextpreviouslink
+theme: olivero
+region: content
+weight: -7
+provider: null
+plugin: next_previous_block
+settings:
+  id: next_previous_block
+  label: 'Next Previous link'
+  label_display: visible
+  provider: nextpre
+  content_type: newsweek_article
+  previous_text: 'Previous article'
+  next_text: 'Next article'
+  previouslink_class: nextpre__btn__prev
+  nextlink_class: nextpre__btn__next
+visibility:
+  'entity_bundle:node':
+    id: 'entity_bundle:node'
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'
+    bundles:
+      newsweek_article: newsweek_article
