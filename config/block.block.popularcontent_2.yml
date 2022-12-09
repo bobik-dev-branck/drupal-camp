@@ -1,17 +1,16 @@
-uuid: 0cee6afb-755c-433d-9a89-0af7c6778603
+uuid: 71185785-174a-4412-9083-2ba4755341a7
 langcode: en
 status: true
 dependencies:
   module:
-    - node
     - statistics
     - system
   theme:
     - olivero
-id: popularcontent
+id: popularcontent_2
 theme: olivero
 region: sidebar
-weight: -10
+weight: -8
 provider: null
 plugin: statistics_popular_block
 settings:
@@ -19,18 +18,11 @@ settings:
   label: 'Popular content'
   label_display: visible
   provider: statistics
-  top_day_num: 4
-  top_all_num: 0
+  top_day_num: 0
+  top_all_num: 1
   top_last_num: 0
 visibility:
-  'entity_bundle:node':
-    id: 'entity_bundle:node'
-    negate: false
-    context_mapping:
-      node: '@node.node_route_context:node'
-    bundles:
-      newsweek_article: newsweek_article
   request_path:
     id: request_path
     negate: false
-    pages: '/node/*'
+    pages: '/taxonomy/term/*'

@@ -8,12 +8,13 @@ dependencies:
     - block_content
     - node
     - system
+    - taxonomy
   theme:
     - olivero
 id: subscribe
 theme: olivero
 region: sidebar
-weight: -8
+weight: -12
 provider: null
 plugin: 'block_content:272fbfdd-595d-4af1-8d37-a9a6d526f192'
 settings:
@@ -36,3 +37,10 @@ visibility:
     id: request_path
     negate: false
     pages: '/node/*'
+  'entity_bundle:taxonomy_term':
+    id: 'entity_bundle:taxonomy_term'
+    negate: false
+    context_mapping:
+      taxonomy_term: '@taxonomy_term.taxonomy_term_route_context:taxonomy_term'
+    bundles:
+      tags: tags

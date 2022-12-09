@@ -1,0 +1,30 @@
+uuid: 8a6b9aba-bccd-43b7-8c70-79855a09743a
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:basic:272fbfdd-595d-4af1-8d37-a9a6d526f192'
+  module:
+    - block_content
+    - system
+  theme:
+    - olivero
+id: subscribe_2
+theme: olivero
+region: sidebar
+weight: -7
+provider: null
+plugin: 'block_content:272fbfdd-595d-4af1-8d37-a9a6d526f192'
+settings:
+  id: 'block_content:272fbfdd-595d-4af1-8d37-a9a6d526f192'
+  label: 'Subscribe '
+  label_display: visible
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: '/taxonomy/term/*'
