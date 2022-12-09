@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f0b27dd149a5fbb95d65c6f96932c2dc",
+    "content-hash": "bab30f32ace8ae02800b634904bee54d",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -945,6 +945,51 @@
                 "source": "https://github.com/drupal/core-recommended/tree/9.4.8"
             },
             "time": "2022-10-06T15:57:08+00:00"
+        },
+        {
+            "name": "drupal/nextpre",
+            "version": "9.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/nextpre.git",
+                "reference": "9.0.2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/nextpre-9.0.2.zip",
+                "reference": "9.0.2",
+                "shasum": "cf3ba8029232688423c0906d1925ebf101f19b08"
+            },
+            "require": {
+                "drupal/core": "^8 || ^9 || ^10"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "9.0.2",
+                    "datestamp": "1658677976",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Rohit Rajput (rohit-drupal)",
+                    "homepage": "https://www.drupal.org/u/rohit-drupal",
+                    "role": "Maintainer"
+                }
+            ],
+            "description": "Next and previous link on detail page",
+            "homepage": "https://www.drupal.org/project/nextpre",
+            "support": {
+                "source": "https://git.drupalcode.org/project/nextpre"
+            }
         },
         {
             "name": "egulias/email-validator",
