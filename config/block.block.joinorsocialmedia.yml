@@ -1,0 +1,30 @@
+uuid: 69b0463f-31ed-436d-985d-e5097b9a156e
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:basic:4f9f2605-db6f-4de3-a037-af9592810d02'
+  module:
+    - block_content
+    - system
+  theme:
+    - olivero
+id: joinorsocialmedia
+theme: olivero
+region: content
+weight: -13
+provider: null
+plugin: 'block_content:4f9f2605-db6f-4de3-a037-af9592810d02'
+settings:
+  id: 'block_content:4f9f2605-db6f-4de3-a037-af9592810d02'
+  label: 'JOIN OR SOCIAL MEDIA'
+  label_display: visible
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: '<front>'
