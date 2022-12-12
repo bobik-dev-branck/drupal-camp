@@ -1,23 +1,23 @@
-uuid: 8a6b9aba-bccd-43b7-8c70-79855a09743a
+uuid: 8ddff914-5749-41c2-ac3e-8d587ea47570
 langcode: en
 status: true
 dependencies:
   content:
-    - 'block_content:basic:272fbfdd-595d-4af1-8d37-a9a6d526f192'
+    - 'block_content:basic:ffc0b7fe-91c5-4539-90fc-a4f30bd2e5db'
   module:
     - block_content
     - system
   theme:
     - olivero
-id: subscribe_2
+id: subscribetous
 theme: olivero
 region: sidebar
 weight: -7
 provider: null
-plugin: 'block_content:272fbfdd-595d-4af1-8d37-a9a6d526f192'
+plugin: 'block_content:ffc0b7fe-91c5-4539-90fc-a4f30bd2e5db'
 settings:
-  id: 'block_content:272fbfdd-595d-4af1-8d37-a9a6d526f192'
-  label: 'Subscribe '
+  id: 'block_content:ffc0b7fe-91c5-4539-90fc-a4f30bd2e5db'
+  label: 'subscribe to us'
   label_display: visible
   provider: block_content
   status: true

@@ -1,15 +1,16 @@
-uuid: 14538bb7-f7cc-42a1-939f-1fabc9453bba
+uuid: b42de95e-3c81-4fe5-a78e-dd601466557e
 langcode: en
 status: true
 dependencies:
   config:
+    - core.entity_view_mode.node.title_and_photo_plus_author
     - node.type.newsweek_article
   module:
     - node
     - statistics
     - user
-id: most_popular
-label: 'Most popular'
+id: most_popular_article
+label: 'Most popular article'
 module: views
 description: ''
 tag: ''
@@ -22,7 +23,7 @@ display:
     display_plugin: default
     position: 0
     display_options:
-      title: 'Most popular'
+      title: 'Most popular article'
       fields:
         title:
           id: title
@@ -76,7 +77,7 @@ display:
           table: node_counter
           field: totalcount
           relationship: none
-          group_type: count
+          group_type: group
           admin_label: ''
           plugin_id: statistics_numeric
           label: ''
@@ -208,13 +209,10 @@ display:
       style:
         type: default
       row:
-        type: fields
+        type: 'entity:node'
         options:
-          default_field_elements: true
-          inline:
-            title: title
-          separator: ''
-          hide_empty: false
+          relationship: none
+          view_mode: title_and_photo_plus_author
       query:
         type: views_query
         options:
@@ -224,7 +222,6 @@ display:
           replica: false
           query_tags: {  }
       relationships: {  }
-      group_by: false
       header: {  }
       footer: {  }
       display_extenders: {  }

@@ -3,7 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
-    - core.entity_view_mode.node.teaser_with_author
+    - core.entity_view_mode.node.teaser_full
   module:
     - node
     - taxonomy
@@ -223,7 +223,7 @@ display:
         type: 'entity:node'
         options:
           relationship: none
-          view_mode: teaser_with_author
+          view_mode: teaser_full
       query:
         type: views_query
         options:

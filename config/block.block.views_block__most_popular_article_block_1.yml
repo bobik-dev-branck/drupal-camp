@@ -1,22 +1,22 @@
-uuid: cdb0f0be-a24c-4789-8266-eb7320743b49
+uuid: 71ebcc15-277b-4fad-87c6-ee630c12336d
 langcode: en
 status: true
 dependencies:
   config:
-    - views.view.most_popular
+    - views.view.most_popular_article
   module:
     - system
     - views
   theme:
     - olivero
-id: views_block__most_popular_block_1
+id: views_block__most_popular_article_block_1
 theme: olivero
 region: sidebar
 weight: -9
 provider: null
-plugin: 'views_block:most_popular-block_1'
+plugin: 'views_block:most_popular_article-block_1'
 settings:
-  id: 'views_block:most_popular-block_1'
+  id: 'views_block:most_popular_article-block_1'
   label: ''
   label_display: visible
   provider: views
