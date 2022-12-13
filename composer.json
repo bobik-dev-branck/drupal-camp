@@ -20,7 +20,8 @@
         "drupal/core-composer-scaffold": "^9.4",
         "drupal/core-project-message": "^9.4",
         "drupal/core-recommended": "^9.4",
-        "drupal/nextpre": "^9.0"
+        "drupal/nextpre": "^9.0",
+        "drupal/pathauto": "^1.11"
     },
     "conflict": {
         "drupal/drupal": "*"

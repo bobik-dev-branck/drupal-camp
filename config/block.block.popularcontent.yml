@@ -11,7 +11,7 @@ dependencies:
 id: popularcontent
 theme: olivero
 region: sidebar
-weight: 0
+weight: -10
 provider: null
 plugin: statistics_popular_block
 settings:
