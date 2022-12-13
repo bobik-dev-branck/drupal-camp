@@ -1,0 +1,8 @@
+uuid: fe081e8f-5bdf-4901-afff-1fc75bba2915
+langcode: en
+status: true
+dependencies: {  }
+id: newspaper_theme
+label: 'Newspaper theme'
+revision: 0
+description: ''

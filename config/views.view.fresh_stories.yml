@@ -1,17 +1,15 @@
-uuid: cfb78ab1-4ea3-45c7-bec7-671baec099dd
+uuid: 2b95f18a-8135-4f8a-a6e4-d299dc088181
 langcode: en
 status: true
 dependencies:
   config:
-    - core.entity_view_mode.node.teaser
-    - core.entity_view_mode.node.teaser_full
+    - core.entity_view_mode.node.meta_info
     - node.type.newsweek_article
   module:
     - node
-    - statistics
     - user
-id: main_bloc_mp
-label: 'Main bloc mp'
+id: fresh_stories
+label: 'Fresh stories'
 module: views
 description: ''
 tag: ''
@@ -24,7 +22,7 @@ display:
     display_plugin: default
     position: 0
     display_options:
-      title: 'Main bloc'
+      title: 'Fresh stories'
       fields:
         title:
           id: title
@@ -33,19 +31,35 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
-          entity_type: node
-          entity_field: title
           plugin_id: field
           label: ''
           exclude: false
           alter:
             alter_text: false
+            text: ''
             make_link: false
+            path: ''
             absolute: false
-            word_boundary: false
-            ellipsis: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
             strip_tags: false
             trim: false
+            preserve_tags: ''
             html: false
           element_type: ''
           element_class: ''
@@ -62,7 +76,7 @@ display:
           click_sort_column: value
           type: string
           settings:
-            link_to_entity: true
+            link_to_entity: false
           group_column: value
           group_columns: {  }
           group_rows: true
@@ -74,10 +88,23 @@ display:
           separator: ', '
           field_api_classes: false
       pager:
-        type: some
+        type: mini
         options:
-          offset: 0
-          items_per_page: 1
+          offset: 3
+          items_per_page: 5
+          total_pages: null
+          id: 0
+          tags:
+            next: ››
+            previous: ‹‹
+          expose:
+            items_per_page: false
+            items_per_page_label: 'Items per page'
+            items_per_page_options: '5, 10, 25, 50'
+            items_per_page_options_all: false
+            items_per_page_options_all_label: '- All -'
+            offset: false
+            offset_label: Offset
       exposed_form:
         type: basic
         options:
@@ -97,13 +124,22 @@ display:
         options: {  }
       empty: {  }
       sorts:
-        totalcount:
-          id: totalcount
-          table: node_counter
-          field: totalcount
-          plugin_id: standard
+        created:
+          id: created
+          table: node_field_data
+          field: created
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          entity_field: created
+          plugin_id: date
+          order: DESC
           expose:
-            field_identifier: totalcount
+            label: ''
+            field_identifier: ''
+          exposed: false
+          granularity: second
       arguments: {  }
       filters:
         status:
@@ -136,7 +172,8 @@ display:
       row:
         type: 'entity:node'
         options:
-          view_mode: teaser
+          relationship: none
+          view_mode: meta_info
       query:
         type: views_query
         options:
@@ -155,106 +192,16 @@ display:
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
-        - 'user.node_grants:view'
-        - user.permissions
-      tags: {  }
-  attachment_2:
-    id: attachment_2
-    display_title: 'Second and third last articles'
-    display_plugin: attachment
-    position: 3
-    display_options:
-      pager:
-        type: some
-        options:
-          offset: 1
-          items_per_page: 2
-      sorts:
-        created:
-          id: created
-          table: node_field_data
-          field: created
-          relationship: none
-          group_type: group
-          admin_label: ''
-          entity_type: node
-          entity_field: created
-          plugin_id: date
-          order: DESC
-          expose:
-            label: ''
-            field_identifier: ''
-          exposed: false
-          granularity: second
-      style:
-        type: default
-        options: {  }
-      row:
-        type: 'entity:node'
-        options:
-          relationship: none
-          view_mode: teaser
-      defaults:
-        style: false
-        row: false
-        sorts: false
-      display_description: ''
-      display_extenders: {  }
-      displays:
-        block_1: block_1
-      attachment_position: after
-    cache_metadata:
-      max-age: -1
-      contexts:
-        - 'languages:language_content'
-        - 'languages:language_interface'
+        - url.query_args
         - 'user.node_grants:view'
         - user.permissions
       tags: {  }
   block_1:
     id: block_1
-    display_title: 'Lasted article'
+    display_title: Block
     display_plugin: block
     position: 1
     display_options:
-      sorts:
-        created:
-          id: created
-          table: node_field_data
-          field: created
-          relationship: none
-          group_type: group
-          admin_label: ''
-          entity_type: node
-          entity_field: created
-          plugin_id: date
-          order: DESC
-          expose:
-            label: ''
-            field_identifier: ''
-          exposed: false
-          granularity: second
-      style:
-        type: grid
-        options:
-          uses_fields: false
-          columns: 1
-          automatic_width: true
-          alignment: vertical
-          row_class_custom: ''
-          row_class_default: true
-          col_class_custom: ''
-          col_class_default: true
-      row:
-        type: 'entity:node'
-        options:
-          relationship: none
-          view_mode: teaser_full
-      defaults:
-        style: false
-        row: false
-        sorts: false
-      display_description: ''
       display_extenders: {  }
       block_category: 'main page'
     cache_metadata:
@@ -262,6 +209,7 @@ display:
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
+        - url.query_args
         - 'user.node_grants:view'
         - user.permissions
       tags: {  }

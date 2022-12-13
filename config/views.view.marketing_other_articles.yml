@@ -1,15 +1,19 @@
-uuid: a00aaa69-57e8-40a7-9f7d-192467ae391a
+uuid: 5dcc1fc1-f656-4238-bae4-b2d15869579f
 langcode: en
 status: true
 dependencies:
   config:
-    - core.entity_view_mode.node.meta_info_short
+    - core.entity_view_mode.node.meta_info
     - node.type.newsweek_article
+    - taxonomy.vocabulary.tags
+  content:
+    - 'taxonomy_term:tags:aa8e8544-360b-4b0e-9570-c64331f7d6ed'
   module:
     - node
+    - taxonomy
     - user
-id: random_articles_mp
-label: 'random articles mp'
+id: marketing_other_articles
+label: 'Marketing other articles'
 module: views
 description: ''
 tag: ''
@@ -22,7 +26,7 @@ display:
     display_plugin: default
     position: 0
     display_options:
-      title: 'random articles mp'
+      title: 'Marketing other articles'
       fields:
         title:
           id: title
@@ -74,13 +78,13 @@ display:
       pager:
         type: mini
         options:
-          offset: 0
-          items_per_page: 4
+          offset: 1
+          items_per_page: 5
           total_pages: null
           id: 0
           tags:
-            next: ››
-            previous: ‹‹
+            next: 'Next ›'
+            previous: '‹ Previous'
           expose:
             items_per_page: false
             items_per_page_label: 'Items per page'
@@ -108,19 +112,22 @@ display:
         options: {  }
       empty: {  }
       sorts:
-        random:
-          id: random
-          table: views
-          field: random
+        created:
+          id: created
+          table: node_field_data
+          field: created
           relationship: none
           group_type: group
           admin_label: ''
-          plugin_id: random
-          order: ASC
+          entity_type: node
+          entity_field: created
+          plugin_id: date
+          order: DESC
           expose:
             label: ''
             field_identifier: ''
           exposed: false
+          granularity: second
       arguments: {  }
       filters:
         status:
@@ -148,22 +155,17 @@ display:
           expose:
             operator_limit_selection: false
             operator_list: {  }
-        created:
-          id: created
-          table: node_field_data
-          field: created
+        tid:
+          id: tid
+          table: taxonomy_index
+          field: tid
           relationship: none
           group_type: group
           admin_label: ''
-          entity_type: node
-          entity_field: created
-          plugin_id: date
-          operator: '<='
+          plugin_id: taxonomy_index_tid
+          operator: or
           value:
-            min: ''
-            max: ''
-            value: '+4 hours 0 minutes'
-            type: offset
+            7: 7
           group: 1
           exposed: false
           expose:
@@ -180,9 +182,7 @@ display:
             multiple: false
             remember_roles:
               authenticated: authenticated
-            min_placeholder: ''
-            max_placeholder: ''
-            placeholder: ''
+            reduce: false
           is_grouped: false
           group_info:
             label: ''
@@ -195,22 +195,19 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
+          reduce_duplicates: false
+          vid: tags
+          type: select
+          hierarchy: false
+          limit: true
+          error_message: true
       style:
-        type: grid
-        options:
-          uses_fields: false
-          columns: 4
-          automatic_width: true
-          alignment: horizontal
-          row_class_custom: ''
-          row_class_default: true
-          col_class_custom: ''
-          col_class_default: true
+        type: default
       row:
         type: 'entity:node'
         options:
           relationship: none
-          view_mode: meta_info_short
+          view_mode: meta_info
       query:
         type: views_query
         options:
@@ -225,11 +222,12 @@ display:
       footer: {  }
       display_extenders: {  }
     cache_metadata:
-      max-age: 0
+      max-age: -1
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
         - url.query_args
+        - user
         - 'user.node_grants:view'
         - user.permissions
       tags: {  }
@@ -240,13 +238,13 @@ display:
     position: 1
     display_options:
       display_extenders: {  }
-      block_category: 'main page'
     cache_metadata:
-      max-age: 0
+      max-age: -1
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
         - url.query_args
+        - user
         - 'user.node_grants:view'
         - user.permissions
       tags: {  }

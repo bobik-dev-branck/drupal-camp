@@ -1,17 +1,19 @@
-uuid: cfb78ab1-4ea3-45c7-bec7-671baec099dd
+uuid: 1700144b-6c59-4ed4-a02b-101ad113cb12
 langcode: en
 status: true
 dependencies:
   config:
     - core.entity_view_mode.node.teaser
-    - core.entity_view_mode.node.teaser_full
     - node.type.newsweek_article
+    - taxonomy.vocabulary.tags
+  content:
+    - 'taxonomy_term:tags:aa8e8544-360b-4b0e-9570-c64331f7d6ed'
   module:
     - node
-    - statistics
+    - taxonomy
     - user
-id: main_bloc_mp
-label: 'Main bloc mp'
+id: marketing
+label: Marketing
 module: views
 description: ''
 tag: ''
@@ -24,7 +26,7 @@ display:
     display_plugin: default
     position: 0
     display_options:
-      title: 'Main bloc'
+      title: Marketing
       fields:
         title:
           id: title
@@ -97,13 +99,22 @@ display:
         options: {  }
       empty: {  }
       sorts:
-        totalcount:
-          id: totalcount
-          table: node_counter
-          field: totalcount
-          plugin_id: standard
+        created:
+          id: created
+          table: node_field_data
+          field: created
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          entity_field: created
+          plugin_id: date
+          order: DESC
           expose:
-            field_identifier: totalcount
+            label: ''
+            field_identifier: ''
+          exposed: false
+          granularity: second
       arguments: {  }
       filters:
         status:
@@ -131,6 +142,52 @@ display:
           expose:
             operator_limit_selection: false
             operator_list: {  }
+        tid:
+          id: tid
+          table: taxonomy_index
+          field: tid
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: taxonomy_index_tid
+          operator: or
+          value:
+            7: 7
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: false
+          vid: tags
+          type: select
+          hierarchy: false
+          limit: true
+          error_message: true
       style:
         type: default
       row:
@@ -146,7 +203,6 @@ display:
           replica: false
           query_tags: {  }
       relationships: {  }
-      use_ajax: true
       header: {  }
       footer: {  }
       display_extenders: {  }
@@ -155,113 +211,23 @@ display:
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
-        - 'user.node_grants:view'
-        - user.permissions
-      tags: {  }
-  attachment_2:
-    id: attachment_2
-    display_title: 'Second and third last articles'
-    display_plugin: attachment
-    position: 3
-    display_options:
-      pager:
-        type: some
-        options:
-          offset: 1
-          items_per_page: 2
-      sorts:
-        created:
-          id: created
-          table: node_field_data
-          field: created
-          relationship: none
-          group_type: group
-          admin_label: ''
-          entity_type: node
-          entity_field: created
-          plugin_id: date
-          order: DESC
-          expose:
-            label: ''
-            field_identifier: ''
-          exposed: false
-          granularity: second
-      style:
-        type: default
-        options: {  }
-      row:
-        type: 'entity:node'
-        options:
-          relationship: none
-          view_mode: teaser
-      defaults:
-        style: false
-        row: false
-        sorts: false
-      display_description: ''
-      display_extenders: {  }
-      displays:
-        block_1: block_1
-      attachment_position: after
-    cache_metadata:
-      max-age: -1
-      contexts:
-        - 'languages:language_content'
-        - 'languages:language_interface'
+        - user
         - 'user.node_grants:view'
         - user.permissions
       tags: {  }
   block_1:
     id: block_1
-    display_title: 'Lasted article'
+    display_title: Block
     display_plugin: block
     position: 1
     display_options:
-      sorts:
-        created:
-          id: created
-          table: node_field_data
-          field: created
-          relationship: none
-          group_type: group
-          admin_label: ''
-          entity_type: node
-          entity_field: created
-          plugin_id: date
-          order: DESC
-          expose:
-            label: ''
-            field_identifier: ''
-          exposed: false
-          granularity: second
-      style:
-        type: grid
-        options:
-          uses_fields: false
-          columns: 1
-          automatic_width: true
-          alignment: vertical
-          row_class_custom: ''
-          row_class_default: true
-          col_class_custom: ''
-          col_class_default: true
-      row:
-        type: 'entity:node'
-        options:
-          relationship: none
-          view_mode: teaser_full
-      defaults:
-        style: false
-        row: false
-        sorts: false
-      display_description: ''
       display_extenders: {  }
-      block_category: 'main page'
     cache_metadata:
       max-age: -1
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
+        - user
         - 'user.node_grants:view'
         - user.permissions
       tags: {  }
