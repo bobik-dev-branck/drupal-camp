@@ -508,10 +508,12 @@ display:
           relationship: none
           view_mode: meta_info
       defaults:
+        use_ajax: false
         style: false
         row: false
         filters: false
         filter_groups: false
+      use_ajax: true
       display_description: ''
       display_extenders: {  }
       displays:

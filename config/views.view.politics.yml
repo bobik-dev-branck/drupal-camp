@@ -3,6 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - block.block.newspapertheme
     - core.entity_view_mode.node.meta_info_short
     - core.entity_view_mode.node.title_and_photo_plus_author
     - node.type.newsweek_article
@@ -256,7 +257,22 @@ display:
       defaults:
         style: false
         row: false
+        footer: false
       display_description: ''
+      footer:
+        entity_block:
+          id: entity_block
+          table: views
+          field: entity_block
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: entity
+          empty: false
+          target: newspapertheme
+          view_mode: default
+          tokenize: true
+          bypass_access: false
       display_extenders: {  }
       displays:
         block_1: block_1
