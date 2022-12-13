@@ -1,4 +1,4 @@
-uuid: 129eb06f-45e2-43ad-9c2e-104cb8ac89b9
+uuid: 625456f9-69b5-44bc-9a97-881100157a6b
 langcode: en
 status: true
 dependencies:
@@ -8,12 +8,10 @@ dependencies:
     - system
   theme:
     - olivero
-_core:
-  default_config_hash: gmxYWWHmgbe0Pnv8y48ZLSLH5mEHejOjAP6RLxUfdzU
-id: olivero_account_menu
+id: useraccountmenu
 theme: olivero
-region: secondary_menu
-weight: -4
+region: header
+weight: -10
 provider: null
 plugin: 'system_menu_block:account'
 settings:
@@ -22,6 +20,10 @@ settings:
   label_display: '0'
   provider: system
   level: 1
-  depth: 1
+  depth: 0
   expand_all_items: false
-visibility: {  }
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: '*'

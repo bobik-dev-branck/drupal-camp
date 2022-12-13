@@ -1,0 +1,30 @@
+uuid: 7d0d0fee-3ae7-451d-b875-5fb970cafa29
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:basic:c3cdd5f5-9ede-4ada-b504-437269334fa1'
+  module:
+    - block_content
+    - system
+  theme:
+    - olivero
+id: headersubscribe
+theme: olivero
+region: header
+weight: -9
+provider: null
+plugin: 'block_content:c3cdd5f5-9ede-4ada-b504-437269334fa1'
+settings:
+  id: 'block_content:c3cdd5f5-9ede-4ada-b504-437269334fa1'
+  label: 'header subscribe'
+  label_display: '0'
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: '*'

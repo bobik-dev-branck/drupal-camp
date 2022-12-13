@@ -1,0 +1,21 @@
+uuid: cfbcc54e-4faf-4076-9f37-7125cabb05a3
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.branding
+    - field.storage.block_content.field_branding
+  module:
+    - text
+id: block_content.branding.field_branding
+field_name: field_branding
+entity_type: block_content
+bundle: branding
+label: branding
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text

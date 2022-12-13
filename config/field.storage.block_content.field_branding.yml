@@ -1,0 +1,20 @@
+uuid: 5f855822-9413-4c20-9630-7137b99adcb6
+langcode: en
+status: true
+dependencies:
+  module:
+    - block_content
+    - text
+id: block_content.field_branding
+field_name: field_branding
+entity_type: block_content
+type: text
+settings:
+  max_length: 255
+module: text
+locked: false
+cardinality: -1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false
