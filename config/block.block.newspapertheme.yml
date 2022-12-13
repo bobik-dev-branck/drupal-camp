@@ -13,7 +13,7 @@ dependencies:
 id: newspapertheme
 theme: olivero
 region: sidebar
-weight: -11
+weight: -9
 provider: null
 plugin: 'block_content:c62e0b81-e2d0-4be3-b7b2-86b5477fb486'
 settings:

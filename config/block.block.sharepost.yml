@@ -13,7 +13,7 @@ dependencies:
 id: sharepost
 theme: olivero
 region: sidebar
-weight: -13
+weight: -11
 provider: null
 plugin: 'block_content:ce5cd172-15ef-4eb1-bf65-a7ef10c07a9c'
 settings:

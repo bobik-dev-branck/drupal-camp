@@ -10,7 +10,7 @@ dependencies:
 id: nextpreviouslink
 theme: olivero
 region: content
-weight: -8
+weight: -9
 provider: null
 plugin: next_previous_block
 settings:

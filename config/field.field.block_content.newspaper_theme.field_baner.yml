@@ -1,0 +1,29 @@
+uuid: 3771dc85-f55d-44a6-b19b-ebaf58abe711
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.newspaper_theme
+    - field.storage.block_content.field_baner
+    - media.type.image
+id: block_content.newspaper_theme.field_baner
+field_name: field_baner
+entity_type: block_content
+bundle: newspaper_theme
+label: baner
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      image: image
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference
