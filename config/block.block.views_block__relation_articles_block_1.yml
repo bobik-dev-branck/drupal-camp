@@ -1,0 +1,30 @@
+uuid: 006c56db-2af3-41d7-b973-f849dd8a9edc
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.relation_articles
+  module:
+    - system
+    - views
+  theme:
+    - olivero
+id: views_block__relation_articles_block_1
+theme: olivero
+region: content
+weight: -10
+provider: null
+plugin: 'views_block:relation_articles-block_1'
+settings:
+  id: 'views_block:relation_articles-block_1'
+  label: ''
+  label_display: visible
+  provider: views
+  context_mapping: {  }
+  views_label: ''
+  items_per_page: none
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: '/taxonomy/term/*'

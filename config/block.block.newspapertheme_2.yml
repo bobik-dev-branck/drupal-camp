@@ -1,0 +1,30 @@
+uuid: 1fab9bd2-2280-4dad-ac5a-5d6e4599b0b4
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:basic:c62e0b81-e2d0-4be3-b7b2-86b5477fb486'
+  module:
+    - block_content
+    - system
+  theme:
+    - olivero
+id: newspapertheme_2
+theme: olivero
+region: sidebar
+weight: -6
+provider: null
+plugin: 'block_content:c62e0b81-e2d0-4be3-b7b2-86b5477fb486'
+settings:
+  id: 'block_content:c62e0b81-e2d0-4be3-b7b2-86b5477fb486'
+  label: 'Newspaper theme'
+  label_display: visible
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: '/taxonomy/term/*'
