@@ -1,0 +1,30 @@
+uuid: 38ebfe96-0048-4506-9c99-01d17ecdaf60
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:basic:53dc9cb4-7428-46b6-a8f0-f3b155b5d6ef'
+  module:
+    - block_content
+    - system
+  theme:
+    - olivero
+id: company
+theme: olivero
+region: footer_top
+weight: -14
+provider: null
+plugin: 'block_content:53dc9cb4-7428-46b6-a8f0-f3b155b5d6ef'
+settings:
+  id: 'block_content:53dc9cb4-7428-46b6-a8f0-f3b155b5d6ef'
+  label: Company
+  label_display: visible
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: '*'

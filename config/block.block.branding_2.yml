@@ -1,0 +1,30 @@
+uuid: 238aa420-6a2f-458c-b7d5-d813e4145be0
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:branding:593a9365-0c31-42a0-89f1-173bb13b9fca'
+  module:
+    - block_content
+    - system
+  theme:
+    - olivero
+id: branding_2
+theme: olivero
+region: footer_top
+weight: -17
+provider: null
+plugin: 'block_content:593a9365-0c31-42a0-89f1-173bb13b9fca'
+settings:
+  id: 'block_content:593a9365-0c31-42a0-89f1-173bb13b9fca'
+  label: branding
+  label_display: '0'
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: '*'

@@ -1,0 +1,30 @@
+uuid: 85886924-5f5e-4be1-b542-c2546f2cd6b4
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:basic:4618df7d-d5de-4546-9d0f-2cccfb750bf0'
+  module:
+    - block_content
+    - system
+  theme:
+    - olivero
+id: aboutus
+theme: olivero
+region: footer_top
+weight: -15
+provider: null
+plugin: 'block_content:4618df7d-d5de-4546-9d0f-2cccfb750bf0'
+settings:
+  id: 'block_content:4618df7d-d5de-4546-9d0f-2cccfb750bf0'
+  label: 'About us'
+  label_display: visible
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: '*'
