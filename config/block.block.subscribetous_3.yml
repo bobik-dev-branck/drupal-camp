@@ -1,24 +1,23 @@
-uuid: a66b36cf-34fc-48e9-9b17-e35b9ce83398
+uuid: 0b150718-c312-4579-a804-20db6bf49d69
 langcode: en
 status: true
 dependencies:
   content:
-    - 'block_content:basic:ce5cd172-15ef-4eb1-bf65-a7ef10c07a9c'
+    - 'block_content:basic:ffc0b7fe-91c5-4539-90fc-a4f30bd2e5db'
   module:
     - block_content
     - node
-    - system
   theme:
     - olivero
-id: sharepost
+id: subscribetous_3
 theme: olivero
 region: sidebar
-weight: -17
+weight: -16
 provider: null
-plugin: 'block_content:ce5cd172-15ef-4eb1-bf65-a7ef10c07a9c'
+plugin: 'block_content:ffc0b7fe-91c5-4539-90fc-a4f30bd2e5db'
 settings:
-  id: 'block_content:ce5cd172-15ef-4eb1-bf65-a7ef10c07a9c'
-  label: 'Share post'
+  id: 'block_content:ffc0b7fe-91c5-4539-90fc-a4f30bd2e5db'
+  label: 'subscribe to us'
   label_display: '0'
   provider: block_content
   status: true
@@ -32,7 +31,3 @@ visibility:
       node: '@node.node_route_context:node'
     bundles:
       newsweek_article: newsweek_article
-  request_path:
-    id: request_path
-    negate: false
-    pages: '/node/*'

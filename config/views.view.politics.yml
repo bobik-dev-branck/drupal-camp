@@ -1,9 +1,8 @@
-uuid: 7f5d3f1e-b787-4d19-bf87-fdef941bf127
+uuid: 922c6b17-18ce-444c-8702-256ed961829a
 langcode: en
 status: true
 dependencies:
   config:
-    - block.block.newspapertheme
     - core.entity_view_mode.node.meta_info_short
     - core.entity_view_mode.node.title_and_photo_plus_author
     - node.type.newsweek_article
@@ -37,19 +36,35 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
-          entity_type: node
-          entity_field: title
           plugin_id: field
           label: ''
           exclude: false
           alter:
             alter_text: false
+            text: ''
             make_link: false
+            path: ''
             absolute: false
-            word_boundary: false
-            ellipsis: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
             strip_tags: false
             trim: false
+            preserve_tags: ''
             html: false
           element_type: ''
           element_class: ''
@@ -257,22 +272,7 @@ display:
       defaults:
         style: false
         row: false
-        footer: false
       display_description: ''
-      footer:
-        entity_block:
-          id: entity_block
-          table: views
-          field: entity_block
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: entity
-          empty: false
-          target: newspapertheme
-          view_mode: default
-          tokenize: true
-          bypass_access: false
       display_extenders: {  }
       displays:
         block_1: block_1
@@ -293,7 +293,6 @@ display:
     position: 1
     display_options:
       display_extenders: {  }
-      block_category: 'main page'
     cache_metadata:
       max-age: -1
       contexts:

@@ -12,7 +12,7 @@ dependencies:
 id: branding
 theme: olivero
 region: header
-weight: -11
+weight: -14
 provider: null
 plugin: 'block_content:593a9365-0c31-42a0-89f1-173bb13b9fca'
 settings:

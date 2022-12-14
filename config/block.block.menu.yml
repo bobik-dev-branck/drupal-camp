@@ -1,28 +1,27 @@
-uuid: 2ceffb92-6b31-44d7-a3fc-df73a348bea4
+uuid: 9ef73cd7-86a6-4383-a9dd-3cf1e45483db
 langcode: en
 status: true
 dependencies:
-  content:
-    - 'block_content:basic:a5f1bac5-1d12-49b5-a127-4551ca4add3e'
+  config:
+    - system.menu.menu
   module:
-    - block_content
     - system
   theme:
     - olivero
 id: menu
 theme: olivero
 region: header
-weight: -13
+weight: -16
 provider: null
-plugin: 'block_content:a5f1bac5-1d12-49b5-a127-4551ca4add3e'
+plugin: 'system_menu_block:menu'
 settings:
-  id: 'block_content:a5f1bac5-1d12-49b5-a127-4551ca4add3e'
+  id: 'system_menu_block:menu'
   label: MENU
   label_display: '0'
-  provider: block_content
-  status: true
-  info: ''
-  view_mode: full
+  provider: system
+  level: 1
+  depth: 0
+  expand_all_items: false
 visibility:
   request_path:
     id: request_path

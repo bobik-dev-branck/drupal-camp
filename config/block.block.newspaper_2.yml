@@ -1,25 +1,24 @@
-uuid: 16b5d294-804c-4e6f-af07-6a951a2c77e5
+uuid: 6c0de9f4-3897-4b26-8456-bfb2facdb6ca
 langcode: en
 status: true
 dependencies:
   content:
-    - 'block_content:basic:c62e0b81-e2d0-4be3-b7b2-86b5477fb486'
+    - 'block_content:newspaper_theme:ac6a4507-3109-41bd-9d46-82b273a23c27'
   module:
     - block_content
     - node
-    - system
   theme:
     - olivero
-id: newspapertheme
+id: newspaper_2
 theme: olivero
 region: sidebar
-weight: -9
+weight: -14
 provider: null
-plugin: 'block_content:c62e0b81-e2d0-4be3-b7b2-86b5477fb486'
+plugin: 'block_content:ac6a4507-3109-41bd-9d46-82b273a23c27'
 settings:
-  id: 'block_content:c62e0b81-e2d0-4be3-b7b2-86b5477fb486'
-  label: 'Newspaper theme'
-  label_display: visible
+  id: 'block_content:ac6a4507-3109-41bd-9d46-82b273a23c27'
+  label: 'Newspaper '
+  label_display: '0'
   provider: block_content
   status: true
   info: ''
@@ -32,7 +31,3 @@ visibility:
       node: '@node.node_route_context:node'
     bundles:
       newsweek_article: newsweek_article
-  request_path:
-    id: request_path
-    negate: false
-    pages: '/node/*'

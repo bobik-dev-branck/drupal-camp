@@ -10,13 +10,13 @@ dependencies:
 id: nextpreviouslink
 theme: olivero
 region: content
-weight: -9
+weight: -14
 provider: null
 plugin: next_previous_block
 settings:
   id: next_previous_block
   label: 'Next Previous link'
-  label_display: visible
+  label_display: '0'
   provider: nextpre
   content_type: newsweek_article
   previous_text: 'Previous article'
