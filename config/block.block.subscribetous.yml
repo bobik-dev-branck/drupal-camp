@@ -12,13 +12,13 @@ dependencies:
 id: subscribetous
 theme: olivero
 region: sidebar
-weight: -7
+weight: -12
 provider: null
 plugin: 'block_content:ffc0b7fe-91c5-4539-90fc-a4f30bd2e5db'
 settings:
   id: 'block_content:ffc0b7fe-91c5-4539-90fc-a4f30bd2e5db'
   label: 'subscribe to us'
-  label_display: visible
+  label_display: '0'
   provider: block_content
   status: true
   info: ''

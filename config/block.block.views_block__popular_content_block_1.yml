@@ -5,14 +5,14 @@ dependencies:
   config:
     - views.view.popular_content
   module:
-    - system
+    - node
     - views
   theme:
     - olivero
 id: views_block__popular_content_block_1
 theme: olivero
 region: sidebar
-weight: 0
+weight: -10
 provider: null
 plugin: 'views_block:popular_content-block_1'
 settings:
@@ -23,7 +23,10 @@ settings:
   views_label: ''
   items_per_page: none
 visibility:
-  request_path:
-    id: request_path
+  'entity_bundle:node':
+    id: 'entity_bundle:node'
     negate: false
-    pages: '/node/*'
+    context_mapping:
+      node: '@node.node_route_context:node'
+    bundles:
+      newsweek_article: newsweek_article

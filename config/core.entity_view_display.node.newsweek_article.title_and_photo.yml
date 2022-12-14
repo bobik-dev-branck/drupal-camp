@@ -7,6 +7,7 @@ dependencies:
     - field.field.node.newsweek_article.body
     - field.field.node.newsweek_article.comment
     - field.field.node.newsweek_article.field_main_image
+    - field.field.node.newsweek_article.field_paragraph
     - field.field.node.newsweek_article.field_special_content
     - field.field.node.newsweek_article.field_tags
     - field.field.node.newsweek_article.field_title
@@ -26,7 +27,7 @@ mode: title_and_photo
 content:
   field_main_image:
     type: entity_reference_entity_view
-    label: above
+    label: hidden
     settings:
       view_mode: default
       link: false
@@ -35,7 +36,7 @@ content:
     region: content
   field_special_content:
     type: entity_reference_label
-    label: above
+    label: hidden
     settings:
       link: true
     third_party_settings: {  }
@@ -43,7 +44,7 @@ content:
     region: content
   field_title:
     type: list_default
-    label: above
+    label: hidden
     settings: {  }
     third_party_settings: {  }
     weight: 2
@@ -51,5 +52,6 @@ content:
 hidden:
   body: true
   comment: true
+  field_paragraph: true
   field_tags: true
   links: true

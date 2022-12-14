@@ -12,7 +12,7 @@ dependencies:
 id: views_block__all_tags_block_1
 theme: olivero
 region: header
-weight: 0
+weight: -12
 provider: null
 plugin: 'views_block:all_tags-block_1'
 settings:

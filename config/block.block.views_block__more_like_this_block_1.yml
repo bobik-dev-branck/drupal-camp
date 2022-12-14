@@ -12,7 +12,7 @@ dependencies:
 id: views_block__more_like_this_block_1
 theme: olivero
 region: content
-weight: -7
+weight: -12
 provider: null
 plugin: 'views_block:more_like_this-block_1'
 settings:

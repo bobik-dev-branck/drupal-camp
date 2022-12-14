@@ -1,18 +1,18 @@
-uuid: 4a156c01-6fb4-4c73-978c-8c5a4aea9df0
+uuid: b339d68f-04eb-449e-81e5-489544778119
 langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.node.body
-    - node.type.newsweek_article
+    - field.storage.paragraph.field_body
+    - paragraphs.paragraphs_type.body
   module:
     - text
-id: node.newsweek_article.body
-field_name: body
-entity_type: node
-bundle: newsweek_article
-label: Summary
-description: 'Article summary'
+id: paragraph.body.field_body
+field_name: field_body
+entity_type: paragraph
+bundle: body
+label: Body
+description: ''
 required: false
 translatable: true
 default_value: {  }

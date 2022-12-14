@@ -5,9 +5,6 @@ dependencies:
   config:
     - block_content.type.newspaper_theme
     - field.field.block_content.newspaper_theme.field_baner
-    - field.field.block_content.newspaper_theme.field_link
-  module:
-    - link
 id: block_content.newspaper_theme.default
 targetEntityType: block_content
 bundle: newspaper_theme
@@ -15,23 +12,11 @@ mode: default
 content:
   field_baner:
     type: entity_reference_entity_view
-    label: above
+    label: hidden
     settings:
       view_mode: default
       link: false
     third_party_settings: {  }
     weight: 0
-    region: content
-  field_link:
-    type: link
-    label: above
-    settings:
-      trim_length: 80
-      url_only: false
-      url_plain: false
-      rel: ''
-      target: ''
-    third_party_settings: {  }
-    weight: 1
     region: content
 hidden: {  }
