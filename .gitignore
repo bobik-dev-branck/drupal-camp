@@ -3,7 +3,7 @@ drush/contrib/
 vendor/
 core/
 web/modules/contrib/
-themes/contrib/
+web/themes/contrib/
 profiles/contrib/
 libraries/
 sites/

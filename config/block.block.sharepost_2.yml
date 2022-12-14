@@ -1,0 +1,33 @@
+uuid: a53f7765-e749-4487-9aa4-383246ad1e29
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:basic:ce5cd172-15ef-4eb1-bf65-a7ef10c07a9c'
+  module:
+    - block_content
+    - node
+  theme:
+    - newsweek
+id: sharepost_2
+theme: newsweek
+region: sidebar_second
+weight: -13
+provider: null
+plugin: 'block_content:ce5cd172-15ef-4eb1-bf65-a7ef10c07a9c'
+settings:
+  id: 'block_content:ce5cd172-15ef-4eb1-bf65-a7ef10c07a9c'
+  label: 'Share post'
+  label_display: '0'
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  'entity_bundle:node':
+    id: 'entity_bundle:node'
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'
+    bundles:
+      newsweek_article: newsweek_article

@@ -1,0 +1,22 @@
+uuid: 31782b73-c24d-4cfc-8e6e-7b6303ab8c38
+langcode: en
+status: true
+dependencies:
+  theme:
+    - newsweek
+_core:
+  default_config_hash: Qf2BoIzd9py5AYXZj8fJzCYDyVk1-AWXcu-AqQeDZKA
+id: newsweek_local_tasks
+theme: newsweek
+region: content
+weight: -13
+provider: null
+plugin: local_tasks_block
+settings:
+  id: local_tasks_block
+  label: Tabs
+  label_display: '0'
+  provider: core
+  primary: true
+  secondary: true
+visibility: {  }

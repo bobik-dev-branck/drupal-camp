@@ -1,0 +1,29 @@
+uuid: f327089a-f628-4843-92bd-d73326d6a9e3
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.all_tags
+  module:
+    - system
+    - views
+  theme:
+    - newsweek
+id: views_block__all_tags_block_1_3
+theme: newsweek
+region: header
+weight: -4
+provider: null
+plugin: 'views_block:all_tags-block_1'
+settings:
+  id: 'views_block:all_tags-block_1'
+  label: ''
+  label_display: '0'
+  provider: views
+  views_label: ''
+  items_per_page: none
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: '*'

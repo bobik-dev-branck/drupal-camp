@@ -1,0 +1,30 @@
+uuid: 44d65b38-66ce-43b4-ab40-c8e47f49bcb4
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:basic:53dc9cb4-7428-46b6-a8f0-f3b155b5d6ef'
+  module:
+    - block_content
+    - system
+  theme:
+    - newsweek
+id: company_2
+theme: newsweek
+region: footer_first
+weight: -10
+provider: null
+plugin: 'block_content:53dc9cb4-7428-46b6-a8f0-f3b155b5d6ef'
+settings:
+  id: 'block_content:53dc9cb4-7428-46b6-a8f0-f3b155b5d6ef'
+  label: Company
+  label_display: visible
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: '*'
