@@ -4,6 +4,7 @@ vendor/
 core/
 web/modules/contrib/
 web/themes/contrib/
+web/themes/custom/newsweek/node_modules
 profiles/contrib/
 libraries/
 sites/
