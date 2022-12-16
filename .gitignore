@@ -7,12 +7,12 @@ web/themes/contrib/
 web/themes/custom/newsweek/node_modules
 profiles/contrib/
 libraries/
-sites/
+web/sites/
 
 
 # Ignore sensitive information
 web/sites/*/settings.phpgit init
-web/sites/*/settings.local.php
+web/sites/default/settings.local.php
 
 # Ignore Drupal's file directory
 web/sites/*/files/

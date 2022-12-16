@@ -2,4 +2,8 @@ global-styling:
   version: VERSION
   css:
     theme:
-      main.css: {}
+      dist/main.css: {}
+
+global-script:
+  js:
+    dist/main.js: {}

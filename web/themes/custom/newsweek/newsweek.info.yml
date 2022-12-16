@@ -5,6 +5,7 @@ description: 'A flexible, recolorable theme with many regions and a responsive, 
 core_version_requirement: ^9
 libraries:
   - newsweek/global-styling
+  - newsweek/global-script
 package: Custom
 version: VERSION
 regions:
