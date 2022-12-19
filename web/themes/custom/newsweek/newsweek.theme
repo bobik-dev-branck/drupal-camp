@@ -1,12 +1,3 @@
 <?php
 
-/**
- * Implements hook_page_attachments_alter().
- */
-function newsweek_example_page_attachments_alter(array &$attachments) {
-  // Use the dev library if we're developing locally.
-  if (in_array('newsweek/global-styling', $attachments['#attached']['library']) && file_exists(__DIR__ . '/dist_dev')) {
-    $index = array_search('newsweek/global-styling', $attachments['#attached']['library']);
-    $attachments['#attached']['library'][$index] = 'newsweek/dev';
-  }
-}
+
