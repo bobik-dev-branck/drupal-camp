@@ -11,7 +11,7 @@ dependencies:
     - newsweek
 id: branding_3
 theme: newsweek
-region: header
+region: header_top
 weight: -6
 provider: null
 plugin: 'block_content:593a9365-0c31-42a0-89f1-173bb13b9fca'

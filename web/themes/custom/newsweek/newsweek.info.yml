@@ -9,7 +9,8 @@ libraries:
 package: Custom
 version: VERSION
 regions:
-  header: Header
+  header_top: 'Header top'
+  header_bottom: 'Header bottom'
   primary_menu: 'Primary menu'
   secondary_menu: 'Secondary menu'
   page_top: 'Page top'

@@ -10,7 +10,7 @@ dependencies:
     - newsweek
 id: useraccountmenu_2
 theme: newsweek
-region: header
+region: header_top
 weight: -5
 provider: null
 plugin: 'system_menu_block:account'

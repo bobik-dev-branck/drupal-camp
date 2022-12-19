@@ -1,6 +1,6 @@
 uuid: 9e3fe491-0905-4630-b72c-441ad0e0ab78
 langcode: en
-status: true
+status: false
 dependencies:
   module:
     - search
@@ -9,7 +9,7 @@ dependencies:
     - newsweek
 id: searchform
 theme: newsweek
-region: header
+region: header_top
 weight: -7
 provider: null
 plugin: search_form_block
