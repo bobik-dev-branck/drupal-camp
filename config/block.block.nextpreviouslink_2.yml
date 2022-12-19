@@ -1,0 +1,33 @@
+uuid: c1332b46-d06a-4e4e-ac3a-812d317f795d
+langcode: en
+status: true
+dependencies:
+  module:
+    - nextpre
+    - node
+  theme:
+    - newsweek
+id: nextpreviouslink_2
+theme: newsweek
+region: content
+weight: -7
+provider: null
+plugin: next_previous_block
+settings:
+  id: next_previous_block
+  label: 'Next Previous link'
+  label_display: '0'
+  provider: nextpre
+  content_type: newsweek_article
+  previous_text: 'Previous article'
+  next_text: 'Next article'
+  previouslink_class: ''
+  nextlink_class: ''
+visibility:
+  'entity_bundle:node':
+    id: 'entity_bundle:node'
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'
+    bundles:
+      newsweek_article: newsweek_article

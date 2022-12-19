@@ -1,0 +1,22 @@
+uuid: 70c04e74-81d1-4d1d-9148-a8051e7cf997
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - newsweek
+_core:
+  default_config_hash: kigu8pTxXt1qGR2NJ5HHdC4G2G1wsDrIjLPKBT5wUBc
+id: newsweek_content
+theme: newsweek
+region: content
+weight: -8
+provider: null
+plugin: system_main_block
+settings:
+  id: system_main_block
+  label: 'Main page content'
+  label_display: '0'
+  provider: system
+visibility: {  }

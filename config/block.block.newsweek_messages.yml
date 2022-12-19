@@ -1,0 +1,22 @@
+uuid: 8a580559-22ea-4522-b833-5a65b6fc080c
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - newsweek
+_core:
+  default_config_hash: KC12e0aosUnBBs5bd374JVcQjJaFNOSIHzu0dUGf22o
+id: newsweek_messages
+theme: newsweek
+region: highlighted
+weight: 0
+provider: null
+plugin: system_messages_block
+settings:
+  id: system_messages_block
+  label: 'Status messages'
+  label_display: '0'
+  provider: system
+visibility: {  }

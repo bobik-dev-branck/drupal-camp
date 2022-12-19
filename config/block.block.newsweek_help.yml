@@ -1,0 +1,22 @@
+uuid: 951ceb37-9f7b-45db-ad59-8c5e77d34363
+langcode: en
+status: true
+dependencies:
+  module:
+    - help
+  theme:
+    - newsweek
+_core:
+  default_config_hash: '-laWx8WA-ikiIEH3NJQ0hVbjqk3iEuBms91LB0B4IQU'
+id: newsweek_help
+theme: newsweek
+region: content
+weight: -12
+provider: null
+plugin: help_block
+settings:
+  id: help_block
+  label: Help
+  label_display: '0'
+  provider: help
+visibility: {  }

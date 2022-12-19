@@ -1,0 +1,26 @@
+uuid: 9e3fe491-0905-4630-b72c-441ad0e0ab78
+langcode: en
+status: true
+dependencies:
+  module:
+    - search
+    - system
+  theme:
+    - newsweek
+id: searchform
+theme: newsweek
+region: header
+weight: -7
+provider: null
+plugin: search_form_block
+settings:
+  id: search_form_block
+  label: 'Search form'
+  label_display: '0'
+  provider: search
+  page_id: ''
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: '*'

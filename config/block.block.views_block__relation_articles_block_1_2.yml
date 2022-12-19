@@ -1,0 +1,30 @@
+uuid: 8320c968-3862-48d6-afb7-55af8437c40b
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.relation_articles
+  module:
+    - system
+    - views
+  theme:
+    - newsweek
+id: views_block__relation_articles_block_1_2
+theme: newsweek
+region: content
+weight: -9
+provider: null
+plugin: 'views_block:relation_articles-block_1'
+settings:
+  id: 'views_block:relation_articles-block_1'
+  label: ''
+  label_display: '0'
+  provider: views
+  context_mapping: {  }
+  views_label: ''
+  items_per_page: none
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: '/taxonomy/term/*'

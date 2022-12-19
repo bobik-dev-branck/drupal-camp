@@ -1,0 +1,20 @@
+uuid: 69dd418c-f2fb-43e6-af3e-2901ee6ca1ec
+langcode: en
+status: true
+dependencies:
+  theme:
+    - newsweek
+_core:
+  default_config_hash: XRdb8LpbArVA6CpuuEZxzi50JIdjsJaCCZ5o3fH0Blk
+id: newsweek_local_actions
+theme: newsweek
+region: content
+weight: -11
+provider: null
+plugin: local_actions_block
+settings:
+  id: local_actions_block
+  label: 'Primary admin actions'
+  label_display: '0'
+  provider: core
+visibility: {  }

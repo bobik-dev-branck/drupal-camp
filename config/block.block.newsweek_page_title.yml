@@ -1,0 +1,20 @@
+uuid: d645f481-030b-4848-870d-be95a502cbc7
+langcode: en
+status: true
+dependencies:
+  theme:
+    - newsweek
+_core:
+  default_config_hash: ItFhhiUOoeR7oIq73ZaCV7PAYrOwXZ-9fazMzF5DJXM
+id: newsweek_page_title
+theme: newsweek
+region: content
+weight: -14
+provider: null
+plugin: page_title_block
+settings:
+  id: page_title_block
+  label: 'Page title'
+  label_display: '0'
+  provider: core
+visibility: {  }
