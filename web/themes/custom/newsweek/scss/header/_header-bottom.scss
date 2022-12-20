@@ -1,25 +1,24 @@
-.region-header-bottom {
-  max-height: 42px;
-  max-width: 705px;
-  margin: 0 auto;
-  font-size: 14px;
-  & .views-row {
-
-  }
-
-  & .views-col {
-
-    padding: 0;
-    & span > a {
-      color: $main-color-black;
-      &:hover {
-        color: $main-color-red;
+header {
+  .region-header-bottom {
+    max-width: 705px;
+    margin: 0 auto;
+    font-size: 14px;
+    & .views-col {
+      padding: 0;
+      & span > a {
+        text-align: center;
+        font-family: "Work Sans";
+        font-weight: 600;
+        color: $main-color-black;
+        &:hover {
+          color: $main-color-red;
+        }
       }
     }
   }
-}
 
-//hide border after block all tags
-.views-view-grid.horizontal .views-row {
-  border-bottom: none;
+  //hide border after block all tags
+  .views-view-grid.horizontal .views-row {
+    border-bottom: none;
+  }
 }
