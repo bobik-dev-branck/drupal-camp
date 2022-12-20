@@ -1,0 +1,18 @@
+{% set bem_block = 'about-us' %}
+<p class="{{ bem_block }}__title">About us </p>
+<div class="{{ bem_block }}__body">
+  {{ content }}
+</div>
+
+<div class="social">
+  {% set items = {
+    'fb': 'https://www.facebook.com/',
+    'instagram': 'https://www.instagram.com/',
+    'twitter' : 'https://www.instagram.com/',
+    'youtube' : 'https://www.instagram.com/' }
+  %}
+  {% for val, link in items %}
+    <a href="{{ link }}" class="link">{{ val }}</a>
+  {% endfor %}
+
+</div>

@@ -1,0 +1,9 @@
+.region-footer-content {
+  display: flex;
+  justify-content: space-between;
+
+  & .block-block-content > div, h2 {
+    color: $main-color-black;
+  }
+
+}
