@@ -1,0 +1,52 @@
+.region-footer-top {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 3px solid $main-color-black;
+  padding-bottom: 0;
+  margin-top: -15px;
+  & .branding__newsweek, .branding__pro {
+    color: $main-color-black;
+    display: block;
+  }
+  & .branding__newsweek {
+    font-family: PT Serif;
+    font-size: 42px;
+    font-style: italic;
+    font-weight: 700;
+    letter-spacing: -2px;
+    margin-top: -15px;
+  }
+  & .branding__pro {
+    font-family: Work Sans;
+    font-size: 10px;
+    line-height: 2;
+    font-style: italic;
+    font-weight: 500;
+    margin-top: -58px;
+    margin-left: 177px;
+  }
+  & .views-row {
+    display: flex;
+    justify-content: flex-end;
+    & .views-col {
+      & span > a {
+        width: 60px;
+        display: block;
+        text-align: center;
+        font-family: "Work Sans";
+        font-weight: 600;
+        color: $main-color-black;
+        border-bottom: none;
+        &:hover {
+          color: $main-color-red;
+        }
+      }
+    }
+  }
+
+  //hide border in block All tags and disable margin-bottom
+  .views-view-grid.horizontal .views-row {
+    border-bottom: none;
+    margin-bottom: 0;
+  }
+}
