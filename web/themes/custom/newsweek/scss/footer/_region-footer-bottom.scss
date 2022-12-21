@@ -1,0 +1,13 @@
+.copyright {
+  display: flex;
+  justify-content: center;
+  border-top: 1px solid #dddddd;
+  > div {
+    margin: 0 2px;
+    padding-top: 20px;
+    font-family: Work Sans;
+    font-size: 14px;
+    line-height: 1.2;
+    font-weight: 700;
+  }
+}
