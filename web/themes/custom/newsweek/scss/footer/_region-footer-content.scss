@@ -1,7 +1,10 @@
 .region-footer-content {
   display: flex;
   justify-content: space-between;
-  margin-top: 30px;
+  margin: -24px;
+  > div {
+    padding: 30px;
+  }
   & .block-block-content > div, h2 {
     color: $main-color-black;
   }
