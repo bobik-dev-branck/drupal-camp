@@ -10,11 +10,7 @@
     flex-direction: column;
     max-width: 340px;
     &__title {
-      font-family: Work Sans;
-      font-size: 24px;
-      line-height: 1;
-      font-weight: 700;
-      letter-spacing: -1px;
+      @include footer-content-title;
     }
     &__body {
       font-family: PT Serif;
