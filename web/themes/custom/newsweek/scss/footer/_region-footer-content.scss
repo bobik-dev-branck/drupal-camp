@@ -50,5 +50,50 @@
       }
     }
   }
+
+  & .the-latest {
+    max-width: 355px;
+    font-weight: 700;
+    .the-latest__title {
+      @include footer-content-title;
+    }
+    .the-latest__body {
+      .node__content {
+        .exclusive-and-content {
+          padding: 0;
+          > div, h2 {
+            display: inline;
+          }
+          .field--name-field-special-content {
+            > a {
+            display: inline;
+            background-color: $main-color-red;
+            color: #fff !important;
+            font-family: Work Sans;
+            font-size: 15px;
+            padding: 2px;
+            border-radius: 2px;
+            text-transform: uppercase;
+            line-height: 0;
+            > a :hover {
+              color: #fff !important;
+              }
+            }
+          }
+        }
+        & .node__meta {
+          display: flex;
+          font-size: 12px;
+          .field--name-field-tags{
+            text-transform: uppercase;
+            padding: 2px;
+          }
+          .field--name-created {
+            color: $main-color-black;
+          }
+        }
+      }
+    }
+  }
 }
 
