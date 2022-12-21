@@ -95,5 +95,39 @@
       }
     }
   }
+
+  .subscribe {
+   max-width: 355px;
+   width: 100%;
+    .subscribe__title {
+      @include footer-content-title;
+    }
+    .agreement__form {
+      .email, .btn {
+        font-size: 14px;
+        display: block;
+        height: 48px;
+        width: 100%;
+      }
+      .btn {
+       background-color:  $main-color-black;
+        color: #fff;
+        font-weight: 700;
+        margin: 10px 0;
+      }
+      .text {
+        font-family: Work Sans;
+        font-size: 13px;
+        line-height: 1.2;
+        .link {
+          color: $main-color-black;
+        }
+        .link:hover {
+          color: $main-color-red;
+        }
+      }
+    }
+  }
 }
+
 
