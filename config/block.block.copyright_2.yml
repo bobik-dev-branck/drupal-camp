@@ -11,8 +11,8 @@ dependencies:
     - newsweek
 id: copyright_2
 theme: newsweek
-region: footer_second
-weight: 0
+region: footer_bottom
+weight: -16
 provider: null
 plugin: 'block_content:43aaccbb-138d-41fe-8fdf-45bb48bab721'
 settings:
