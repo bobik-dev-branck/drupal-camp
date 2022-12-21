@@ -38,5 +38,21 @@
       }
     }
   }
+
+  & .company {
+    width: 197px;
+    &__title {
+      @include footer-content-title;
+    }
+    &__body {
+      @include footer-body-flex;
+      & .link {
+        font-family: Work Sans;
+        font-size: 15px;
+        line-height: 30px;
+        font-weight: 600;
+      }
+    }
+  }
 }
 
