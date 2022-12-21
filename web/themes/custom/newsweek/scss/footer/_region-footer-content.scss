@@ -1,9 +1,42 @@
 .region-footer-content {
   display: flex;
   justify-content: space-between;
-
+  margin-top: 30px;
   & .block-block-content > div, h2 {
     color: $main-color-black;
   }
-
+  & .about-us {
+    display: flex;
+    flex-direction: column;
+    max-width: 340px;
+    &__title {
+      font-family: Work Sans;
+      font-size: 24px;
+      line-height: 1;
+      font-weight: 700;
+      letter-spacing: -1px;
+    }
+    &__body {
+      font-family: PT Serif;
+      font-size: 15px;
+      line-height: 1.5;
+      font-weight: 400;
+    }
+    &__social-media {
+      display: flex;
+      & .link {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 44px;
+        height: 44px;
+        margin-right: 10px;
+        background-color: $main-color-black;
+        &:hover {
+          background-color: $main-color-red;
+        }
+      }
+    }
+  }
 }
+
