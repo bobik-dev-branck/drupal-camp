@@ -5,6 +5,7 @@ core/
 web/modules/contrib/
 web/themes/contrib/
 web/themes/custom/newsweek/node_modules
+web/themes/custom/newsweek/dist
 profiles/contrib/
 libraries/
 web/sites/
