@@ -1,0 +1,6 @@
+{% set bem_block = 'copyright' %}
+<div class="{{ bem_block }}">
+  <div class="{{ bem_block }}__copy">&copy; </div>
+  <div class="{{ bem_block }}__date">{{ 'now'|date('Y') }} </div>
+  {{ content }}
+</div>

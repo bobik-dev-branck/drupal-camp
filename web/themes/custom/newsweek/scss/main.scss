@@ -1,8 +1,18 @@
 @import "variables";
 @import "fonts";
+@import "mixins";
+@import "default-style";
+
 
 //header
 @import "header/header";
 @import "header/header-top";
 @import "header/header-bottom";
+
+//footer
+@import "footer/footer";
+@import "footer/region-footer-top";
+@import "footer/region-footer-content";
+@import "footer/region-footer-bottom";
+
 

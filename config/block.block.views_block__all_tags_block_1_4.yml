@@ -11,8 +11,8 @@ dependencies:
     - newsweek
 id: views_block__all_tags_block_1_4
 theme: newsweek
-region: footer_first
-weight: -12
+region: footer_top
+weight: -15
 provider: null
 plugin: 'views_block:all_tags-block_1'
 settings:
