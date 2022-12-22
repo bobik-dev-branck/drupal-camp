@@ -1,0 +1,149 @@
+.header {
+  .region-header-top {
+    height: 120px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #d3d7d9;
+    & .clearfix {
+      display: flex;
+      font-weight: 700;
+    }
+  }
+
+  .pop-up {
+    position: relative;
+    margin: 0 40px 0 0;
+    & > a {
+      color: $main-color-red;
+      font-size: 14px;
+      text-transform: uppercase;
+      &::after {
+        content: '';
+        background: url(../icons/header/icon-menu-red.png) 0 0 no-repeat;
+        object-fit: contain;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 3px;
+        left: 45px;
+      }
+      &:hover {
+        color: $main-color-black;
+        &::after {
+          content: '';
+          background: url(../icons/header/icon-menu-black.png) 0 0 no-repeat;
+          object-fit: contain;
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          top: 3px;
+          left: 45px;
+        }
+      }
+    }
+  }
+
+  .search {
+    position: relative;
+    margin: 0 50px 0 0;
+    & > a {
+      color: $main-color-red;
+      font-size: 14px;
+      &::after {
+        content: '';
+        background: url(../icons/header/icon-search-red.png) 0 0 no-repeat;
+        object-fit: contain;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 3px;
+        left: 55px;
+      }
+      &:hover {
+        color: $main-color-black;
+        &::after {
+          content: '';
+          background: url(../icons/header/icon-search-black.png) 0 0 no-repeat;
+          object-fit: contain;
+          position: absolute;
+        }
+      }
+    }
+  }
+
+  .branding {
+    &__newsweek {
+      display: block;
+      color: $main-color-red;
+      font-family: 'PT Serif', sans-serif;
+      font-style: italic;
+      font-size: 100px;
+      font-weight: 700;
+      letter-spacing: -5px;
+      margin-top: -70px;
+    }
+    &__pro {
+      display: block;
+      margin-top: -137px;
+      margin-left: 420px;
+      color: $main-color-black;
+      font-family: 'Work Sans', sans-serif;
+      font-size: 12px;
+      line-height: 4.6;
+      font-style: italic;
+      font-weight: 500;
+    }
+  }
+
+  .menu--account {
+    & ul.my_account::marker {
+      list-style: none;
+    }
+    & .my_account {
+      position: relative;
+      margin-right: 30px;
+      & > a {
+        color: $main-color-black;
+        font-size: 13px;
+        margin: 0 auto;
+        &::before {
+          content: '';
+          background: url(../icons/header/icon-my-account.png) 0 0 no-repeat;
+          margin-left: -100px;
+          position: absolute;
+          width: 30px;
+          height: 30px;
+          top: -4px;
+          left: 60px;
+        }
+      }
+    }
+    & .subscribe {
+      & > a {
+        display: block;
+        color: #ffffff;
+        font-size: 14px;
+        background: $main-color-red;
+        padding: 6px 8px;
+        width: 83px;
+        height: 20px;
+        border-radius: 2px;
+        text-transform: uppercase;
+        margin-top: -5px;
+        &:hover {
+          background: $main-color-black;
+        }
+      }
+    }
+  }
+
+  //hide marker
+  li.menu-item.menu-item--collapsed.my_account {
+    &::marker {
+      content: none;
+    }
+  }
+}

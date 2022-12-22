@@ -9,7 +9,8 @@ libraries:
 package: Custom
 version: VERSION
 regions:
-  header: Header
+  header_top: 'Header top'
+  header_bottom: 'Header bottom'
   primary_menu: 'Primary menu'
   secondary_menu: 'Secondary menu'
   page_top: 'Page top'
@@ -23,8 +24,6 @@ regions:
   featured_bottom_first: 'Featured bottom first'
   featured_bottom_second: 'Featured bottom second'
   featured_bottom_third: 'Featured bottom third'
-  footer_first: 'Footer first'
-  footer_second: 'Footer second'
-  footer_third: 'Footer third'
-  footer_fourth: 'Footer fourth'
-  footer_fifth: 'Footer fifth'
+  footer_top: 'Footer top'
+  footer_content: 'Footer content'
+  footer_bottom: 'Footer bottom'

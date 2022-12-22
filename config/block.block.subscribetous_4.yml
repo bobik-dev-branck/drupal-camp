@@ -11,8 +11,8 @@ dependencies:
     - newsweek
 id: subscribetous_4
 theme: newsweek
-region: footer_first
-weight: -8
+region: footer_content
+weight: -13
 provider: null
 plugin: 'block_content:ffc0b7fe-91c5-4539-90fc-a4f30bd2e5db'
 settings:

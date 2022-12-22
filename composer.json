@@ -20,9 +20,12 @@
         "drupal/core-composer-scaffold": "^9.4",
         "drupal/core-project-message": "^9.4",
         "drupal/core-recommended": "^9.4",
+        "drupal/devel": "^5.1",
+        "drupal/menus_attribute": "^1.2",
         "drupal/nextpre": "^9.0",
         "drupal/paragraphs": "^1.15",
-        "drupal/pathauto": "^1.11"
+        "drupal/pathauto": "^1.11",
+        "kint-php/kint": "^5.0"
     },
     "conflict": {
         "drupal/drupal": "*"
