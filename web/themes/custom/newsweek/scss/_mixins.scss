@@ -17,6 +17,7 @@
   padding: 0;
   > div, h2 {
     display: inline;
+    line-height: 2px;
   }
   .field--name-field-special-content {
     > a {
@@ -31,6 +32,28 @@
       line-height: 0;
       > a :hover {
         color: #fff !important;
+      }
+    }
+  }
+}
+
+@mixin view-mode_meta-info {
+  .field--name-title {
+    font-family: "PT Serif";
+    font-size: 14px;
+    font-weight: 600;
+    }
+  .node__meta {
+    display: flex;
+    color: $main-color-black;
+    .field--name-field-tags {
+      text-transform: uppercase;
+      font-weight: 700;
+      a, a.link {
+        color: $main-color-red;
+        &:hover {
+          color: $main-color-black;
+        }
       }
     }
   }
