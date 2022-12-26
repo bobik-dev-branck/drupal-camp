@@ -3,20 +3,17 @@
 @import "mixins";
 @import "default-style";
 
-
-//header
+//Header.
 @import "header/header";
 @import "header/header-top";
 @import "header/header-bottom";
 
-//content
+//Content.
 @import "content/content";
 @import "content/main-section";
 
-//footer
+//Footer.
 @import "footer/footer";
 @import "footer/region-footer-top";
 @import "footer/region-footer-content";
 @import "footer/region-footer-bottom";
-
-

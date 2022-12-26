@@ -1,7 +1,5 @@
 .main-section {
   justify-content: space-between;
-  //max-height: 612px;
-
   .layout__region--first {
     max-width: 282px;
   }
@@ -51,7 +49,7 @@
   }
 }
 
-//three lasted node in main block
+//Three lasted node in main block.
 .block-views-blockmain-bloc-mp-block-1 {
   margin: -10px;
   //min-width: 100%;
@@ -69,7 +67,7 @@
   }
 }
 
-//last mode in main block
+//Last mode in main block.
 .node--view-mode-teaser-full {
   .node {
     position: absolute;
@@ -118,6 +116,9 @@
 }
 
 .attachment-after {
+  .exclusive-and-content {
+    @include exclusive-and-content;
+  }
   .node--view-mode-teaser {
     border-bottom: none;
     max-height: 50%;

@@ -1,15 +1,14 @@
 {%
   set classes = [
-  'node',
-  'node--type-' ~ node.bundle|clean_class,
-  node.isPromoted() ? 'node--promoted',
-  node.isSticky() ? 'node--sticky',
-  not node.isPublished() ? 'node--unpublished',
-  view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
-  'clearfix',
-]
+    'node',
+    'node--type-' ~ node.bundle|clean_class,
+    node.isPromoted() ? 'node--promoted',
+    node.isSticky() ? 'node--sticky',
+    not node.isPublished() ? 'node--unpublished',
+    view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
+    'clearfix',
+  ]
 %}
-
 {%
   set images_style = {
   '#theme':      'image_style',
@@ -17,20 +16,16 @@
   '#uri':        node.field_main_image.entity.field_media_image.entity.fileuri,
   }
 %}
-
 {{ attach_library('bartik/classy.node') }}
-
 <article{{ attributes.addClass(classes) }}>
-
   <div class="main-image">
     <a href="{{ url }}" class="main-image" rel="bookmark"> {{ images_style }}</a>
   </div>
-
   <div class="node">
     <header>
-
-      {{ content.field_tags }}
-
+      {% if content.field_tags %}
+        {{ content.field_tags }}
+      {% endif %}
       {{ title_prefix }}
       {% if label and not page %}
         <h2{{ title_attributes.addClass('node__title') }}>
@@ -38,15 +33,12 @@
         </h2>
       {% endif %}
       {{ title_suffix }}
-
-      {{ content.body }}
-
+      {% if content.body %}
+        {{ content.body }}
+      {% endif %}
     </header>
   </div>
-
-
-    <div{{ content_attributes.addClass('node__content', 'clearfix') }}>
-      {{ content | without ('field_tags', 'field_main_image', 'body') }}
-    </div>
-
+  <div{{ content_attributes.addClass('node__content', 'clearfix') }}>
+    {{ content|without('field_tags', 'field_main_image', 'body') }}
+  </div>
 </article>
