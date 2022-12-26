@@ -1,0 +1,54 @@
+/* styles fot block Join or social media in Content */
+.join-or-social-media {
+  .layout__region--content {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .field--name-field-title{
+    font-family: Work Sans;
+    font-size: 13px;
+    line-height: 1.2;
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+
+  .field--name-body {
+    font-family: PT Serif;
+    font-size: 20px;
+    line-height: 1.2;
+    font-weight: 700;
+  }
+
+  .social-media {
+    display: flex;
+  }
+  .social-media > a {
+    display: inline-block;
+    height: 16px;
+    overflow: hidden;
+    position: relative;
+    vertical-align: middle;
+    width: 16px;
+    margin-left: 16px;
+  }
+  .social-media__facebook{
+    content: '';
+    background: url(../icons/social-media/facebook-red.png) 0 0 no-repeat;
+    &:hover {
+      background: url(../icons/social-media/facebook-black.png) 0 0 no-repeat;
+    }
+  }
+  .social-media__instagram {
+    background: url(../icons/social-media/instagram-red.png) 0 0 no-repeat;
+    &:hover {
+      background: url(../icons/social-media/instagram-black.png) 0 0 no-repeat;
+    }
+  }
+  .social-media__twitter {
+    background: url(../icons/social-media/twitter-red.png) 0 0 no-repeat;
+    &:hover {
+      background: url(../icons/social-media/twitter-black.png) 0 0 no-repeat;
+    }
+  }
+}

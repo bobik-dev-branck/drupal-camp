@@ -21,6 +21,7 @@
         "drupal/core-project-message": "^9.4",
         "drupal/core-recommended": "^9.4",
         "drupal/devel": "^5.1",
+        "drupal/layout_custom_section_classes": "^1.0",
         "drupal/menus_attribute": "^1.2",
         "drupal/nextpre": "^9.0",
         "drupal/paragraphs": "^1.15",
