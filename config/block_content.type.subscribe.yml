@@ -1,0 +1,8 @@
+uuid: d250472c-89f4-4e1d-9f39-37f8597c76e1
+langcode: en
+status: true
+dependencies: {  }
+id: subscribe
+label: Subscribe
+revision: 0
+description: ''
