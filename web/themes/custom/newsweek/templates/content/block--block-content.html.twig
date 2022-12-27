@@ -1,0 +1,21 @@
+{% if content.field_title %}
+  {{ content.field_title }}
+{% endif %}
+
+{% if content.body %}
+  {{ content.body }}
+{% endif %}
+
+<div class="social-media">
+  {% set items = {
+    'facebook': 'https://www.facebook.com/',
+    'instagram': 'https://www.instagram.com/',
+    'twitter': 'https://twitter.com/'
+  } %}
+
+  {% for media, link in items %}
+    <a href="{{ link }}" class="social-media__{{ media }}"><i></i></a>
+  {% endfor %}
+</div>
+
+{{ content|without('body', 'field_title') }}

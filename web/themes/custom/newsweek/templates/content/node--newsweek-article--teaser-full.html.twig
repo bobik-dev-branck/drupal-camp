@@ -11,9 +11,9 @@
 %}
 {%
   set images_style = {
-  '#theme':      'image_style',
-  '#style_name': 'teaser_full',
-  '#uri':        node.field_main_image.entity.field_media_image.entity.fileuri,
+    '#theme':      'image_style',
+    '#style_name': 'teaser_full',
+    '#uri':        node.field_main_image.entity.field_media_image.entity.fileuri,
   }
 %}
 {{ attach_library('bartik/classy.node') }}
