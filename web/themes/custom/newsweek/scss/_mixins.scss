@@ -30,7 +30,7 @@
       border-radius: 2px;
       text-transform: uppercase;
       line-height: 0;
-      > a :hover {
+      &:hover {
         color: #fff !important;
       }
     }
@@ -42,7 +42,7 @@
     font-family: "PT Serif";
     font-size: 14px;
     font-weight: 600;
-    }
+  }
   .node__meta {
     display: flex;
     color: $main-color-black;
