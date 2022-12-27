@@ -1,0 +1,15 @@
+uuid: 5ab78d38-7534-42f4-90aa-80cfce9ad5f6
+langcode: en
+status: true
+dependencies: {  }
+name: title_and_photo_plus_author
+label: 'Title and photo plus author'
+effects:
+  06bbb7af-3da1-40a8-b470-12c9a26499be:
+    uuid: 06bbb7af-3da1-40a8-b470-12c9a26499be
+    id: image_scale_and_crop
+    weight: 1
+    data:
+      width: 331
+      height: 232
+      anchor: center-center

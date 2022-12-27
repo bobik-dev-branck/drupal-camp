@@ -1,5 +1,5 @@
 {%
-    set classes = [
+  set classes = [
     'node',
     'node--type-' ~ node.bundle|clean_class,
     node.isPromoted() ? 'node--promoted',
@@ -9,13 +9,19 @@
     'clearfix',
   ]
 %}
+{% set images_style = {
+  '#theme':      'image_style',
+  '#style_name': 'title_and_photo_plus_author',
+  '#uri':        node.field_main_image.entity.field_media_image.entity.fileuri,
+} %}
 {{ attach_library('bartik/classy.node') }}
 <article{{ attributes.addClass(classes) }}>
   <header>
     {% if content.field_main_image %}
-      {{ content.field_main_image }}
+      <div class="field--name-field-main-image">
+        {{ images_style }}
+      </div>
     {% endif %}
-
     {% if content.field_special_content %}
       <div class="exclusive-and-content">
         {{ content.field_special_content }}
@@ -36,13 +42,10 @@
       {% endif %}
       {{ title_suffix }}
     {% endif %}
-
-
-
     {% if display_submitted %}
       <div class="node__meta">
         {{ author_picture }}
-        <span{{ author_attributes }}>
+        <span class="meta-info" {{ author_attributes }}>
           {% trans %}{{ author_name }} - {{ date }}{% endtrans %}
         </span>
         {{ metadata }}
