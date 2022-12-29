@@ -9,7 +9,6 @@
   ]
 %}
 <div{{ attributes.addClass(classes) }}>
-
   {{ title_prefix }}
   {% if title %}
     {{ title }}
@@ -30,7 +29,11 @@
       {{ attachment_before }}
     </div>
   {% endif %}
-
+  {% if pager %}
+    <div class="previous">
+      {{ pager }}
+    </div>
+  {% endif %}
   {% if rows %}
     <div class="view-content">
       {{ rows }}
@@ -40,14 +43,10 @@
       {{ empty }}
     </div>
   {% endif %}
-
   {% if pager %}
-    {{ pager }}
-    {{ pager['#tags'][3] }}
-
-    {{ devel_dump(pager) }}
-{#    {{ kint(pager) }}#}
-
+    <div class="next">
+      {{ pager }}
+    </div>
   {% endif %}
   {% if attachment_after %}
     <div class="attachment attachment-after">
