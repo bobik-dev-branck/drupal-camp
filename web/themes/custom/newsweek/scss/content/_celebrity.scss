@@ -1,0 +1,80 @@
+.celebrity {
+  position: relative;
+  // Styles for title in section Celebrity.
+  .title {
+    position: relative;
+    padding-bottom: 100px;
+    font-family: Work Sans;
+    .title_main {
+      font-size: 32px;
+      line-height: 1;
+      font-weight: 700;
+      letter-spacing: -1px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50% , -50%);
+      z-index: 2;
+    }
+    .subtitle {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 90px;
+      text-transform: uppercase;
+      color: #f3f3f3;
+      line-height: 1;
+    }
+  }
+
+  // Styles for top part Celebrity section
+  .view-display-id-block_1 > .view-content {
+    .views-view-grid.horizontal .views-row {
+      border-bottom: none;
+      padding: 0;
+    }
+    .node--view-mode-title-and-photo-plus-author header {
+      display: inline-flex;
+      flex-wrap: wrap;
+      margin: -10px;
+      height: 333px;
+      justify-content: space-between;
+      position: relative;
+      @include round_avatar;
+      .field--name-field-main-image {
+        width: 333px;
+        height: 233px;
+        padding: 10px;
+        .image-style-title-and-photo-plus-author {
+          min-width: 333px;
+          min-height: 233px;
+        }
+      }
+      .field--name-field-main-image {
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+      .exclusive-and-content {
+        @include exclusive-and-content;
+        position: absolute;
+        top: 20%;
+        left: 360px;
+        width: 333px;
+        max-height: 100px;
+        margin: 0 0 8px 0;
+        font-family: PT Serif;
+        font-size: 16px;
+        font-weight: 600;
+      }
+      .node__meta {
+        @include meta-info_plus_author;
+        position: absolute;
+        bottom: 50%;
+        left: 360px;
+        width: 333px;
+      }
+    }
+  }
+}
