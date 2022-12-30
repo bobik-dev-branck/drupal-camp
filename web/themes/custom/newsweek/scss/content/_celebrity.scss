@@ -1,5 +1,6 @@
 .celebrity {
   position: relative;
+
   // Styles for title in section Celebrity.
   .title {
     position: relative;
@@ -28,52 +29,88 @@
     }
   }
 
-  // Styles for top part Celebrity section
+  // Styles for top part Celebrity section.
   .view-display-id-block_1 > .view-content {
     .views-view-grid.horizontal .views-row {
       border-bottom: none;
+      display: flex;
+      justify-content: space-between;
       padding: 0;
+      margin: -10px;
+      &::after {
+        content: '';
+        display: none;
+      }
+      .views-col {
+        max-width: 700px;
+        padding: 10px;
+      }
     }
     .node--view-mode-title-and-photo-plus-author header {
-      display: inline-flex;
-      flex-wrap: wrap;
-      margin: -10px;
-      height: 333px;
+      display: flex;
       justify-content: space-between;
-      position: relative;
+      margin: -10px;
       @include round_avatar;
       .field--name-field-main-image {
-        width: 333px;
-        height: 233px;
         padding: 10px;
         .image-style-title-and-photo-plus-author {
           min-width: 333px;
           min-height: 233px;
         }
       }
-      .field--name-field-main-image {
-        position: absolute;
-        top: 0;
-        left: 0;
+      .article-without-image {
+        display: flex;
+        flex-direction: column;
+        padding: 0 10px;
+        max-width: 333px;
+        width: 100%;
+        .exclusive-and-content {
+          @include exclusive-and-content;
+          margin: 0 0 8px 0;
+          font-family: PT Serif;
+          font-size: 16px;
+          font-weight: 600;
+          padding: 60px 0 10px 0;
+        }
+        .node__meta {
+          @include meta-info_plus_author;
+        }
       }
-      .exclusive-and-content {
-        @include exclusive-and-content;
-        position: absolute;
-        top: 20%;
-        left: 360px;
-        width: 333px;
-        max-height: 100px;
-        margin: 0 0 8px 0;
-        font-family: PT Serif;
-        font-size: 16px;
-        font-weight: 600;
+    }
+  }
+
+  //Styles fot bottom part Celebrity section.
+  .attachment-after {
+    .view-display-id-attachment_1 > .view-content {
+      .views-view-grid.horizontal .views-row {
+        border-bottom: none;
+        display: flex;
+        justify-content: space-between;
+        &::after {
+          content: '';
+          display: none;
+        }
+        .views-col {
+          max-width: 333px;
+        }
       }
-      .node__meta {
-        @include meta-info_plus_author;
-        position: absolute;
-        bottom: 50%;
-        left: 360px;
-        width: 333px;
+      .node--view-mode-title-and-photo-plus-author header {
+        @include round_avatar;
+        .field--name-field-main-image {
+          .image-style-title-and-photo-plus-author {
+            min-width: 333px;
+            min-height: 233px;
+          }
+        }
+        .article-without-image {
+          padding-top: 10px;
+          .exclusive-and-content {
+            padding-bottom: 10px;
+          }
+          .node__meta {
+            @include meta-info_plus_author;
+          }
+        }
       }
     }
   }
