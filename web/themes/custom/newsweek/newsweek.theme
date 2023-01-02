@@ -1,15 +1,17 @@
 <?php
 
+/**
+ * @file
+ * Functions to support theming in the NewsWeek PRO theme.
+ */
+
 use Drupal\block\Entity\Block;
 
 
 /**
  * Implements hook_theme_suggestions_HOOK_alter().
  */
-
 function newsweek_theme_suggestions_block_alter(&$suggestions, $variables) {
-
-
   // View mode suggestion for custom blocks.
   if (isset($variables['elements']['#configuration']['view_mode'])) {
     $view_mode = $variables['elements']['content']['#view_mode'];
@@ -45,5 +47,14 @@ function newsweek_theme_suggestions_block_alter(&$suggestions, $variables) {
     // Bundle type.
     $bundle = $variables['elements']['content']['#block_content']->bundle();
     $suggestions[] = 'block__' . $bundle;
+  }
+}
+
+/**
+ * Implements hook_theme_suggestions_HOOK_alter().
+ */
+function newsweek_theme_suggestions_views_view_alter(array &$suggestions, array $variables) {
+  if ($variables['view']) {
+    $suggestions[] = 'views_view__' . $variables['view']->id();
   }
 }

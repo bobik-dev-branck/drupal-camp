@@ -1,0 +1,64 @@
+.nineth-lasted-artickes {
+  .view-display-id-block_1 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .views-row {
+      border-bottom: none;
+      padding: 20px 0;
+      margin: -10px;
+      .views-col {
+        padding: 10px;
+      }
+    }
+  }
+
+  // Styles for Pager in section Nineth lasted artickes
+  .is-active {
+    display: none;
+  }
+  .pager__item--next {
+    padding: 0;
+  }
+  .previous, .next {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    background-color: #dddddd;
+    font-size: 40px;
+    line-height: 0.7;
+    &:hover {
+      background-color: #a9a8a8;
+    }
+    & span  {
+      color: $main-color-white;
+    }
+  }
+  .previous {
+    min-width: 40px;
+    margin-right: 30px;
+    &::before {
+      content: '←';
+      color: $main-color-white;
+    }
+    .pager__item--next {
+      display: none;
+    }
+  }
+  .next {
+    margin-left: 30px;
+    .pager__item--previous {
+      display: none;
+    }
+  }
+
+  // Styles for content in section Nineth lasted artickes
+  .exclusive-and-content {
+    @include exclusive-and-content;
+    font-size: 13px ;
+    font-weight: 700;
+  }
+  .node__meta {
+    color: $main-color-black;
+  }
+}
