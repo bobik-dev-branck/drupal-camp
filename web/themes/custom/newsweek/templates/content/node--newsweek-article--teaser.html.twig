@@ -46,6 +46,15 @@
         {% endif %}
         {{ title_suffix }}
       {% endif %}
+      {% if display_submitted %}
+        <div class="node__meta">
+          {{ author_picture }}
+          <span class="meta-info" {{ author_attributes }}>
+            {% trans %}{{ author_name }} - {{ date }}{% endtrans %}
+          </span>
+          {{ metadata }}
+        </div>
+      {% endif %}
     </div>
   </header>
   <div{{ content_attributes.addClass('node__content', 'clearfix') }}>

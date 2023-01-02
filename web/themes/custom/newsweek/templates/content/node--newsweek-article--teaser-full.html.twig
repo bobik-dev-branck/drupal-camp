@@ -33,6 +33,15 @@
         </h2>
       {% endif %}
       {{ title_suffix }}
+      {% if display_submitted %}
+        <div class="node__meta">
+          {{ author_picture }}
+          <span class="meta-info" {{ author_attributes }}>
+            {% trans %}{{ author_name }} - {{ date }}{% endtrans %}
+          </span>
+          {{ metadata }}
+        </div>
+      {% endif %}
       {% if content.body %}
         {{ content.body }}
       {% endif %}

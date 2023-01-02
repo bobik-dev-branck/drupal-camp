@@ -14,7 +14,7 @@ use Drupal\block\Entity\Block;
 function newsweek_theme_suggestions_block_alter(&$suggestions, $variables) {
   // View mode suggestion for custom blocks.
   if (isset($variables['elements']['#configuration']['view_mode'])) {
-    $view_mode = $variables['elements']['content']['#view_mode'];
+    $view_mode = $variables['elements']['#configuration']['view_mode'];
     $suggestions[] = 'block__' . $view_mode;
   }
   else {

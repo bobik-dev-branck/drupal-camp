@@ -1,0 +1,219 @@
+.recent-posts {
+  position: relative;
+  padding-top: 150px;
+  display: flex;
+  justify-content: space-around;
+  .layout__region--first {
+    max-width: 1032px;
+    padding: 0 24px;
+
+  // Styles for title section Recent post.
+  .title {
+    position: absolute;
+    top: 25px;
+    left: 50%;
+    font-family: Work Sans;
+    .title_main {
+      font-size: 32px;
+      line-height: 1;
+      font-weight: 700;
+      letter-spacing: -1px;
+      position: absolute;
+      left: 50%;
+      transform: translate(-50%, 85%);
+      z-index: 2;
+      width: 200px;
+    }
+    .subtitle {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 90px;
+      text-transform: uppercase;
+      color: #f3f3f3;
+      line-height: 1;
+    }
+  }
+
+    // Styles for left part section Recent post.
+    // Styles for attachment before in left part section Recent post.
+    .node--view-mode-teaser-full {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 20px;
+      .main-image img {
+        max-height: 361px;
+        max-width: 516px;
+        margin-right: 30px;
+      }
+      .node {
+        position: static;
+        max-width: 478px;
+        & header {
+          padding-top: 40px;
+          display: flex;
+          flex-direction: row;
+          flex-wrap: wrap;
+          @include round_avatar;
+          .node__title {
+            order: 1;
+            margin-bottom: 20px;
+            .field--name-title {
+              color: $main-color-black;
+            }
+          }
+          .field--name-field-tags {
+            margin: auto 0;
+            order: 2;
+            & a {
+              background: $main-color-white;
+              color: $main-color-black;
+              padding: 0;
+              &:hover {
+                color: $main-color-red;
+              }
+            }
+          }
+          .node__meta {
+            @include meta-info_plus_author;
+            order: 3;
+            width: 50%;
+          }
+          .field--name-body {
+            margin-top: 20px;
+            order: 4;
+            & p {
+              color: $main-color-black;
+            }
+          }
+        }
+      }
+    }
+
+    // Styles for main block in left part section Recent post.
+    .view-content {
+      .views-view-grid.horizontal .views-row {
+        border-bottom: none;
+        display: flex;
+        justify-content: space-between;
+        padding: 0;
+        &::after {
+          content: '';
+          display: none;
+        }
+        .views-col {
+          max-width: 333px;
+        }
+      }
+      .node--view-mode-title-and-photo-plus-author > header {
+        display: flex;
+        flex-direction: column;
+        .field--name-field-main-image {
+          margin-right: 20px;
+          width: 331px;
+          height: 231px;
+          .image-style-title-and-photo-plus-author {
+            min-width: 100px;
+            min-height: 70px;
+          }
+        }
+        .article-without-image {
+          padding-top: 5px;
+          .exclusive-and-content {
+            @include exclusive-and-content;
+            padding-bottom: 10px;
+          }
+          .node__meta {
+            @include round_avatar;
+            @include meta-info_plus_author;
+          }
+        }
+      }
+    }
+  }
+
+  // Styles for right part section Recent post.
+  .layout__region--second {
+    max-width: 312px;
+    // Styles for main block in right part section Recent post.
+    .block-views-blockmarketing-block-1 > h2 {
+      position: absolute;
+      top: -47px;
+      left: 20px;
+      z-index: 5;
+      color: $main-color-white;
+      background: $main-color-black;
+      text-align: center;
+      padding: 10px 0;
+      width: 134px;
+      font-family: PT Serif;
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+    .node--view-mode-teaser {
+      border-bottom: none;
+      margin: 0;
+      padding: 0;
+      & > header {
+        position: relative;
+        .main-image {
+          max-height: 420px;
+          max-width: 312px;
+          & img {
+            height: 420px;
+            width: 312px;
+          }
+        }
+        .node {
+          position: absolute;
+          bottom: 5%;
+          left: 5%;
+          max-width: 90%;
+          color: $main-color-white;
+          .field--name-title {
+            color: $main-color-white;
+            font-family: Work Sans;
+            font-size: 20px;
+            line-height: 1;
+            font-weight: 700;
+            &:hover {
+              color: #d3d2d2;
+            }
+          }
+          .field--name-user-picture, .field--name-field-tags, .field--name-field-special-content {
+            display: none;
+          }
+          .node__meta {
+            color: $main-color-white;
+          }
+          .username {
+            color: $main-color-white;
+            text-transform: capitalize;
+            line-height: 1.2;
+            font-weight: 500;
+            font-family: Work Sans;
+            &:hover {
+              color: #d3d2d2;
+            }
+          }
+        }
+      }
+    }
+
+    // Styles for attachment block in right part section Recent post.
+    .view-id-marketing_other_articles {
+      @include view-mode_meta-info;
+      .is-active {
+        display: none;
+      }
+      .pager__items {
+        text-align: left;
+      }
+      .exclusive-and-content {
+        @include exclusive-and-content;
+      }
+    }
+  }
+}
