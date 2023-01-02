@@ -3,6 +3,20 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    position: relative;
+    .background {
+      position: absolute;
+      width: 100vw;
+      left: 50%;
+      top: 0;
+      transform: translateX(-50%);
+      background-color: #c9c6c6;
+      height: 204px;
+      opacity: 0.2;
+    }
+    .view-content {
+      z-index: 5;
+    }
     .views-row {
       border-bottom: none;
       padding: 20px 0;
