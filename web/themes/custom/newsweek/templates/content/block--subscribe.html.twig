@@ -1,0 +1,17 @@
+{% set bem_block = 'subscribe' %}
+
+<div class="{{ bem_block }}">
+  <p class="{{ bem_block }}__title">Subscribe</p>
+  <div class="{{ bem_block }}__body">
+    <form class="agreement__form" action="#">
+      <input class="email" type="email" placeholder="Email address">
+      <button class="btn" TYPE="submit">{{ content }}</button>
+      <div>
+        <input class="agreement" type="checkbox">
+        <span class="text">{{ "I've read and the"|t }}
+          <a class="link" href="#">{{ 'Privacy Policy'|t }}</a>
+        </span>
+      </div>
+    </form>
+  </div>
+</div>

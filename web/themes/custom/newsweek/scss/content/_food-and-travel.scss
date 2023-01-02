@@ -1,0 +1,110 @@
+.food-and-travel {
+  .food-and-travel__header {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 3px $main-color-red solid;
+    padding-bottom: 10px;
+    margin-bottom: 5px;
+    .food-and-travel__title {
+      color: $main-color-black;
+      font-family: Work Sans;
+      font-size: 32px;
+      line-height: 1;
+      font-weight: 700;
+      letter-spacing: -1px;
+    }
+    .food-and-travel__category {
+      font-family: Work Sans;
+      font-size: 13px;
+      line-height: 1.2;
+      font-weight: 600;
+      text-transform: uppercase;
+      height: auto;
+      color: $main-color-red;
+      &:after {
+        content: '→';
+        font-size: 30px;
+      }
+      &:hover {
+        color: $main-color-black;
+      }
+    }
+  }
+  .view-display-id-block_1 > .view-content {
+    .views-view-grid.horizontal .views-row {
+      display: flex;
+      justify-content: space-between;
+      &::after {
+        content: '';
+        display: none;
+      }
+      .views-col {
+        max-width: 333px;
+      }
+    }
+    .node--view-mode-title-and-photo-plus-author header {
+      @include round_avatar;
+      .field--name-field-main-image {
+        .image-style-title-and-photo-plus-author {
+          min-width: 333px;
+          min-height: 233px;
+        }
+      }
+      .article-without-image {
+        padding-top: 10px;
+        .exclusive-and-content {
+          @include exclusive-and-content;
+          font-family: PT Serif;
+          font-size: 16px !important;
+          font-weight: 600;
+        }
+        .node__meta {
+          @include meta-info_plus_author;
+        }
+        .exclusive-and-content {
+          padding-bottom: 10px;
+        }
+        .node__meta {
+          @include meta-info_plus_author;
+        }
+      }
+    }
+  }
+
+  .attachment-after {
+    .view-display-id-attachment_1 > .view-content {
+      .views-view-grid.horizontal .views-row {
+        border-bottom: none;
+        display: flex;
+        justify-content: space-between;
+        &::after {
+          content: '';
+          display: none;
+        }
+        .views-col {
+          max-width: 333px;
+        }
+      }
+      .node--view-mode-title-and-photo header {
+        display: flex;
+
+        .field--name-field-main-image {
+          margin-right: 20px;
+          .image-style-title-and-photo-plus-author {
+            min-width: 100px;
+            min-height: 70px;
+          }
+        }
+        .article-without-image {
+          padding-top: 5px;
+          .exclusive-and-content {
+            padding-bottom: 10px;
+          }
+          .node__meta {
+            @include meta-info_plus_author;
+          }
+        }
+      }
+    }
+  }
+}

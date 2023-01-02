@@ -1,0 +1,22 @@
+uuid: fb943ca2-2ee1-4c9b-b67f-64269f4baaf1
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.subscribe
+    - field.field.block_content.subscribe.body
+  module:
+    - text
+id: block_content.subscribe.default
+targetEntityType: block_content
+bundle: subscribe
+mode: default
+content:
+  body:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden: {  }

@@ -3,6 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - core.entity_view_mode.node.title_and_photo
     - core.entity_view_mode.node.title_and_photo_plus_author
     - node.type.newsweek_article
     - taxonomy.vocabulary.tags
@@ -335,7 +336,7 @@ display:
         type: 'entity:node'
         options:
           relationship: none
-          view_mode: title_and_photo_plus_author
+          view_mode: title_and_photo
       defaults:
         style: false
         row: false
