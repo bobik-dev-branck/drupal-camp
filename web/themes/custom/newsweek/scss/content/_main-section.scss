@@ -67,18 +67,28 @@
   }
 }
 
-//Last mode in main block.
-.node--view-mode-teaser-full {
+// Styles for Newsweek-article View mode teaser-full.
+//TODO For optimization structure of SCSS  files needs to be put in a separate file. Rows from 72 into 123.
+article .node--view-mode-teaser-full {
+  position: relative;
+  width: 548px;
+  height: 600px;
+  margin-right: 20px;
+  @include exclusive-and-content;
   .node {
     position: absolute;
     z-index: 1;
+    width: 100%;
     max-width: 90%;
-    left: 5%;
-    top: 42%;
+    padding: 20px;
+    left: 0;
+    bottom: 0%;
     color: $main-color-black;
-
   }
   .field--name-field-special-content {
+    display: none;
+  }
+  .node__meta {
     display: none;
   }
   .field--name-field-tags {
@@ -107,6 +117,7 @@
     }
   }
   .field--name-body {
+    margin-top: 10px;
     font-family: Work Sans;
     font-size: 16px;
     line-height: 1.4;
