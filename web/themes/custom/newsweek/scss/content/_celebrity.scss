@@ -1,0 +1,117 @@
+.celebrity {
+  position: relative;
+
+  // Styles for title in section Celebrity.
+  .title {
+    position: relative;
+    padding-bottom: 100px;
+    font-family: Work Sans;
+    .title_main {
+      font-size: 32px;
+      line-height: 1;
+      font-weight: 700;
+      letter-spacing: -1px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50% , -50%);
+      z-index: 2;
+    }
+    .subtitle {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 90px;
+      text-transform: uppercase;
+      color: #f3f3f3;
+      line-height: 1;
+    }
+  }
+
+  // Styles for top part Celebrity section.
+  .view-display-id-block_1 > .view-content {
+    .views-view-grid.horizontal .views-row {
+      border-bottom: none;
+      display: flex;
+      justify-content: space-between;
+      padding: 0;
+      margin: -10px;
+      &::after {
+        content: '';
+        display: none;
+      }
+      .views-col {
+        max-width: 700px;
+        padding: 10px;
+      }
+    }
+    .node--view-mode-title-and-photo-plus-author header {
+      display: flex;
+      justify-content: space-between;
+      margin: -10px;
+      @include round_avatar;
+      .field--name-field-main-image {
+        padding: 10px;
+        .image-style-title-and-photo-plus-author {
+          min-width: 333px;
+          min-height: 233px;
+        }
+      }
+      .article-without-image {
+        display: flex;
+        flex-direction: column;
+        padding: 0 10px;
+        max-width: 333px;
+        width: 100%;
+        .exclusive-and-content {
+          @include exclusive-and-content;
+          margin: 0 0 8px 0;
+          font-family: PT Serif;
+          font-size: 16px;
+          font-weight: 600;
+          padding: 60px 0 10px 0;
+        }
+        .node__meta {
+          @include meta-info_plus_author;
+        }
+      }
+    }
+  }
+
+  //Styles fot bottom part Celebrity section.
+  .attachment-after {
+    .view-display-id-attachment_1 > .view-content {
+      .views-view-grid.horizontal .views-row {
+        border-bottom: none;
+        display: flex;
+        justify-content: space-between;
+        &::after {
+          content: '';
+          display: none;
+        }
+        .views-col {
+          max-width: 333px;
+        }
+      }
+      .node--view-mode-title-and-photo-plus-author header {
+        @include round_avatar;
+        .field--name-field-main-image {
+          .image-style-title-and-photo-plus-author {
+            min-width: 333px;
+            min-height: 233px;
+          }
+        }
+        .article-without-image {
+          padding-top: 10px;
+          .exclusive-and-content {
+            padding-bottom: 10px;
+          }
+          .node__meta {
+            @include meta-info_plus_author;
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,5 +1,5 @@
 {%
-  set classes = [
+    set classes = [
     'node',
     'node--type-' ~ node.bundle|clean_class,
     node.isPromoted() ? 'node--promoted',
@@ -42,15 +42,6 @@
           </h2>
         {% endif %}
         {{ title_suffix }}
-      {% endif %}
-      {% if display_submitted %}
-        <div class="node__meta">
-          {{ author_picture }}
-          <span class="meta-info" {{ author_attributes }}>
-            {% trans %}{{ author_name }} - {{ date }}{% endtrans %}
-          </span>
-          {{ metadata }}
-        </div>
       {% endif %}
     </div>
   </header>
