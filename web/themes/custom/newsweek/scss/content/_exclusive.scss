@@ -1,0 +1,74 @@
+.exclusive-content {
+  position: relative;
+  padding: 25px;
+  box-shadow: 0 4px 20px rgb(0 0 0 / 9%);
+  .exclusive-content__header {
+    position: absolute;
+    top: -10px;
+    left: 45px;
+    z-index: 5;
+    color: $main-color-white;
+    font-family: PT Serif;
+    font-size: 20px;
+    font-style: italic;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    padding: 8px 12px;
+    border-radius: 2px;
+    background: $main-color-red;
+  }
+
+  // Styles for main block in section Exclusive content.
+  .view-exclusive-content {
+    display: flex;
+    justify-content: space-between;
+    max-height: 600px;
+    .view-display-id-block_1 {
+      flex: 1 0 600px;
+      article .node--view-mode-teaser-full {
+        margin-right: 20px;
+        .node {
+          .field--name-field-tags {
+            display: none;
+          }
+          .field--name-field-special-content {
+            display: inline-block;
+          }
+        }
+      }
+    }
+  }
+
+  // Styles for attachment in section Exclusive content.
+  .attachment-after {
+    flex: 1 1 auto;
+    .view-display-id-attachment_1 {
+      width: 100%;
+      .view-content {
+        min-width: 100%;
+      }
+      .views-view-grid.horizontal .views-row {
+        border-bottom: none;
+        padding: 0;
+        display: flex;
+        justify-content: space-between;
+        &::after {
+          display: none;
+        }
+        .views-col {
+          max-width: 400px;
+          padding: 0;
+        }
+        .main-image {
+          .image-style-teaser {
+            width: 400px;
+            height: 203px;
+          }
+        }
+        .field--name-field-tags {
+          margin: 5px 0;
+        }
+      }
+    }
+  }
+}

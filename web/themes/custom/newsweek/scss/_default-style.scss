@@ -20,6 +20,7 @@ p {
   margin-block-end: 0;
 }
 
+
 // Zeroing out the basic grid styles
 .views-view-grid .views-col {
   padding: 0;
@@ -35,4 +36,7 @@ p {
 
 .main-content h2 {
   font-size: initial;
+}
+.node .field--type-image {
+  float: none;
 }
