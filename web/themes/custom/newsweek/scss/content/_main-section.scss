@@ -125,12 +125,9 @@ article .node--view-mode-teaser-full {
   }
 }
 
-.attachment-after {
+.main-section .attachment-after {
   .exclusive-and-content {
     @include exclusive-and-content;
-  }
-  .main-image {
-
   }
   .node--view-mode-teaser {
     border-bottom: none;
@@ -183,7 +180,6 @@ article .node--view-mode-teaser-full {
     padding: 15px 20px 20px 20px;
     box-shadow: 0 0 40px #eaeaea;
   }
-
   .exclusive-and-content {
     @include exclusive-and-content;
   }
