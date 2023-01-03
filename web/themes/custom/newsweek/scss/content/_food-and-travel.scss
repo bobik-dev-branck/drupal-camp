@@ -1,10 +1,11 @@
 .food-and-travel {
+  padding-top: 60px;
   .food-and-travel__header {
     display: flex;
     justify-content: space-between;
     border-bottom: 3px $main-color-red solid;
     padding-bottom: 10px;
-    margin-bottom: 5px;
+    margin-bottom: 20px;
     .food-and-travel__title {
       color: $main-color-black;
       font-family: Work Sans;
@@ -30,6 +31,8 @@
       }
     }
   }
+
+  //Styles for top part the section Food and travel.
   .view-display-id-block_1 > .view-content {
     .views-view-grid.horizontal .views-row {
       display: flex;
@@ -71,6 +74,7 @@
     }
   }
 
+  //Styles for bottom part the section Food and travel.
   .attachment-after {
     .view-display-id-attachment_1 > .view-content {
       .views-view-grid.horizontal .views-row {
@@ -98,6 +102,11 @@
         .article-without-image {
           padding-top: 5px;
           .exclusive-and-content {
+            @include exclusive-and-content;
+            font-family: PT Serif;
+            font-size: 14px;
+            line-height: 1.4;
+            font-weight: 600;
             padding-bottom: 10px;
           }
           .node__meta {
