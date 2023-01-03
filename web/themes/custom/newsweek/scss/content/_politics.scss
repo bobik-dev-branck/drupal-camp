@@ -1,5 +1,5 @@
 .politics {
-  margin-top: 50px;
+  margin: 50px 0 30px 0;
   .layout__region--first {
     max-width: 1032px;
     margin-right: 30px;
@@ -88,9 +88,14 @@
       border-bottom: none;
       display: flex;
       justify-content: space-between;
+      margin: 0;
+      padding: 5px 0;
       .views-col {
         max-width: 331px;
-
+        @include view-mode_meta-info;
+        .exclusive-and-content {
+          @include exclusive-and-content;
+        }
       }
       .field--name-created {
         color: $main-color-black;
