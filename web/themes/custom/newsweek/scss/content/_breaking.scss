@@ -130,6 +130,7 @@
         .field--name-field-tags a {
           color: $main-color-red;
           font-weight: 700;
+          text-transform: uppercase;
           &:hover {
             color: $main-color-black;
           }
