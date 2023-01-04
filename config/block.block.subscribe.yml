@@ -1,24 +1,24 @@
-uuid: 459cc471-3b58-45d9-821b-c0375788bfc6
+uuid: 8259460a-05cb-4074-928c-32e91d90ff3c
 langcode: en
 status: true
 dependencies:
   content:
-    - 'block_content:basic:ffc0b7fe-91c5-4539-90fc-a4f30bd2e5db'
+    - 'block_content:subscribe:06a11876-22ec-4294-ba40-7c38a6e75ef9'
   module:
     - block_content
     - system
   theme:
     - newsweek
-id: subscribetous_5
+id: subscribe
 theme: newsweek
 region: sidebar_second
 weight: -15
 provider: null
-plugin: 'block_content:ffc0b7fe-91c5-4539-90fc-a4f30bd2e5db'
+plugin: 'block_content:06a11876-22ec-4294-ba40-7c38a6e75ef9'
 settings:
-  id: 'block_content:ffc0b7fe-91c5-4539-90fc-a4f30bd2e5db'
-  label: 'subscribe to us'
-  label_display: '0'
+  id: 'block_content:06a11876-22ec-4294-ba40-7c38a6e75ef9'
+  label: Subscribe
+  label_display: visible
   provider: block_content
   status: true
   info: ''

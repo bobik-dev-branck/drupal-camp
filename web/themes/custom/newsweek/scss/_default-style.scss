@@ -48,3 +48,20 @@ p {
 #block-newsweek-page-title {
   display: none;
 }
+
+.highlighted {
+  margin: 0 auto;
+  .layout-container {
+    max-width: 1440px;
+    padding: 0 10px;
+  }
+}
+
+.sidebar .block  {
+  padding: 0;
+  margin-bottom: 0;
+  & h2 {
+    border-bottom: none;
+    text-shadow: none;
+  }
+}

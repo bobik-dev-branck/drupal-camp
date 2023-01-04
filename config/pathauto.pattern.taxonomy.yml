@@ -7,12 +7,12 @@ dependencies:
 id: taxonomy
 label: Taxonomy
 type: 'canonical_entities:taxonomy_term'
-pattern: '[term:name]'
+pattern: 'category/[term:name]'
 selection_criteria:
-  b207a535-7724-4263-951b-cf4bb9271630:
+  656ac6aa-669c-40c6-b8cd-2882c564e745:
     id: 'entity_bundle:taxonomy_term'
     negate: false
-    uuid: b207a535-7724-4263-951b-cf4bb9271630
+    uuid: 656ac6aa-669c-40c6-b8cd-2882c564e745
     context_mapping:
       taxonomy_term: taxonomy_term
     bundles:

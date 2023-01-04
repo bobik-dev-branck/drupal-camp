@@ -1,4 +1,4 @@
-uuid: 8cde5f2b-1e99-4250-99aa-10c0fed833b1
+uuid: 5253b1b1-368b-4c3b-9b31-5acdfe81149d
 langcode: en
 status: true
 dependencies:
@@ -9,18 +9,18 @@ dependencies:
     - views
   theme:
     - newsweek
-id: views_block__most_popular_article_block_1_2
+id: views_block__most_popular_article_sidebar_right
 theme: newsweek
 region: sidebar_second
 weight: -16
 provider: null
-plugin: 'views_block:most_popular_article-block_1'
+plugin: 'views_block:most_popular_article-sidebar_right'
 settings:
-  id: 'views_block:most_popular_article-block_1'
-  label: ''
-  label_display: '0'
+  id: 'views_block:most_popular_article-sidebar_right'
+  label: Popular
+  label_display: visible
   provider: views
-  views_label: ''
+  views_label: Popular
   items_per_page: none
 visibility:
   request_path:
