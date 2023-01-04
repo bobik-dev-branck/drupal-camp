@@ -46,6 +46,8 @@
   // Styles for top part Celebrity section.
   .view-display-id-block_1 > .view-content {
     .views-view-grid.horizontal .views-row {
+      position: relative;
+      z-index: 5;
       border-bottom: none;
       display: flex;
       justify-content: space-between;
