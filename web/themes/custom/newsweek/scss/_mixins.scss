@@ -21,17 +21,20 @@
   }
   .field--name-field-special-content {
     > a {
-      display: inline;
-      background-color: $main-color-red;
-      color: #fff !important;
-      font-family: Work Sans;
-      font-size: 15px;
-      padding: 3px;
+      display: inline-block;
+      margin: -4px 5px 0 0;
+      padding: 3px 5px;
       border-radius: 2px;
+      color: $main-color-white;
+      background-color: $main-color-red;
+      font-family: Work Sans;
+      font-size: 12px;
+      line-height: 1;
+      font-weight: 500;
       text-transform: uppercase;
-      line-height: 0;
+      letter-spacing: -0.5px;
       &:hover {
-        color: #fff !important;
+        color: $main-color-white;
       }
     }
   }
@@ -50,6 +53,7 @@
       text-transform: uppercase;
       font-weight: 700;
       a, a.link {
+        font-size: 13px;
         color: $main-color-red;
         &:hover {
           color: $main-color-black;
@@ -74,7 +78,7 @@
   align-items: center;
   color: black;
   font-family: Work Sans;
-  font-size: 13px;
+  font-size: 15px;
   line-height: 1;
   font-weight: 500;
   text-transform: capitalize;

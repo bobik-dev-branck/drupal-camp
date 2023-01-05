@@ -1,6 +1,10 @@
 .celebrity {
   position: relative;
-
+  padding-bottom: 50px;
+  .contextual-region {
+    position: relative;
+    z-index: 5;
+  }
   // Styles for title in section Celebrity.
   .title {
     position: relative;
@@ -28,10 +32,22 @@
       line-height: 1;
     }
   }
+  .background {
+    position: absolute;
+    width: 100vw;
+    left: 50%;
+    top: 220px;
+    transform: translateX(-50%);
+    background-color: #c9c6c6;
+    height: 530px;
+    opacity: 0.2;
+  }
 
   // Styles for top part Celebrity section.
   .view-display-id-block_1 > .view-content {
     .views-view-grid.horizontal .views-row {
+      position: relative;
+      z-index: 5;
       border-bottom: none;
       display: flex;
       justify-content: space-between;
@@ -44,6 +60,9 @@
       .views-col {
         max-width: 700px;
         padding: 10px;
+        &:last-child {
+          margin-left: 20px;
+        }
       }
     }
     .node--view-mode-title-and-photo-plus-author header {
@@ -52,7 +71,7 @@
       margin: -10px;
       @include round_avatar;
       .field--name-field-main-image {
-        padding: 10px;
+        padding: 0 10px;
         .image-style-title-and-photo-plus-author {
           min-width: 333px;
           min-height: 233px;
@@ -64,13 +83,14 @@
         padding: 0 10px;
         max-width: 333px;
         width: 100%;
+        margin: auto 0;
         .exclusive-and-content {
           @include exclusive-and-content;
           margin: 0 0 8px 0;
           font-family: PT Serif;
           font-size: 16px;
           font-weight: 600;
-          padding: 60px 0 10px 0;
+          padding-bottom: 10px;
         }
         .node__meta {
           @include meta-info_plus_author;
@@ -105,7 +125,12 @@
         .article-without-image {
           padding-top: 10px;
           .exclusive-and-content {
+            @include exclusive-and-content;
             padding-bottom: 10px;
+            font-family: PT Serif;
+            font-size: 16px;
+            line-height: 1.3;
+            font-weight: 600;
           }
           .node__meta {
             @include meta-info_plus_author;

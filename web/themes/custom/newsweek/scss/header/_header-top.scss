@@ -100,7 +100,7 @@
 
   .menu--account {
     & ul.my_account::marker {
-      list-style: none;
+      content: none;
     }
     & .my_account {
       position: relative;

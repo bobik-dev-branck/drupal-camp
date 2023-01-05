@@ -3,6 +3,10 @@ header {
     max-width: 705px;
     margin: 0 auto;
     font-size: 14px;
+    .views-view-grid.horizontal .views-row {
+      padding: 15px 0 0 0;
+      margin: 0;
+    }
     & .views-col {
       padding: 0;
       & span > a {

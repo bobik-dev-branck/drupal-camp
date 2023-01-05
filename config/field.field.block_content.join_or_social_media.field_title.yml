@@ -1,0 +1,21 @@
+uuid: 10ff219a-4cf6-44a7-bdd1-9f946db5bdee
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.join_or_social_media
+    - field.storage.block_content.field_title
+  module:
+    - text
+id: block_content.join_or_social_media.field_title
+field_name: field_title
+entity_type: block_content
+bundle: join_or_social_media
+label: Title
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text

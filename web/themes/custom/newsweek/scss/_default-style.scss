@@ -1,6 +1,10 @@
 #main-wrapper {
   max-width: 1440px;
   margin: 0 auto;
+  padding: 0 24px;
+  .layout-main {
+    margin-top: 0;
+  }
 }
 
 .main-content .section {
@@ -39,4 +43,25 @@ p {
 }
 .node .field--type-image {
   float: none;
+}
+
+#block-newsweek-page-title {
+  display: none;
+}
+
+.highlighted {
+  margin: 0 auto;
+  .layout-container {
+    max-width: 1440px;
+    padding: 0 10px;
+  }
+}
+
+.sidebar .block  {
+  padding: 0;
+  margin-bottom: 0;
+  & h2 {
+    border-bottom: none;
+    text-shadow: none;
+  }
 }

@@ -1,0 +1,28 @@
+.view-id-taxonomy_term_name {
+  padding: 68px 0 30px 0 ;
+  position: relative;
+  &:before {
+    position: absolute;
+    content: '';
+    top:0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100vw;
+    height: 504px;
+    background-color: #f4f4f4;
+  }
+  .field-content a {
+    position: relative;
+    z-index: 2;
+    display: inline-block;
+    pointer-events: none;
+    width: 100%;
+    text-align: center;
+    color: $main-color-black;
+    font-family: PT Serif;
+    font-size: 42px;
+    line-height: 1;
+    font-weight: 700;
+    text-transform: capitalize;
+  }
+}

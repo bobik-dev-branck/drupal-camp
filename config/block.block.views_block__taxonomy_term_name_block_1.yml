@@ -1,22 +1,22 @@
-uuid: 06562441-0c5b-42e3-bdf4-284150dd1fd8
+uuid: 9bca1499-4293-482b-b88b-56eba5aa3346
 langcode: en
 status: true
 dependencies:
   config:
-    - views.view.other_category
+    - views.view.taxonomy_term_name
   module:
     - system
     - views
   theme:
     - newsweek
-id: views_block__other_category_block_1_2
+id: views_block__taxonomy_term_name_block_1
 theme: newsweek
 region: highlighted
-weight: -14
+weight: -15
 provider: null
-plugin: 'views_block:other_category-block_1'
+plugin: 'views_block:taxonomy_term_name-block_1'
 settings:
-  id: 'views_block:other_category-block_1'
+  id: 'views_block:taxonomy_term_name-block_1'
   label: ''
   label_display: '0'
   provider: views
@@ -27,4 +27,4 @@ visibility:
   request_path:
     id: request_path
     negate: false
-    pages: '/taxonomy/term/*'
+    pages: '/category/*'

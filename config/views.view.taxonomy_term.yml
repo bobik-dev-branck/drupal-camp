@@ -26,15 +26,17 @@ display:
     display_options:
       fields: {  }
       pager:
-        type: mini
+        type: full
         options:
           offset: 0
           items_per_page: 5
           total_pages: 0
           id: 0
           tags:
-            next: ››
-            previous: ‹‹
+            next: '>'
+            previous: '<'
+            first: ''
+            last: ''
           expose:
             items_per_page: false
             items_per_page_label: 'Items per page'
@@ -43,6 +45,7 @@ display:
             items_per_page_options_all_label: '- All -'
             offset: false
             offset_label: Offset
+          quantity: 9
       exposed_form:
         type: basic
         options:
@@ -98,16 +101,20 @@ display:
           group_type: group
           admin_label: ''
           plugin_id: taxonomy_index_tid
-          default_action: 'not found'
+          default_action: default
           exception:
             value: all
             title_enable: false
             title: All
           title_enable: true
           title: '{{ argument.tid }}'
-          default_argument_type: fixed
+          default_argument_type: taxonomy_tid
           default_argument_options:
-            argument: ''
+            term_page: '1'
+            node: false
+            limit: false
+            vids: {  }
+            anyall: ','
           default_argument_skip_url: false
           summary_options:
             base_path: ''

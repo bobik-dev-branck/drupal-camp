@@ -1,175 +1,210 @@
 .main-section {
+  padding-bottom: 30px;
   justify-content: space-between;
+
   .layout__region--first {
     max-width: 282px;
   }
 
   .layout__region--third {
     max-width: 262px;
- }
-}
+  }
 
-.block-views-blockfresh-stories-block-1 {
-  min-height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  .title {
-    font-family: Work Sans;
-    font-size: 32px;
-    line-height: 1;
-    font-weight: 700;
-    letter-spacing: -1px;
-    margin: 10px 0 7px 0;
+
+  .block-views-blockfresh-stories-block-1 {
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-right: 20px;
+
+    .title {
+      font-family: Work Sans;
+      font-size: 32px;
+      line-height: 1;
+      font-weight: 700;
+      letter-spacing: -1px;
+      margin: 10px 0 7px 0;
+    }
+
+    .description {
+      font-family: Work Sans;
+      font-size: 13px;
+      line-height: 1.2;
+      font-weight: 600;
+      text-transform: uppercase;
+      margin: 10px 0 7px 0;
+    }
+
+    .node__content {
+      .exclusive-and-content {
+        @include exclusive-and-content;
+      }
+
+      @include view-mode_meta-info;
+      border-bottom: 1px solid #eaeaea;
+    }
+
+    .pager {
+      .pager__items {
+        text-align: start;
+      }
+
+      .is-active {
+        display: none;
+      }
+
+      .pager__item a span {
+        font-size: 22px;
+      }
+    }
   }
-  .description {
-    font-family: Work Sans;
-    font-size: 13px;
-    line-height: 1.2;
-    font-weight: 600;
-    text-transform: uppercase;
-    margin: 10px 0 7px 0;
+
+  //Three lasted node in main block.
+  .block-views-blockmain-bloc-mp-block-1 {
+    margin: -10px;
+    width: 847px;
+
+    .view-main-bloc-mp {
+      display: flex;
+      padding: 0 7px;
+
+      .view-content {
+        min-width: 65%;
+        padding: 0 3px;
+      }
+
+      .attachment-after {
+        min-width: 35%;
+      }
+    }
   }
-  .node__content {
+
+  // Styles for Left part in the Main section.
+  .node--view-mode-teaser-full {
+    position: relative;
+    width: 548px;
+    height: 600px;
+    //@include exclusive-and-content;
+    .node {
+      position: absolute;
+      z-index: 1;
+      width: 100%;
+      max-width: 90%;
+      padding: 20px;
+      left: 0;
+      bottom: 0%;
+      color: $main-color-black;
+    }
+    .field--name-field-special-content {
+      display: none;
+    }
+    .node__meta {
+      display: none;
+    }
+    .field--name-field-tags {
+      font-family: Work Sans;
+      font-size: 16px;
+      a {
+        padding: 5px 8px;
+        border-radius: 2px;
+        font-size: 13px;
+        line-height: 1;
+        font-weight: 600;
+        text-transform: uppercase;
+        color: #fff;
+        background: $main-color-red;
+      }
+    }
+    .field--name-title {
+      font-family: Work Sans;
+      margin: 16px 0 12px 0;
+      font-size: 40px;
+      line-height: 1;
+      font-weight: 700;
+      color: $main-color-white;
+      &:hover {
+        color: #d3d2d2;
+      }
+    }
+    .field--name-body {
+      margin-top: 10px;
+      font-family: Work Sans;
+      font-size: 16px;
+      line-height: 1.4;
+      font-weight: 500;
+      color: #ffffff;
+    }
+  }
+
+  // Styles for right part in the Main section.
+  .attachment-after {
     .exclusive-and-content {
       @include exclusive-and-content;
     }
-    @include view-mode_meta-info;
-  }
-  .pager {
-    .pager__items {
-      text-align: start;
+
+    .node--view-mode-teaser {
+      border-bottom: none;
+      max-height: 50%;
+      padding: 0;
+      max-width: 262px;
     }
-    .is-active {
+
+    .field--name-field-tags {
+      font-family: Work Sans;
+      margin: 0;
+
+      a {
+        border-radius: 2px;
+        font-size: 13px;
+        line-height: 1;
+        font-weight: 600;
+        text-transform: uppercase;
+      }
+    }
+
+    .node__title {
+      padding: 0;
+    }
+
+    .field--name-title {
+      font-family: PT Serif;
+      font-size: 16px;
+      line-height: 1.3;
+      font-weight: 600;
+    }
+
+    .node__meta {
       display: none;
     }
-    .pager__item a span {
-      font-size: 22px;
-    }
   }
-}
 
-//Three lasted node in main block.
-.block-views-blockmain-bloc-mp-block-1 {
-  margin: -10px;
-  //min-width: 100%;
-  width: 847px;
-  .view-main-bloc-mp {
-    display: flex;
-    padding: 0 7px;
+  .block-views-blockpopular-block-1 {
+    position: relative;
+    max-width: 262px;
+    margin-top: -35px;
+
+    > h2 {
+      font-family: Work Sans;
+      font-size: 32px;
+      line-height: 1;
+      font-weight: 700;
+      letter-spacing: -1px;
+      margin-bottom: 30px;
+
+    }
+
     .view-content {
-      min-width: 65%;
-      padding: 0 7px;
+      position: absolute;
+      z-index: 2;
+      background-color: $main-color-white;
+      padding: 15px 20px 20px 20px;
+      box-shadow: 0 0 40px #eaeaea;
     }
-    .attachment-after {
-      min-width: 35%;
-    }
-  }
-}
 
-// Styles for Newsweek-article View mode teaser-full.
-//TODO For optimization structure of SCSS  files needs to be put in a separate file. Rows from 72 into 123.
-article .node--view-mode-teaser-full {
-  position: relative;
-  width: 548px;
-  height: 600px;
-  margin-right: 20px;
-  @include exclusive-and-content;
-  .node {
-    position: absolute;
-    z-index: 1;
-    width: 100%;
-    max-width: 90%;
-    padding: 20px;
-    left: 0;
-    bottom: 0%;
-    color: $main-color-black;
-  }
-  .field--name-field-special-content {
-    display: none;
-  }
-  .node__meta {
-    display: none;
-  }
-  .field--name-field-tags {
-    font-family: Work Sans ;
-    font-size: 16px;
-    a {
-      padding: 5px 8px;
-      border-radius: 2px;
-      font-size: 13px;
-      line-height: 1;
-      font-weight: 600;
-      text-transform: uppercase;
-      color: #fff;
-      background: $main-color-red;
+    .exclusive-and-content {
+      @include exclusive-and-content;
     }
-  }
-  .field--name-title  {
-    font-family: Work Sans ;
-    margin: 16px 0 12px 0;
-    font-size: 40px ;
-    line-height: 1;
-    font-weight: 700;
-    color: $main-color-white;
-    &:hover {
-      color: #d3d2d2;
-    }
-  }
-  .field--name-body {
-    margin-top: 10px;
-    font-family: Work Sans;
-    font-size: 16px;
-    line-height: 1.4;
-    font-weight: 500;
-    color: #ffffff;
-  }
-}
 
-.attachment-after {
-  .exclusive-and-content {
-    @include exclusive-and-content;
+    @include view-mode_meta-info;
   }
-  .node--view-mode-teaser {
-    border-bottom: none;
-    max-height: 50%;
-    padding: 0;
-  }
-  .field--name-field-tags {
-    font-family: Work Sans;
-    margin: 0;
-    a {
-      border-radius: 2px;
-      font-size: 13px;
-      line-height: 1;
-      font-weight: 600;
-      text-transform: uppercase;
-    }
-  }
-  .node__title {
-    padding: 0;
-  }
-  .field--name-title {
-    font-family: PT Serif;
-    font-size: 16px;
-    line-height: 1.3;
-    font-weight: 600;
-  }
-}
-
-.block-views-blockpopular-block-1 {
-  max-width: 262px;
-  margin-top: -35px;
-  > h2 {
-    font-family: Work Sans;
-    font-size: 32px;
-    line-height: 1;
-    font-weight: 700;
-    letter-spacing: -1px;
-    margin-bottom: 30px;
-  }
-  .exclusive-and-content {
-    @include exclusive-and-content;
-  }
-  @include view-mode_meta-info;
 }

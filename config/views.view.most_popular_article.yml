@@ -3,7 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
-    - core.entity_view_mode.node.title_and_photo_plus_author
+    - core.entity_view_mode.node.teaser
     - node.type.newsweek_article
   module:
     - node
@@ -137,8 +137,8 @@ display:
           total_pages: null
           id: 0
           tags:
-            next: 'Next ›'
-            previous: '‹ Previous'
+            next: →
+            previous: ←
           expose:
             items_per_page: false
             items_per_page_label: 'Items per page'
@@ -212,7 +212,7 @@ display:
         type: 'entity:node'
         options:
           relationship: none
-          view_mode: title_and_photo_plus_author
+          view_mode: teaser
       query:
         type: views_query
         options:
@@ -222,6 +222,7 @@ display:
           replica: false
           query_tags: {  }
       relationships: {  }
+      use_ajax: true
       header: {  }
       footer: {  }
       display_extenders: {  }
@@ -234,8 +235,8 @@ display:
         - 'user.node_grants:view'
         - user.permissions
       tags: {  }
-  block_1:
-    id: block_1
+  sidebar_right:
+    id: sidebar_right
     display_title: Block
     display_plugin: block
     position: 1

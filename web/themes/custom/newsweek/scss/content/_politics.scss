@@ -1,5 +1,5 @@
 .politics {
-  margin-top: 50px;
+  margin: 50px 0 30px 0;
   .layout__region--first {
     max-width: 1032px;
     margin-right: 30px;
@@ -46,36 +46,47 @@
       }
       .views-col {
         max-width: 331.66px;
-        .field--name-field-main-image {
-          width: 100%;
-          height: 100%;
-          margin-bottom: 10px;
-        }
-        .field--name-title {
-          margin: 12px 0 12px 0;
-          font-family: PT Serif;
-          font-size: 26px;
-          line-height: 1.1;
-          font-weight: 600;
-        }
-        .field--name-user-picture a > img {
-          width: 20px;
-          height: 20px;
-          object-fit: cover;
-          margin: 0;
-          border-radius: 50%;
-        }
-        .node__meta {
-          display: flex;
-          color: black;
-          font-family: Work Sans;
-          font-size: 13px;
-          line-height: 1;
-          font-weight: 500;
-          text-transform: capitalize;
-          letter-spacing: -0.5px;
-          .meta-info {
-            align-self: center;
+        .node--view-mode-title-and-photo-plus-author {
+          .exclusive-and-content {
+            @include exclusive-and-content;
+            .field--name-field-special-content {
+               a {
+                font-size: 20px;
+              }
+            }
+          }
+          .field--name-field-main-image {
+            width: 100%;
+            height: 100%;
+            margin-bottom: 10px;
+          }
+          .field--name-title {
+            margin: 12px 0 12px 0;
+            font-family: PT Serif;
+            font-size: 26px;
+            line-height: 1.1;
+            font-weight: 600;
+          }
+          .field--name-user-picture a > img {
+            width: 20px;
+            height: 20px;
+            object-fit: cover;
+            margin: 0;
+            border-radius: 50%;
+          }
+          .node__meta {
+            display: flex;
+            color: black;
+            margin-top: 10px;
+            font-family: Work Sans;
+            font-size: 14px;
+            line-height: 1;
+            font-weight: 500;
+            text-transform: capitalize;
+            letter-spacing: -0.5px;
+            .meta-info {
+              align-self: center;
+            }
           }
         }
       }
@@ -88,9 +99,14 @@
       border-bottom: none;
       display: flex;
       justify-content: space-between;
+      margin: 0;
+      padding: 5px 0;
       .views-col {
         max-width: 331px;
-
+        @include view-mode_meta-info;
+        .exclusive-and-content {
+          @include exclusive-and-content;
+        }
       }
       .field--name-created {
         color: $main-color-black;

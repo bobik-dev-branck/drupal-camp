@@ -1,0 +1,23 @@
+uuid: 5347af68-3b1c-47ae-bd31-0813590287fa
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.join_or_social_media
+    - field.storage.block_content.body
+  module:
+    - text
+id: block_content.join_or_social_media.body
+field_name: body
+entity_type: block_content
+bundle: join_or_social_media
+label: Body
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  display_summary: false
+  required_summary: false
+field_type: text_with_summary

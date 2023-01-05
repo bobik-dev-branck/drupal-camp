@@ -3,12 +3,16 @@
   .layout__region--content {
     display: flex;
     justify-content: space-between;
+    margin: 15px 0 45px 0;
+    padding: 15px 0;
+    border-top: 1px solid #d3d7d9;
+    border-bottom: 1px solid #d3d7d9;
   }
 
   .field--name-field-title{
     font-family: Work Sans;
     font-size: 13px;
-    line-height: 1.2;
+    line-height: 2.2;
     font-weight: 600;
     text-transform: uppercase;
   }
@@ -25,6 +29,7 @@
   }
   .social-media > a {
     display: inline-block;
+    align-self: center;
     height: 16px;
     overflow: hidden;
     position: relative;

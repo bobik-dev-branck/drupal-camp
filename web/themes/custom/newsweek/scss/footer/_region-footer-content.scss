@@ -37,7 +37,6 @@
       }
     }
   }
-
   & .company {
     width: 197px;
     &__title {
@@ -53,7 +52,6 @@
       }
     }
   }
-
   & .the-latest {
     max-width: 355px;
     font-weight: 700;
@@ -62,43 +60,21 @@
     }
     .the-latest__body {
       .node__content {
+        @include view-mode_meta-info;
         .exclusive-and-content {
-          padding: 0;
-          > div, h2 {
-            display: inline;
-          }
-          .field--name-field-special-content {
-            > a {
-            display: inline;
-            background-color: $main-color-red;
-            color: #fff !important;
-            font-family: Work Sans;
-            font-size: 15px;
-            padding: 2px;
-            border-radius: 2px;
-            text-transform: uppercase;
-            line-height: 0;
-            > a :hover {
-              color: #fff !important;
-              }
-            }
-          }
+          @include exclusive-and-content;
         }
         & .node__meta {
-          display: flex;
-          font-size: 12px;
-          .field--name-field-tags{
-            text-transform: uppercase;
-            padding: 2px;
-          }
-          .field--name-created {
+          .field--name-field-tags a {
             color: $main-color-black;
+            &:hover {
+              color: $main-color-red;
+            }
           }
         }
       }
     }
   }
-
   .subscribe {
    max-width: 355px;
    width: 100%;
@@ -117,16 +93,17 @@
         color: #fff;
         font-weight: 700;
         margin: 10px 0;
+        border: none;
       }
       .text {
         font-family: Work Sans;
         font-size: 13px;
         line-height: 1.2;
         .link {
-          color: $main-color-black;
+          color: $main-color-red;
         }
         .link:hover {
-          color: $main-color-red;
+          color: $main-color-black;
         }
       }
     }
