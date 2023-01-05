@@ -11,7 +11,7 @@ _core:
 id: newsweek_messages
 theme: newsweek
 region: highlighted
-weight: 0
+weight: -16
 provider: null
 plugin: system_messages_block
 settings:

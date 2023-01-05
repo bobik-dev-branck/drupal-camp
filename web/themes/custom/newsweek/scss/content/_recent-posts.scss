@@ -167,11 +167,12 @@
 
   // Styles for right part section Recent post.
   .layout__region--second {
+    position: relative;
     max-width: 312px;
     // Styles for main block in right part section Recent post.
     .block-views-blockmarketing-block-1 > h2 {
       position: absolute;
-      top: -47px;
+      top: -35px;
       left: 20px;
       z-index: 5;
       color: $main-color-white;

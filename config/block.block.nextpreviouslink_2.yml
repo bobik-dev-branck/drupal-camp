@@ -10,7 +10,7 @@ dependencies:
 id: nextpreviouslink_2
 theme: newsweek
 region: content
-weight: -7
+weight: -8
 provider: null
 plugin: next_previous_block
 settings:

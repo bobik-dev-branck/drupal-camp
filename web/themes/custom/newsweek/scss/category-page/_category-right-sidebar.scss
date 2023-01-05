@@ -1,0 +1,134 @@
+.region-sidebar-second {
+
+  // Styles for pager in block Popular.
+  .view-most-popular-article {
+    position: relative;
+    .pager {
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      .pager__item a span {
+        color: $main-color-white;
+        font-size: 30px;
+      }
+      .is-active {
+        display: none;
+      }
+    }
+  }
+
+  // Styles for content in block Popular.
+  .block-views-blockmost-popular-article-sidebar-right > h2 {
+    position: absolute;
+    top: 0px;
+    left: 40px;
+    z-index: 5;
+    background: $main-color-red;
+    color: $main-color-white;
+    text-align: center;
+    padding: 10px 0;
+    width: 134px;
+    font-family: PT Serif;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    font-style: italic;
+  }
+  .node--view-mode-teaser {
+    border-bottom: none;
+    margin: 0;
+    padding: 0;
+    & > header {
+      position: relative;
+      .main-image {
+        max-height: 420px;
+        max-width: 312px;
+        & img {
+          height: 420px;
+          width: 312px;
+          object-fit: cover;
+        }
+      }
+      .node {
+        position: absolute;
+        bottom: 5%;
+        left: 5%;
+        max-width: 90%;
+        color: $main-color-white;
+        .field--name-title {
+          color: $main-color-white;
+          font-family: Work Sans;
+          font-size: 20px;
+          line-height: 1;
+          font-weight: 700;
+          &:hover {
+            color: #d3d2d2;
+          }
+        }
+        .field--name-user-picture, .field--name-field-tags, .field--name-field-special-content {
+          display: none;
+        }
+        .node__meta {
+          color: $main-color-white;
+          font-size: 13px;
+        }
+        .username {
+          color: $main-color-white;
+          text-transform: capitalize;
+          line-height: 1.2;
+          font-weight: 500;
+          font-family: Work Sans;
+          &:hover {
+            color: #d3d2d2;
+          }
+        }
+      }
+    }
+  }
+
+  // Styles for block Subscribe.
+  .subscribe {
+    max-width: 355px;
+    width: 100%;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    .subscribe__title {
+      @include footer-content-title;
+      //TODO Will need rename after rename Mixin
+      margin-bottom: 18px;
+    }
+    .agreement__form {
+      .email, .btn {
+        font-size: 14px;
+        display: block;
+        height: 48px;
+        width: 100%;
+        font-weight: 600;
+        border-radius: 3px;
+        font-family: Work Sans;
+      }
+      .email {
+        border: 1px #d3d7d9 solid;
+      }
+      .btn {
+        background-color:  $main-color-red;
+        color: $main-color-white;
+        font-weight: 700;
+        margin: 10px 0;
+        border: none;
+        text-transform: uppercase;
+      }
+      .text {
+        font-family: Work Sans;
+        font-size: 13px;
+        line-height: 1.2;
+        .link {
+          color: $main-color-red;
+          &:hover {
+            color: $main-color-black;
+          }
+        }
+      }
+    }
+  }
+}

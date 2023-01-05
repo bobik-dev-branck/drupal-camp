@@ -1,0 +1,23 @@
+.block-views-blockother-category-block-1 {
+  position: relative;
+  z-index: 5;
+  margin-bottom: 30px;
+  .category-list {
+    .category {
+      list-style: none;
+      display: flex;
+      justify-content: center;
+      .views-field-name {
+        padding: 10px;
+        font-family: Work Sans;
+        font-size: 15px;
+        line-height: 1.2;
+        font-weight: 600;
+        text-transform: uppercase;
+        .field-content a:active {
+          color: $main-color-red;
+        }
+      }
+    }
+  }
+}
