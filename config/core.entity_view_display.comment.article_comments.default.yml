@@ -1,0 +1,47 @@
+uuid: 99a35c0d-c249-4567-b2d3-81a98efaf2ff
+langcode: en
+status: true
+dependencies:
+  config:
+    - comment.type.article_comments
+    - field.field.comment.article_comments.comment_body
+    - field.field.comment.article_comments.field_comment_email
+    - field.field.comment.article_comments.field_comment_name
+    - field.field.comment.article_comments.field_comment_website
+  module:
+    - text
+id: comment.article_comments.default
+targetEntityType: comment
+bundle: article_comments
+mode: default
+content:
+  comment_body:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_comment_email:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_comment_name:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_comment_website:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 3
+    region: content
+hidden:
+  links: true

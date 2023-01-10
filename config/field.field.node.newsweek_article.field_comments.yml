@@ -1,20 +1,20 @@
-uuid: 906d7270-dfbf-44c6-8d8f-9a4149166c47
+uuid: 0c384b46-4bbc-421e-9f09-eefe28cbaac6
 langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.node.comment
+    - field.storage.node.field_comments
     - node.type.newsweek_article
   module:
     - comment
-id: node.newsweek_article.comment
-field_name: comment
+id: node.newsweek_article.field_comments
+field_name: field_comments
 entity_type: node
 bundle: newsweek_article
 label: Comments
 description: ''
 required: false
-translatable: true
+translatable: false
 default_value:
   -
     status: 2
@@ -29,5 +29,5 @@ settings:
   per_page: 50
   anonymous: 0
   form_location: true
-  preview: 1
+  preview: 0
 field_type: comment
