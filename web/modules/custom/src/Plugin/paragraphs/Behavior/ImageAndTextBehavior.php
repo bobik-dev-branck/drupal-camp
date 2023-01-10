@@ -19,7 +19,6 @@ use Drupal\paragraphs\ParagraphsBehaviorBase;
  *   description = @Translation("Settings for paragraphs type"),
  *   weight = 0,
  * )
- *
  */
 
 class ImageAndTextBehavior extends ParagraphsBehaviorBase {
