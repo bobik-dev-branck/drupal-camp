@@ -19,6 +19,7 @@ use Drupal\paragraphs\ParagraphsBehaviorBase;
  *   description = @Translation("Settings for paragraphs type"),
  *   weight = 0,
  * )
+ *
  */
 
 class ImageAndTextBehavior extends ParagraphsBehaviorBase {
@@ -37,7 +38,7 @@ class ImageAndTextBehavior extends ParagraphsBehaviorBase {
     $image_position = $paragraph->getBehaviorSetting($this->getPluginId(),
       'image_position', 'left');
 
-    //Generating class name for bundle 'image_and_text'.
+    // Generating class name for bundle 'image_and_text'.
     $bem_block = 'paragraph-' . $paragraph->bundle();
 
     $build['#attributes']['class'][] =
@@ -56,7 +57,7 @@ class ImageAndTextBehavior extends ParagraphsBehaviorBase {
         'right' => $this->t('Right'),
       ],
       '#default_value' => $paragraph->getBehaviorSetting($this->getPluginId(),
-        'image_position','left'),
+        'image_position', 'left'),
     ];
 
     return $form;
