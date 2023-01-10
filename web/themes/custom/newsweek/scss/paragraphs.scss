@@ -1,0 +1,26 @@
+/**
+* @file
+* Layout for paragraphs
+*/
+
+.field--name-field-paragraph {
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+  color: #000;
+  font-family: Work Sans;
+
+  .field--name-field-title {
+    font-size: 32px;
+    font-style: italic;
+    text-align: center;
+    font-weight: 700;
+    color: #ec3535;
+    margin-bottom: 26px;
+  }
+
+  .field--name-field-body {
+    font-size: 16px;
+    line-height: 26px;
+  }
+}
