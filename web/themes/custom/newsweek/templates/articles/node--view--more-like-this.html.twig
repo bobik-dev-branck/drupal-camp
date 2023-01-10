@@ -1,0 +1,64 @@
+{%
+  set classes = [
+    'node',
+    'node--type-' ~ node.bundle|clean_class,
+    node.isPromoted() ? 'node--promoted',
+    node.isSticky() ? 'node--sticky',
+    not node.isPublished() ? 'node--unpublished',
+    view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
+    'clearfix',
+  ]
+%}
+{% set images_style = {
+  '#theme':      'image_style',
+  '#style_name': 'teaser',
+  '#uri':        node.field_main_image.entity.field_media_image.entity.fileuri,
+} %}
+{{ attach_library('bartik/classy.node') }}
+<article{{ attributes.addClass(classes) }}>
+    <header>
+      <div class="more-like-this-view-mode">
+        {% if images_style %}
+        <div class="main-image">
+          {{ images_style }}
+        </div>
+        {% endif %}
+        <div class="node">
+          {% if content.field_special_content %}
+            <div class="exclusive-and-content">
+              {{ content.field_special_content }}
+              {{ title_prefix }}
+              {% if label and not page %}
+                <h2{{ title_attributes.addClass('node__title') }}>
+                  <a href="{{ url }}" rel="bookmark">{{ label }}</a>
+                </h2>
+              {% endif %}
+              {{ title_suffix }}
+            </div>
+          {% else %}
+            {{ title_prefix }}
+            {% if label and not page %}
+              <h2{{ title_attributes.addClass('node__title') }}>
+                <a href="{{ url }}" rel="bookmark">{{ label }}</a>
+              </h2>
+            {% endif %}
+            {{ title_suffix }}
+          {% endif %}
+          {% if display_submitted %}
+            <div class="node__meta">
+              <div class="avatar-image">
+                {{ author_picture }}
+              </div>
+              <span class="meta-info" {{ author_attributes }}>
+                {% trans %}{{ author_name }} - {{ date }}{% endtrans %}
+              </span>
+              {{ metadata }}
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    </header>
+    <div{{ content_attributes.addClass('node__content', 'clearfix') }}>
+      {{ content|without('field_tags', 'field_main_image', 'field_special_content') }}
+    </div>
+</article>
