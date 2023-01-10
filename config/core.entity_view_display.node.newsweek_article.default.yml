@@ -3,9 +3,9 @@ langcode: en
 status: true
 dependencies:
   config:
-    - core.entity_view_display.comment.comment.default
     - field.field.node.newsweek_article.body
-    - field.field.node.newsweek_article.comment
+    - field.field.node.newsweek_article.field_article_tags
+    - field.field.node.newsweek_article.field_comments
     - field.field.node.newsweek_article.field_main_image
     - field.field.node.newsweek_article.field_paragraph
     - field.field.node.newsweek_article.field_special_content
@@ -30,14 +30,22 @@ content:
     third_party_settings: {  }
     weight: 4
     region: content
-  comment:
+  field_article_tags:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 7
+    region: content
+  field_comments:
     type: comment_default
     label: above
     settings:
       view_mode: default
       pager_id: 0
     third_party_settings: {  }
-    weight: 5
+    weight: 8
     region: content
   field_main_image:
     type: entity_reference_entity_view
@@ -55,7 +63,7 @@ content:
       view_mode: default
       link: ''
     third_party_settings: {  }
-    weight: 7
+    weight: 6
     region: content
   field_special_content:
     type: entity_reference_label
@@ -63,7 +71,7 @@ content:
     settings:
       link: true
     third_party_settings: {  }
-    weight: 6
+    weight: 5
     region: content
   field_tags:
     type: entity_reference_label
