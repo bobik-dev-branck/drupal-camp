@@ -26,6 +26,7 @@
         "drupal/nextpre": "^9.0",
         "drupal/paragraphs": "^1.15",
         "drupal/pathauto": "^1.11",
+        "drush/drush": "^11.4",
         "kint-php/kint": "^5.0"
     },
     "conflict": {
