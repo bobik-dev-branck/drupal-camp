@@ -18,7 +18,9 @@ regions:
   highlighted: Highlighted
   featured_top: 'Featured top'
   breadcrumb: Breadcrumb
+  full_width_blocks_first: "Full width blocks first"
   content: Content
+  full_width_blocks_second: "Full width blocks second"
   sidebar_first: 'Sidebar first'
   sidebar_second: 'Sidebar second'
   featured_bottom_first: 'Featured bottom first'
