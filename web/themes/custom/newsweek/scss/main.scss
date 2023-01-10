@@ -33,3 +33,12 @@
 @import "category-page/relation-articles";
 @import "category-page/category-content";
 @import "category-page/category-right-sidebar";
+
+/* Import styles for article page */
+@import "articles/article.scss";
+@import "articles/article_preview.scss";
+@import "articles/article_preview_view_mode.scss";
+@import "articles/comments.scss";
+@import "paragraphs.scss";
+@import "articles/more_like_this_view_mode.scss";
+@import "articles/more_like_this_view.scss";

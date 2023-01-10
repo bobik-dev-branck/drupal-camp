@@ -1,0 +1,26 @@
+/**
+* @file
+* Layout for comments
+*/
+
+.field--type-comment {
+  font-family: Work Sans;
+
+  .comment-title {
+    text-transform: uppercase;
+    font-size: 16px;
+    line-height: 16px;
+    font-weight: 700;
+    color: #000;
+  }
+
+  .form-type-textfield {
+    position: relative;
+
+    .form-required {
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+  }
+}
