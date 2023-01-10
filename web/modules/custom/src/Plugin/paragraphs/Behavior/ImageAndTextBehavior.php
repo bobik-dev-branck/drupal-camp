@@ -11,6 +11,8 @@ use Drupal\paragraphs\ParagraphInterface;
 use Drupal\paragraphs\ParagraphsBehaviorBase;
 
 /**
+ * Custom behavior for paragraph Image and text.
+ *
  * @ParagraphsBehavior (
  *   id = "newsweek_paragraphs_behavior_image_and_text",
  *   label = @Translation("Image and text settings"),
@@ -24,18 +26,18 @@ class ImageAndTextBehavior extends ParagraphsBehaviorBase {
   /**
    * {@inheritDoc}
    */
-  public static function isApplicable(ParagraphsType $paragraphs_type)  {
+  public static function isApplicable(ParagraphsType $paragraphs_type) {
     return $paragraphs_type->id() == 'image_and_text';
   }
 
   /**
    * {@inheritDoc}
    */
-  public function view(array &$build, Paragraph $paragraph, EntityViewDisplayInterface $display, $view_mode)  {
+  public function view(array &$build, Paragraph $paragraph, EntityViewDisplayInterface $display, $view_mode) {
     $image_position = $paragraph->getBehaviorSetting($this->getPluginId(),
-      'image_position' ,'left');
+      'image_position', 'left');
 
-    //generating class name for bundle 'image_and_text'
+    //Generating class name for bundle 'image_and_text'.
     $bem_block = 'paragraph-' . $paragraph->bundle();
 
     $build['#attributes']['class'][] =
@@ -54,9 +56,10 @@ class ImageAndTextBehavior extends ParagraphsBehaviorBase {
         'right' => $this->t('Right'),
       ],
       '#default_value' => $paragraph->getBehaviorSetting($this->getPluginId(),
-        'image_position' ,'left'),
+        'image_position','left'),
     ];
 
     return $form;
   }
+
 }
