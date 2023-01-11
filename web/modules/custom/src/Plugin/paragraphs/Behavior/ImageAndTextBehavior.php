@@ -20,7 +20,6 @@ use Drupal\paragraphs\ParagraphsBehaviorBase;
  *   weight = 0,
  * )
  */
-
 class ImageAndTextBehavior extends ParagraphsBehaviorBase {
 
   /**
