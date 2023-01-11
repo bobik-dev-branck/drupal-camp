@@ -1,22 +1,22 @@
-uuid: 2f7498e0-4043-4907-a15e-bccc176c9b9e
+uuid: 37b5da0b-11c3-4176-a401-ffbb181bdf20
 langcode: en
 status: true
 dependencies:
   config:
-    - views.view.more_like_this
+    - views.view.article_preview
   module:
     - node
     - views
   theme:
     - newsweek
-id: views_block__more_like_this_block_1_2
+id: views_block__article_preview_block_1
 theme: newsweek
-region: full_width_blocks_second
-weight: -17
+region: full_width_blocks_first
+weight: 0
 provider: null
-plugin: 'views_block:more_like_this-block_1'
+plugin: 'views_block:article_preview-block_1'
 settings:
-  id: 'views_block:more_like_this-block_1'
+  id: 'views_block:article_preview-block_1'
   label: ''
   label_display: '0'
   provider: views

@@ -5,6 +5,7 @@ dependencies:
   config:
     - field.field.paragraph.image_and_text.field_body
     - field.field.paragraph.image_and_text.field_image
+    - field.field.paragraph.image_and_text.field_title
     - paragraphs.paragraphs_type.image_and_text
   module:
     - media_library
@@ -30,6 +31,14 @@ content:
     region: content
     settings:
       media_types: {  }
+    third_party_settings: {  }
+  field_title:
+    type: text_textfield
+    weight: 2
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
     third_party_settings: {  }
 hidden:
   created: true

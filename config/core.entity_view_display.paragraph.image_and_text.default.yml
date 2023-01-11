@@ -5,6 +5,7 @@ dependencies:
   config:
     - field.field.paragraph.image_and_text.field_body
     - field.field.paragraph.image_and_text.field_image
+    - field.field.paragraph.image_and_text.field_title
     - paragraphs.paragraphs_type.image_and_text
   module:
     - text
@@ -18,7 +19,7 @@ content:
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    weight: 1
+    weight: 2
     region: content
   field_image:
     type: entity_reference_entity_view
@@ -26,6 +27,13 @@ content:
     settings:
       view_mode: default
       link: false
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_title:
+    type: text_default
+    label: hidden
+    settings: {  }
     third_party_settings: {  }
     weight: 0
     region: content

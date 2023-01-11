@@ -1,0 +1,10 @@
+uuid: 5b04eac8-5b09-4b58-9c20-fa7beaddc4bf
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.article_preview
+label: 'Article preview'
+targetEntityType: node
+cache: true

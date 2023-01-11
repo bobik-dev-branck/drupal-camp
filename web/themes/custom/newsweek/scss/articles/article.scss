@@ -1,0 +1,26 @@
+/**
+* @file
+* Layout for article page
+*/
+
+.full-width-blocks-first {
+  position: relative;
+
+  .contextual-region {
+    position: static;
+  }
+
+  &:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -19%;
+    width: 100vw;
+    height: calc(100% - 160px);
+    background-color: #f7f7f7;
+  }
+}
+.full-width-blocks-second {
+  display: block;
+
+}

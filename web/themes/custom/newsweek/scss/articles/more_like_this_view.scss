@@ -1,0 +1,21 @@
+/**
+* @file
+* Layout for more like this view
+*/
+
+.more-like-this-view {
+  .views-view-grid {
+    .views-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      padding: 0;
+      margin: 0;
+      border: none;
+
+      .views-col {
+        flex: 0 0 min-content;
+      }
+    }
+  }
+}
