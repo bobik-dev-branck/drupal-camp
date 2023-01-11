@@ -1,0 +1,13 @@
+.paragraph--type--image-and-text {
+  display: inline;
+  gap: 30px;
+}
+.paragraph-image-and-text--image-position-left   .field--name-field-image {
+  float: left;
+  margin-right: 30px;
+}
+
+.paragraph-image-and-text--image-position-right   .field--name-field-image {
+  float: right;
+  margin-left: 30px;
+}
