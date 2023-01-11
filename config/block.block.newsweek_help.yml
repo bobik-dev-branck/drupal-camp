@@ -11,7 +11,7 @@ _core:
 id: newsweek_help
 theme: newsweek
 region: content
-weight: -14
+weight: -15
 provider: null
 plugin: help_block
 settings:

@@ -12,7 +12,7 @@ dependencies:
 id: views_block__all_tags_block_1_3
 theme: newsweek
 region: header_bottom
-weight: -16
+weight: -18
 provider: null
 plugin: 'views_block:all_tags-block_1'
 settings:

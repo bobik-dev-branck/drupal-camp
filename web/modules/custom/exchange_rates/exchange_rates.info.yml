@@ -1,0 +1,5 @@
+name: Exchange rates
+type: module
+description: Custom module with showing Exchange rates.
+package: Custom
+core_version_requirement: ^9 || ^10

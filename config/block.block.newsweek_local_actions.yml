@@ -9,7 +9,7 @@ _core:
 id: newsweek_local_actions
 theme: newsweek
 region: content
-weight: -13
+weight: -14
 provider: null
 plugin: local_actions_block
 settings:

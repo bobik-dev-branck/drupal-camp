@@ -12,7 +12,7 @@ dependencies:
 id: subscribe
 theme: newsweek
 region: sidebar_second
-weight: -15
+weight: -17
 provider: null
 plugin: 'block_content:06a11876-22ec-4294-ba40-7c38a6e75ef9'
 settings:

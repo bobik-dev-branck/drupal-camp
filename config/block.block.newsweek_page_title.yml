@@ -9,7 +9,7 @@ _core:
 id: newsweek_page_title
 theme: newsweek
 region: content
-weight: -16
+weight: -17
 provider: null
 plugin: page_title_block
 settings:

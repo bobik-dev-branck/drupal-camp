@@ -9,7 +9,7 @@ _core:
 id: newsweek_local_tasks
 theme: newsweek
 region: content
-weight: -15
+weight: -16
 provider: null
 plugin: local_tasks_block
 settings:

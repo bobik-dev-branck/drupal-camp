@@ -1,0 +1,53 @@
+uuid: ff0227fd-6769-4a60-a002-7af49adfe197
+langcode: en
+status: false
+dependencies:
+  config:
+    - comment.type.article_comments
+    - core.entity_view_mode.comment.full
+    - field.field.comment.article_comments.comment_body
+    - field.field.comment.article_comments.field_comment_email
+    - field.field.comment.article_comments.field_comment_name
+    - field.field.comment.article_comments.field_comment_website
+  module:
+    - layout_builder
+    - text
+third_party_settings:
+  layout_builder:
+    enabled: false
+    allow_custom: false
+id: comment.article_comments.full
+targetEntityType: comment
+bundle: article_comments
+mode: full
+content:
+  comment_body:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_comment_email:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_comment_name:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_comment_website:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 3
+    region: content
+hidden:
+  links: true
