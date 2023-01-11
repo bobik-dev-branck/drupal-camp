@@ -22,7 +22,7 @@ class ExchangeRatesBlock extends BlockBase {
     $date = date("Ymd");
     $exchangeRates =
       json_decode($httpClient
-        ->get('https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?date=' . $date .'&json')
+        ->get('https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?date=' . $date . '&json')
         ->getBody());
 
     foreach ($exchangeRates as $exchangeRate) {
@@ -37,4 +37,5 @@ class ExchangeRatesBlock extends BlockBase {
     return $renderable;
 
   }
+
 }
