@@ -1,4 +1,4 @@
-uuid: c0a10fea-20eb-4224-8ca6-49a8f345a6ae
+uuid: 734e5f7c-7172-4ca6-af22-51a77393d887
 langcode: en
 status: true
 dependencies:
@@ -10,11 +10,11 @@ dependencies:
 id: exchange_rates
 theme: newsweek
 region: header_bottom
-weight: -17
+weight: 0
 provider: null
-plugin: exchange_rates
+plugin: dru
 settings:
-  id: exchange_rates
+  id: dru
   label: Exchange_rates
   label_display: '0'
   provider: exchange_rates

@@ -1,0 +1,11 @@
+# Schema for the configuration files of the Exchange rates module.
+exchange_rates.settings:
+  type: config_object
+  label: 'Exchange rates settings'
+  mapping:
+    show:
+      type: integer
+      label: 'Show block'
+    url:
+      type: string
+      label: 'Exchange rates API'
