@@ -37,7 +37,7 @@ class ExchangeRatesSettingsForm extends ConfigFormBase {
     $form['url'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Exchange rates API'),
-      '#description' => 'Example - https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?date=',
+      '#description' => $this->t('Example - https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?date='),
       '#default_value' => $this->config('exchange_rates.settings')->get('url'),
     ];
     return parent::buildForm($form, $form_state);
