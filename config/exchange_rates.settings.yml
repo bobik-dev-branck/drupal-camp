@@ -1,0 +1,4 @@
+_core:
+  default_config_hash: SPpsNH1zKxy6G2VhB4n2yf8tD50QffB021cbvBbhh54
+show_block: 0
+url: 'https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?json'

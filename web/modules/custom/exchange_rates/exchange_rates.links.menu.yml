@@ -1,0 +1,6 @@
+exchange_rates.settings_form:
+  title: Exchange rates
+  description: Config form for block Exchange rates
+  parent: system.admin_config
+  route_name: exchange_rates.settings_form
+  weight: 10
