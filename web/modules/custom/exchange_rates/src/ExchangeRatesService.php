@@ -42,7 +42,7 @@ class ExchangeRatesService {
    * Gets the value of the config name of the configuration object to construct.
    *
    * @param string $configName
-   *  The config name.
+   *   The config name.
    *
    * @return string|bool|null
    *   The default settings for block.
