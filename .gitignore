@@ -38,7 +38,7 @@ config/ath_courts.import_courts.batch.yml
 # Ignore contrib modules and themes.
 web/modules/contrib/**
 web/themes/contrib/**
- web/themes/custom/newsweek/dist/
+web/themes/custom/newsweek/dist/
 
 # Ignore paths that contain user-generated content.
 /web/sites/*/files
