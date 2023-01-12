@@ -28,17 +28,19 @@ class ExchangeRatesSettingsForm extends ConfigFormBase {
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
+    $config = $this->config('exchange_rates.settings');
+
     $form['show_block'] = [
       '#type' => 'checkbox',
-      '#title' => $this->t('Do you want to show block'),
-      '#default_value' => $this->config('exchange_rates.settings')->get('show_block'),
+      '#title' => $this->t('Do you want to show block?'),
+      '#default_value' => $config->get('show_block') ?? FALSE,
     ];
 
     $form['url'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Exchange rates API'),
-      '#description' => $this->t('Example - https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?date='),
-      '#default_value' => $this->config('exchange_rates.settings')->get('url'),
+      '#description' => $this->t('WARNING! Use only JSON API'),
+      '#default_value' => $config->get('url') ?? ' ',
     ];
     return parent::buildForm($form, $form_state);
   }
@@ -47,9 +49,6 @@ class ExchangeRatesSettingsForm extends ConfigFormBase {
    * {@inheritdoc}
    */
   public function validateForm(array &$form, FormStateInterface $form_state) {
-    if ($form_state->getValue('url') != 'https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?date=') {
-      $form_state->setErrorByName('url', $this->t('The value is not correct.'));
-    }
     parent::validateForm($form, $form_state);
   }
 

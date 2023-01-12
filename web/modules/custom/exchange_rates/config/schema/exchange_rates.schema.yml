@@ -4,7 +4,7 @@ exchange_rates.settings:
   label: 'Exchange rates settings'
   mapping:
     show:
-      type: integer
+      type: boolean
       label: 'Show block'
     url:
       type: string
