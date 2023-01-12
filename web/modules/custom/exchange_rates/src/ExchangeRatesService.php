@@ -7,7 +7,7 @@ use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\RequestException;
 
 /**
- *  Provided Exchange Rates Service.
+ * Provided Exchange Rates Service.
  */
 class ExchangeRatesService {
 
@@ -41,10 +41,11 @@ class ExchangeRatesService {
   /**
    * Gets the value of the config name of the configuration object to construct.
    *
-   * @param $configName
+   * @param string $configName
    *  The config name.
    *
-   * @return string|boolean|null
+   * @return string|bool|null
+   *   The default settings for block.
    */
   public function getConfig($configName) {
     $config = $this->configFactory->get('exchange_rates.settings');
@@ -56,19 +57,20 @@ class ExchangeRatesService {
    * Gets Exchange Rates with API.
    *
    * @param string $url
-   *  The url to API Exchange Rates.
+   *   The url to API Exchange Rates.
    *
    * @return array|null
+   *   The uri link, NULL otherwise.
    */
-
-  public function getExchangeRates ($url) {
+  public function getExchangeRates($url) {
     try {
       $request = $this->client->get($url)->getBody();
       $exchangeRates = json_decode($request);
       foreach ($exchangeRates as $exchangeRate) {
         $data[$exchangeRate->cc] = $exchangeRate->rate;
       }
-    }catch (RequestException $e) {
+    }
+    catch (RequestException $e) {
       return;
     }
 
