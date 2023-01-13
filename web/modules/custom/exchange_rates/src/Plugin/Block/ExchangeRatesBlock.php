@@ -79,12 +79,9 @@ class ExchangeRatesBlock extends BlockBase implements ContainerFactoryPluginInte
           return $renderable;
         }
 
-        return;
       }
 
     }
-
-    return;
 
   }
 
