@@ -49,6 +49,8 @@ class ExchangeRatesSettingsForm extends ConfigFormBase {
    * {@inheritdoc}
    */
   public function validateForm(array &$form, FormStateInterface $form_state) {
+    //TODO Need will add validate URL input.
+
     parent::validateForm($form, $form_state);
   }
 
