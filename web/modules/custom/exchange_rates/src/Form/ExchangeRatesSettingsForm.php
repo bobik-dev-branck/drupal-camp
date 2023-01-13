@@ -16,6 +16,8 @@ class ExchangeRatesSettingsForm extends ConfigFormBase {
   /**
    * The Constructor for Exchange Rates Settings Form.
    *
+   * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
+   *   The factory for configuration objects.
    * @param \Drupal\exchange_rates\ExchangeRatesService $exchange_rates
    *   The Exchange Rates Service.
    */
@@ -69,10 +71,10 @@ class ExchangeRatesSettingsForm extends ConfigFormBase {
 
     // If API set and return data will show this fieldset.
     $url = $this->exchangeRates->getConfig('url');
-    if(!empty($url)) {
+    if (!empty($url)) {
       $checkUrl = $this->exchangeRates->checkRequest($url);
 
-      if($checkUrl) {
+      if ($checkUrl) {
         $form['currency'] = [
           '#type' => 'fieldset',
           '#title' => $this->t('Choose currency will show'),
@@ -84,7 +86,7 @@ class ExchangeRatesSettingsForm extends ConfigFormBase {
         foreach (array_keys($data) as $currency) {
           $form['currency'][$currency] = [
             '#type' => 'checkbox',
-            '#title' => $this->t($currency),
+            '#title' => $currency,
             '#default_value' => $defaultValue[$currency] ?? FALSE,
           ];
         }

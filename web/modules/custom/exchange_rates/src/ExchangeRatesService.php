@@ -78,7 +78,9 @@ class ExchangeRatesService {
   }
 
   /**
-   * @param $url
+   * Checks API status code.
+   *
+   * @param string $url
    *   The API URL.
    *
    * @return bool
@@ -88,7 +90,8 @@ class ExchangeRatesService {
     try {
       $check = $this->client->get($url)->getStatusCode();
       $check == 200 ? $result = TRUE : $result = FALSE;
-    } catch (\Exception $e) {
+    }
+    catch (\Exception $e) {
       return FALSE;
     }
 
