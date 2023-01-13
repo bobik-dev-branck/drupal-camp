@@ -48,15 +48,6 @@ class ExchangeRatesSettingsForm extends ConfigFormBase {
   /**
    * {@inheritdoc}
    */
-  public function validateForm(array &$form, FormStateInterface $form_state) {
-    //TODO Need will add validate URL input.
-
-    parent::validateForm($form, $form_state);
-  }
-
-  /**
-   * {@inheritdoc}
-   */
   public function submitForm(array &$form, FormStateInterface $form_state) {
     $this->config('exchange_rates.settings')
       ->set('show_block', $form_state->getValue('show_block'))
