@@ -20,10 +20,10 @@ class ExchangeRatesBlock extends BlockBase {
   public function build() {
     $httpClient = \Drupal::httpClient();
     $date = date("Ymd");
-    $exchangeRates =
-      json_decode($httpClient
-        ->get('https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?date=' . $date . '&json')
-        ->getBody());
+    $response = $httpClient
+      ->get('https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?date=' . $date . '&json')
+      ->getBody();
+    $exchangeRates = json_decode($response);
 
     foreach ($exchangeRates as $exchangeRate) {
       $data[$exchangeRate->cc] = $exchangeRate->rate;
