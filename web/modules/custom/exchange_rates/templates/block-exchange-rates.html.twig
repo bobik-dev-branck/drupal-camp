@@ -1,0 +1,8 @@
+{% if data %}
+  <h2>Exchanges rate</h2>
+  {% for currency, rate in data %}
+    <div>
+      <span class="currency">{{ currency }}</span> - <span class="rate">{{ rate }}</span>
+    </div>
+  {% endfor %}
+{% endif %}

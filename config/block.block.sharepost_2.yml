@@ -12,7 +12,7 @@ dependencies:
 id: sharepost_2
 theme: newsweek
 region: sidebar_second
-weight: -13
+weight: -15
 provider: null
 plugin: 'block_content:ce5cd172-15ef-4eb1-bf65-a7ef10c07a9c'
 settings:

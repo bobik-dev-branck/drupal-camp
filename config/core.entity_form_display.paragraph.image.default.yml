@@ -4,7 +4,10 @@ status: true
 dependencies:
   config:
     - field.field.paragraph.image.field_image
+    - field.field.paragraph.image.field_title
     - paragraphs.paragraphs_type.image
+  module:
+    - text
 id: paragraph.image.default
 targetEntityType: paragraph
 bundle: image
@@ -12,11 +15,19 @@ mode: default
 content:
   field_image:
     type: entity_reference_autocomplete
-    weight: 0
+    weight: 1
     region: content
     settings:
       match_operator: CONTAINS
       match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_title:
+    type: text_textfield
+    weight: 0
+    region: content
+    settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }

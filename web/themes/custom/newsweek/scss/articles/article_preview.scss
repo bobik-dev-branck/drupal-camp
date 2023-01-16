@@ -1,0 +1,24 @@
+/**
+* @file
+* Layout for article preview view
+*/
+
+.article-preview {
+  padding-top: 60px;
+
+  .views-row {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+    height: 720px;
+    position: relative;
+  }
+
+  .node__meta {
+    text-transform: capitalize;
+    color: #000;
+    font-size: 15px;
+    font-weight: 600;
+  }
+}

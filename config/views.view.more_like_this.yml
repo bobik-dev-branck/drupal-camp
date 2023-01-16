@@ -242,6 +242,7 @@ display:
           replica: false
           query_tags: {  }
       relationships: {  }
+      css_class: more-like-this-view
       header: {  }
       footer: {  }
       display_extenders: {  }

@@ -1,0 +1,33 @@
+uuid: f48191c1-c731-4b89-b6e9-fd873d1a9610
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:subscribe:06a11876-22ec-4294-ba40-7c38a6e75ef9'
+  module:
+    - block_content
+    - node
+  theme:
+    - newsweek
+id: subscribe_2
+theme: newsweek
+region: sidebar_second
+weight: -14
+provider: null
+plugin: 'block_content:06a11876-22ec-4294-ba40-7c38a6e75ef9'
+settings:
+  id: 'block_content:06a11876-22ec-4294-ba40-7c38a6e75ef9'
+  label: Subscribe
+  label_display: visible
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  'entity_bundle:node':
+    id: 'entity_bundle:node'
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'
+    bundles:
+      newsweek_article: newsweek_article

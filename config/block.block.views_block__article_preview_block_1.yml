@@ -1,0 +1,33 @@
+uuid: 37b5da0b-11c3-4176-a401-ffbb181bdf20
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.article_preview
+  module:
+    - node
+    - views
+  theme:
+    - newsweek
+id: views_block__article_preview_block_1
+theme: newsweek
+region: full_width_blocks_first
+weight: 0
+provider: null
+plugin: 'views_block:article_preview-block_1'
+settings:
+  id: 'views_block:article_preview-block_1'
+  label: ''
+  label_display: '0'
+  provider: views
+  context_mapping: {  }
+  views_label: ''
+  items_per_page: none
+visibility:
+  'entity_bundle:node':
+    id: 'entity_bundle:node'
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'
+    bundles:
+      newsweek_article: newsweek_article
