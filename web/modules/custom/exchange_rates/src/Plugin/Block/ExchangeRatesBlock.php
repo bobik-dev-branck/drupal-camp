@@ -18,7 +18,7 @@ use Psr\Container\ContainerInterface;
 class ExchangeRatesBlock extends BlockBase implements ContainerFactoryPluginInterface {
 
   /**
-   * Constructor.
+   * Constructor Exchange Rates Block.
    *
    * @param array $configuration
    *   Configuration array.
@@ -35,16 +35,7 @@ class ExchangeRatesBlock extends BlockBase implements ContainerFactoryPluginInte
   }
 
   /**
-   * Create method.
-   *
-   * @param \Symfony\Component\DependencyInjection\ContainerInterface $container
-   *   Container.
-   * @param array $configuration
-   *   Configuration array.
-   * @param string $plugin_id
-   *   Plugin ID.
-   * @param mixed $plugin_definition
-   *   Plugin definition.
+   * {@inheritdoc}
    */
   public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
     return new static(
@@ -60,11 +51,11 @@ class ExchangeRatesBlock extends BlockBase implements ContainerFactoryPluginInte
    */
   public function build() {
     $showBlock = $this->exchangeRates->getConfig('show_block');
-    if ($showBlock == FALSE) {
+    if (!$showBlock) {
       return;
     }
 
-    if ($showBlock == TRUE) {
+    if ($showBlock) {
       $url = $this->exchangeRates->getConfig('url');
 
       if ($url) {

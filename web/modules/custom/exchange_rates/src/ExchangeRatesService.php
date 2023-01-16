@@ -8,7 +8,7 @@ use Drupal\Core\StringTranslation\StringTranslationTrait;
 use GuzzleHttp\ClientInterface;
 
 /**
- * Provided Exchange Rates Service.
+ * Provides functionality for fetching exchange rates via API.
  */
 class ExchangeRatesService {
 
