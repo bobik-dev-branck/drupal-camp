@@ -66,11 +66,14 @@ class ExchangeRatesSettingsForm extends ConfigFormBase {
       '#type' => 'textfield',
       '#title' => $this->t('Exchange rates API'),
       '#description' => $this->t('WARNING! Use only JSON API'),
-      '#default_value' => $config->get('url') ?? ' ',
+      '#default_value' => $config->get('url') ?? '',
+      '#cache' => [
+        'max-age' => 0,
+      ],
     ];
 
     // If API set and return data will show this fieldset.
-    $url = $this->exchangeRates->getConfig('url');
+    $url = $config->get('url') ?? '';
     if (!empty($url)) {
       $checkUrl = $this->exchangeRates->checkRequest($url);
 
@@ -81,7 +84,7 @@ class ExchangeRatesSettingsForm extends ConfigFormBase {
           '#tree' => TRUE,
         ];
 
-        $data = $this->exchangeRates->getExchangeRates($url);
+        $data = $this->exchangeRates->getExchangeRates($config->get('url'));
         $defaultValue = $config->get('currency');
         foreach (array_keys($data) as $currency) {
           $form['currency'][$currency] = [
@@ -96,6 +99,21 @@ class ExchangeRatesSettingsForm extends ConfigFormBase {
     }
 
     return parent::buildForm($form, $form_state);
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function validateForm(array &$form, FormStateInterface $form_state) {
+    if ($form_state->getValue('url')) {
+      $checkLink = $this->exchangeRates->checkRequest($form_state->getValue('url'));
+      if (!$checkLink) {
+        $form_state->setErrorByName('url', $this->t('Wrong link or API don\'t work'));
+      }
+
+    }
+
+    parent::validateForm($form, $form_state);
   }
 
   /**
