@@ -77,4 +77,25 @@ class ExchangeRatesService {
     return $data;
   }
 
+  /**
+   * Checks API status code.
+   *
+   * @param string $url
+   *   The API URL.
+   *
+   * @return bool
+   *   Return API Status code.
+   */
+  public function checkRequest($url) {
+    try {
+      $check = $this->client->get($url)->getStatusCode();
+      $check == 200 ? $result = TRUE : $result = FALSE;
+    }
+    catch (\Exception $e) {
+      return FALSE;
+    }
+
+    return $result;
+  }
+
 }
