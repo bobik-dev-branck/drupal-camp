@@ -7,7 +7,7 @@ use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\RequestException;
 
 /**
- * Provided Exchange Rates Service.
+ * Provides functionality for fetching exchange rates via API.
  */
 class ExchangeRatesService {
 
