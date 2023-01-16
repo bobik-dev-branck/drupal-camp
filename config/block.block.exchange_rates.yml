@@ -1,4 +1,4 @@
-uuid: c0a10fea-20eb-4224-8ca6-49a8f345a6ae
+uuid: 00976503-dd1f-4209-b7f4-3df3dcb1cdef
 langcode: en
 status: true
 dependencies:
@@ -10,7 +10,7 @@ dependencies:
 id: exchange_rates
 theme: newsweek
 region: header_bottom
-weight: -17
+weight: 0
 provider: null
 plugin: exchange_rates
 settings:
