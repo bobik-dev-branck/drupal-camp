@@ -109,7 +109,7 @@ class ExchangeRatesService {
   /**
    * Sends logs message.
    *
-   * @param \Exception $error
+   * @param object $error
    *   The Exceptions.
    */
   public function sendLog($error) {
@@ -120,4 +120,3 @@ class ExchangeRatesService {
   }
 
 }
-
