@@ -1,0 +1,28 @@
+uuid: 00976503-dd1f-4209-b7f4-3df3dcb1cdef
+langcode: en
+status: true
+dependencies:
+  module:
+    - exchange_rates
+    - node
+  theme:
+    - newsweek
+id: exchange_rates
+theme: newsweek
+region: header_bottom
+weight: 0
+provider: null
+plugin: exchange_rates
+settings:
+  id: exchange_rates
+  label: Exchange_rates
+  label_display: '0'
+  provider: exchange_rates
+visibility:
+  'entity_bundle:node':
+    id: 'entity_bundle:node'
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'
+    bundles:
+      main_page: main_page

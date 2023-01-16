@@ -12,7 +12,7 @@ dependencies:
 id: newspaper_4
 theme: newsweek
 region: sidebar_second
-weight: -11
+weight: -12
 provider: null
 plugin: 'block_content:ac6a4507-3109-41bd-9d46-82b273a23c27'
 settings:
