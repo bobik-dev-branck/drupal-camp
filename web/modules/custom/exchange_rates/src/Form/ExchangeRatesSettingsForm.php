@@ -120,12 +120,50 @@ class ExchangeRatesSettingsForm extends ConfigFormBase {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
+    // Gets default settings for currency.
+    $defaultSettings = $this->exchangeRates->getConfig('currency');
+    foreach ($defaultSettings as $currency => $shows) {
+      $isShow[$currency] = $shows;
+    }
+
     $this->config('exchange_rates.settings')
       ->set('show_block', $form_state->getValue('show_block'))
       ->set('url', $form_state->getValue('url'))
       ->set('currency', $form_state->getValue('currency'))
       ->save();
     parent::submitForm($form, $form_state);
+
+    // Compares currency settings and send user messages.
+    $withForm = $form_state->getValue('currency');
+    foreach ($withForm as $currency => $show) {
+      if ($show != $isShow[$currency]) {
+
+        // Message for Settings form.
+        if ($show) {
+          $this->messenger->addWarning($this->t('The @currency has been enabled', [
+            '@currency' => $currency,
+          ]));
+        } else {
+          $this->messenger->addWarning($this->t('The @currency has been disabled', [
+            '@currency' => $currency,
+          ]));
+        }
+
+        // Message for Logs.
+        if ($show) {
+          $this->logger('exchange_rates')->info($this->t('The @currency has been enabledd', [
+            '@currency' => $currency,
+          ]));
+        } else {
+          $this->logger('exchange_rates')->info($this->t('The @currency has been disabled', [
+            '@currency' => $currency,
+          ]));
+        }
+
+      }
+
+    }
+
   }
 
 }
