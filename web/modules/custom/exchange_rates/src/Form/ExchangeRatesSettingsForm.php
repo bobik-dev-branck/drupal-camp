@@ -72,6 +72,15 @@ class ExchangeRatesSettingsForm extends ConfigFormBase {
       ],
     ];
 
+    $form['date'] = [
+      '#type' => 'textfield',
+      '#title' => $this->t('Gets date with'),
+      '#default_value' => date('Ymd'),
+      '#description' => $this->t('WARNING! Write date in format - 20230101'),
+      '#maxlength' => 8,
+    ];
+
+
     // If API set and return data will show this fieldset.
     $url = $config->get('url') ?? '';
     if (!empty($url)) {
@@ -113,6 +122,16 @@ class ExchangeRatesSettingsForm extends ConfigFormBase {
 
     }
 
+    if ($form_state->getValue('date')) {
+      if (!is_numeric($form_state->getValue('date'))) {
+        $form_state->setErrorByName('date', $this->t('Needs to enter only numeric'));
+      }
+
+      if (strlen($form_state->getValue('date')) != 8) {
+        $form_state->setErrorByName('date', $this->t('Too little numeric'));
+      }
+    }
+
     parent::validateForm($form, $form_state);
   }
 
@@ -129,41 +148,48 @@ class ExchangeRatesSettingsForm extends ConfigFormBase {
     $this->config('exchange_rates.settings')
       ->set('show_block', $form_state->getValue('show_block'))
       ->set('url', $form_state->getValue('url'))
+      ->set('date', $form_state->getValue('date'))
       ->set('currency', $form_state->getValue('currency'))
       ->save();
     parent::submitForm($form, $form_state);
 
     // Compares currency settings and send user messages.
     $withForm = $form_state->getValue('currency');
-    foreach ($withForm as $currency => $show) {
-      if ($show != $isShow[$currency]) {
+    if (!empty($withForm)) {
+      foreach ($withForm as $currency => $show) {
+        if ($show != $isShow[$currency]) {
 
-        // Message for Settings form.
-        if ($show) {
-          $this->messenger->addWarning($this->t('The @currency has been enabled', [
-            '@currency' => $currency,
-          ]));
-        } else {
-          $this->messenger->addWarning($this->t('The @currency has been disabled', [
-            '@currency' => $currency,
-          ]));
-        }
+          // Message for Settings form.
+          if ($show) {
+            $this->messenger->addWarning($this->t('The @currency has been enabled', [
+              '@currency' => $currency,
+            ]));
+          }
+          else {
+            $this->messenger->addWarning($this->t('The @currency has been disabled', [
+              '@currency' => $currency,
+            ]));
+          }
 
-        // Message for Logs.
-        if ($show) {
-          $this->logger('exchange_rates')->info($this->t('The @currency has been enabledd', [
-            '@currency' => $currency,
-          ]));
-        } else {
-          $this->logger('exchange_rates')->info($this->t('The @currency has been disabled', [
-            '@currency' => $currency,
-          ]));
+          // Message for Logs.
+          if ($show) {
+            $this->logger('exchange_rates')
+              ->info($this->t('The @currency has been enabled', [
+                '@currency' => $currency,
+              ]));
+          }
+          else {
+            $this->logger('exchange_rates')
+              ->info($this->t('The @currency has been disabled', [
+                '@currency' => $currency,
+              ]));
+          }
+
         }
 
       }
 
     }
-
   }
 
 }
