@@ -1,8 +1,9 @@
 {% if data %}
+  {{ devel_dump() }}
   <h2>Exchanges rate</h2>
   {% for currency, rate in data %}
-    <div>
-      <span class="currency">{{ currency }}</span> - <span class="rate">{{ rate }}</span>
-    </div>
+    <canvas id="{{ currency }}" aria-label="Hello ARIA World">
+     {{ currency }}  - {{ rate }}
+    </canvas>
   {% endfor %}
 {% endif %}

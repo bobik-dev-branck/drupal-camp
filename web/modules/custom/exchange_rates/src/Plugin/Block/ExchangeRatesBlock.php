@@ -61,13 +61,37 @@ class ExchangeRatesBlock extends BlockBase implements ContainerFactoryPluginInte
       if ($url) {
         $data = $this->exchangeRates->getExchangeRates($url);
 
-        if (!empty($data)) {
-          $renderable = [
-            '#theme' => 'block_exchange_rates',
-            '#data' => $data,
-          ];
+        if(!empty($data)) {
+          $mustShow = $this->exchangeRates->getConfig('currency');
+          foreach ($mustShow as $rate => $shows) {
+            $isShow[$rate] = $shows;
+          }
 
-          return $renderable;
+          foreach ($data as $currency => $rate) {
+            if ($isShow[$currency]) {
+              $validated[$currency] = $rate;
+            }
+          }
+
+          if (!empty($validated)) {
+            $renderable = [
+              '#theme' => 'block_exchange_rates',
+              '#data' => $validated,
+              '#attributes' => [
+                'class' => [
+                  'charts-chartjs'
+                ],
+              ],
+              '#attached' => [
+                'library' => [
+                  'exchange_rates/exchange_rates_chart'
+                ],
+              ],
+            ];
+
+            return $renderable;
+          }
+
         }
 
       }

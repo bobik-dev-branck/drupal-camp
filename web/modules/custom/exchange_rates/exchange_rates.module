@@ -17,3 +17,10 @@ function exchange_rates_theme($existing, $type, $theme, $path) {
     ],
   ];
 }
+
+///**
+// * Implements hook_page_attachments().
+// */
+//function exchange_rates_page_attachments(array &$attachments) {
+//  $attachments['#attached']['library'][] = 'exchange_rates/exchange_rates_chart';
+//}
