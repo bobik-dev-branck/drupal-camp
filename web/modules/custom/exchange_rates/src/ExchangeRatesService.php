@@ -76,6 +76,7 @@ class ExchangeRatesService {
 
     return $fullUrl;
   }
+
   /**
    * Gets Exchange Rates with API.
    *
