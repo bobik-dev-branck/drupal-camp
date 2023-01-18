@@ -65,15 +65,24 @@ class ExchangeRatesSettingsForm extends ConfigFormBase {
     $form['url'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Exchange rates API'),
-      '#description' => $this->t('WARNING! Use only JSON API'),
+      '#description' => $this
+        ->t('WARNING! Use only JSON API and without get parameters'),
       '#default_value' => $config->get('url') ?? '',
       '#cache' => [
         'max-age' => 0,
       ],
     ];
 
+    $form['date'] = [
+      '#type' => 'textfield',
+      '#title' => $this->t('Set start range get data'),
+      '#default_value' => $config->get('date') ?? date('Ymd'),
+      '#description' => $this->t('WARNING! Write date in format - 20230101'),
+      '#maxlength' => 8,
+    ];
+
     // If API set and return data will show this fieldset.
-    $url = $config->get('url') ?? '';
+    $url = $this->exchangeRates->buildUrl($config->get('url')) ?? '';
     if (!empty($url)) {
       $checkUrl = $this->exchangeRates->checkRequest($url);
 
@@ -84,14 +93,20 @@ class ExchangeRatesSettingsForm extends ConfigFormBase {
           '#tree' => TRUE,
         ];
 
-        $data = $this->exchangeRates->getExchangeRates($config->get('url'));
-        $defaultValue = $config->get('currency');
-        foreach (array_keys($data) as $currency) {
-          $form['currency'][$currency] = [
-            '#type' => 'checkbox',
-            '#title' => $currency,
-            '#default_value' => $defaultValue[$currency] ?? FALSE,
-          ];
+        $data = $this->exchangeRates->getExchangeRates($url);
+
+        if ($data) {
+          $defaultValue = $config->get('currency');
+
+          foreach (array_keys($data) as $currency) {
+            $form['currency'][$currency] = [
+              '#type' => 'checkbox',
+              '#title' => $currency,
+              '#default_value' => $defaultValue[$currency] ?? FALSE,
+            ];
+
+          }
+
         }
 
       }
@@ -106,9 +121,30 @@ class ExchangeRatesSettingsForm extends ConfigFormBase {
    */
   public function validateForm(array &$form, FormStateInterface $form_state) {
     if ($form_state->getValue('url')) {
-      $checkLink = $this->exchangeRates->checkRequest($form_state->getValue('url'));
+      $checkLink = $this->exchangeRates
+        ->checkRequest($this->exchangeRates->buildUrl($form_state->getValue('url')));
+
       if (!$checkLink) {
         $form_state->setErrorByName('url', $this->t('Wrong link or API don\'t work'));
+
+      }
+
+    }
+
+    if ($form_state->getValue('date')) {
+      if (!is_numeric($form_state->getValue('date'))) {
+        $form_state->setErrorByName('date', $this->t('Needs to enter only numeric'));
+
+      }
+
+      if (strlen($form_state->getValue('date')) != 8) {
+        $form_state->setErrorByName('date', $this->t('Too little numeric'));
+
+      }
+
+      if ($form_state->getValue('date') > date('Ymd')) {
+        $form_state->setErrorByName('date', $this->t('The date isn\'t valid'));
+
       }
 
     }
@@ -120,12 +156,60 @@ class ExchangeRatesSettingsForm extends ConfigFormBase {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
+    // Gets default settings for currency.
+    $defaultSettings = $this->exchangeRates->getConfig('currency');
+    if ($defaultSettings) {
+      foreach ($defaultSettings as $currency => $shows) {
+        $isShow[$currency] = $shows;
+      }
+    }
+
     $this->config('exchange_rates.settings')
       ->set('show_block', $form_state->getValue('show_block'))
       ->set('url', $form_state->getValue('url'))
+      ->set('date', $form_state->getValue('date'))
       ->set('currency', $form_state->getValue('currency'))
       ->save();
     parent::submitForm($form, $form_state);
+
+    // Compares currency settings and send user messages.
+    $withForm = $form_state->getValue('currency');
+    if (!empty($withForm) && isset($isShow)) {
+      foreach ($withForm as $currency => $show) {
+        if ($show != $isShow[$currency]) {
+
+          // Message for Settings form.
+          if ($show) {
+            $this->messenger->addWarning($this->t('The @currency has been enabled', [
+              '@currency' => $currency,
+            ]));
+          }
+          else {
+            $this->messenger->addWarning($this->t('The @currency has been disabled', [
+              '@currency' => $currency,
+            ]));
+          }
+
+          // Message for Logs.
+          if ($show) {
+            $this->logger('exchange_rates')
+              ->info($this->t('The @currency has been enabled', [
+                '@currency' => $currency,
+              ]));
+          }
+          else {
+            $this->logger('exchange_rates')
+              ->info($this->t('The @currency has been disabled', [
+                '@currency' => $currency,
+              ]));
+          }
+
+        }
+
+      }
+
+    }
+
   }
 
 }

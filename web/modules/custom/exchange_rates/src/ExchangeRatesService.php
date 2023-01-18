@@ -60,6 +60,24 @@ class ExchangeRatesService {
   }
 
   /**
+   * Builds URL with all get parameters.
+   *
+   * @param string $url
+   *   The static part of URL for API.
+   *
+   * @return string
+   *   The full URL for API.
+   */
+  public function buildUrl($url) {
+    $defaultDate = $this->getConfig('date');
+    $tail = '&sort=exchangedate&order=desc&json';
+
+    $fullUrl = $url . 'start=' . $defaultDate . '&end=' . date('Ymd') . $tail;
+
+    return $fullUrl;
+  }
+
+  /**
    * Gets Exchange Rates with API.
    *
    * @param string $url
@@ -73,7 +91,8 @@ class ExchangeRatesService {
       $request = $this->client->get($url)->getBody();
       $exchangeRates = json_decode($request);
       foreach ($exchangeRates as $exchangeRate) {
-        $data[$exchangeRate->cc] = $exchangeRate->rate;
+
+        $data[$exchangeRate->cc][$exchangeRate->exchangedate] = $exchangeRate->rate;
       }
     }
     catch (\Exception $e) {
@@ -116,6 +135,7 @@ class ExchangeRatesService {
     $message = $this->t('API isn\'t available - @error', [
       '@error' => $error->getMessage(),
     ]);
+
     $this->logger->get('exchange_rates')->notice($message);
   }
 
