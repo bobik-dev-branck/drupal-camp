@@ -90,6 +90,16 @@ class ExchangeRatesBlock extends BlockBase implements ContainerFactoryPluginInte
             $renderable = [
               '#theme' => 'block_exchange_rates',
               '#data' => $validated,
+              '#attributes' => [
+                'class' => [
+                  'charts-chartjs'
+                ],
+              ],
+              '#attached' => [
+                'library' => [
+                  'exchange_rates/exchange_rates_chart'
+                ],
+              ],
             ];
 
             return $renderable;
