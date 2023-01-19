@@ -72,7 +72,7 @@ class ExchangeRatesService {
     $defaultDate = $this->getConfig('date');
     $tail = '&sort=exchangedate&order=desc&json';
 
-    $fullUrl = $url . 'start=' . $defaultDate . '&end=' . date('Ymd') . $tail;
+    $fullUrl = $url . '?start=' . $defaultDate . '&end=' . date('Ymd') . $tail;
 
     return $fullUrl;
   }
