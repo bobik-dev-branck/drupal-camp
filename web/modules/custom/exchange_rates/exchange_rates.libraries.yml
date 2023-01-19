@@ -2,4 +2,7 @@ exchange_rates_chart:
   version: 1.x
   js:
     js/exchange_rates.js: {}
-    /libraries/chart.js/dist/chart.js: {}
+    /libraries/chart.js/dist/chart.umd.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupalSettings

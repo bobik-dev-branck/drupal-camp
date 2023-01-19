@@ -87,20 +87,23 @@ class ExchangeRatesBlock extends BlockBase implements ContainerFactoryPluginInte
           }
 
           if (!empty($validated)) {
-            $renderable = [
-              '#theme' => 'block_exchange_rates',
-              '#data' => $validated,
-              '#attributes' => [
-                'class' => [
-                  'charts-chartjs'
-                ],
-              ],
-              '#attached' => [
-                'library' => [
-                  'exchange_rates/exchange_rates_chart'
-                ],
-              ],
-            ];
+            $i = 0;
+
+            $renderable['#theme'][] = 'block_exchange_rates';
+            $renderable['#attached']['library'][] = 'exchange_rates/exchange_rates_chart';
+
+            foreach ($validated as $currency => $currencyData) {
+              if (!isset($renderable['#attached']['drupalSettings']['exchange_rates']['currency_data']['date'])) {
+                $renderable['#attached']['drupalSettings']['currency_data']['date'] = array_keys($currencyData);
+
+              }
+
+              $renderable['#attached']['drupalSettings']['exchange_rates'][$i]['label'] = $currency;
+              $renderable['#attached']['drupalSettings']['exchange_rates'][$i]['borderWidth'] = 1;
+              $renderable['#attached']['drupalSettings']['exchange_rates'][$i]['data'] = array_values($currencyData);
+
+              $i++;
+            }
 
             return $renderable;
           }
