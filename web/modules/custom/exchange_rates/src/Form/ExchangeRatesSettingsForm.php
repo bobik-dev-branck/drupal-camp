@@ -82,8 +82,8 @@ class ExchangeRatesSettingsForm extends ConfigFormBase {
     ];
 
     // If API set and return data will show this fieldset.
-    $url = $this->exchangeRates->buildUrl($config->get('url')) ?? '';
-    if (!empty($url)) {
+    if ($config->get('url')) {
+      $url = $this->exchangeRates->buildUrlForCheck($config->get('url'));
       $checkUrl = $this->exchangeRates->checkRequest($url);
 
       if ($checkUrl) {
@@ -93,15 +93,26 @@ class ExchangeRatesSettingsForm extends ConfigFormBase {
           '#tree' => TRUE,
         ];
 
-        $data = $this->exchangeRates->getExchangeRates($url);
+      $enabledCurrency = $config->get('currency');
 
-        if ($data) {
-          $defaultValue = $config->get('currency');
+      if ($enabledCurrency) {
+        foreach ($enabledCurrency as $currency => $status) {
+          $form['currency'][$currency] = [
+            '#type' => 'checkbox',
+            '#title' => $currency,
+            '#default_value' => $status ?? FALSE,
+          ];
 
-          foreach (array_keys($data) as $currency) {
-            $form['currency'][$currency] = [
+        }
+
+        } else {
+          $data = $this->exchangeRates->getExchangeRates2($url);
+
+          foreach ($data as $currency ) {
+            $form['currency'][$currency['currency']] = [
               '#type' => 'checkbox',
-              '#title' => $currency,
+              '#title' => $currency['currency'],
+              // '#default_value' => $defaultValue[$currency] ?? FALSE,
               '#default_value' => $defaultValue[$currency] ?? FALSE,
             ];
 
@@ -171,6 +182,17 @@ class ExchangeRatesSettingsForm extends ConfigFormBase {
       ->set('currency', $form_state->getValue('currency'))
       ->save();
     parent::submitForm($form, $form_state);
+
+    // Save enabled currency.
+    if ($form_state->getValue('currency')) {
+      foreach ($form_state->getValue('currency') as $currency => $status) {
+        if ($status) {
+          $enabled[$currency] = $status;
+        }
+      }
+      $this->exchangeRates->saveCurrency($enabled);
+    }
+
 
     // Compares currency settings and send user messages.
     $withForm = $form_state->getValue('currency');

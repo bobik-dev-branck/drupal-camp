@@ -6,6 +6,7 @@ use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Logger\LoggerChannelFactoryInterface;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
 use GuzzleHttp\ClientInterface;
+use Drupal\Core\Database\Connection;
 
 /**
  * Provides functionality for fetching exchange rates via API.
@@ -29,6 +30,13 @@ class ExchangeRatesService {
   protected $configFactory;
 
   /**
+   * The database connection.
+   *
+   * @var \Drupal\Core\Database\Connection $database
+   */
+  protected $database;
+
+  /**
    * Constructs an ExchangeRatesService object.
    *
    * @param \GuzzleHttp\ClientInterface $client
@@ -37,11 +45,17 @@ class ExchangeRatesService {
    *   The config factory.
    * @param \Drupal\Core\Logger\LoggerChannelFactoryInterface $logger
    *   The logger factory.
+   * @param \Drupal\Core\Database\Connection $database
+   *   The database connection.
    */
-  public function __construct(ClientInterface $client, ConfigFactoryInterface $config_factory, LoggerChannelFactoryInterface $logger) {
+  public function __construct(ClientInterface $client,
+                              ConfigFactoryInterface $config_factory,
+                              LoggerChannelFactoryInterface $logger,
+                              Connection $database ) {
     $this->client = $client;
     $this->configFactory = $config_factory;
     $this->logger = $logger;
+    $this->database = $database;
   }
 
   /**
@@ -78,6 +92,24 @@ class ExchangeRatesService {
   }
 
   /**
+   * Builds URL with all get parameters for check.
+   *
+   * @param string $url
+   *   The static part of URL for API.
+   *
+   * @return string
+   *   The full URL for API.
+   */
+  public function buildUrlForCheck($url) {
+    $defaultDate = $this->getConfig('date');
+    $tail = '&sort=exchangedate&order=desc&json';
+
+    $fullUrl = $url . '?start=' . date('Ymd') . '&end=' . date('Ymd') . $tail;
+
+    return $fullUrl;
+  }
+
+  /**
    * Gets Exchange Rates with API.
    *
    * @param string $url
@@ -102,6 +134,36 @@ class ExchangeRatesService {
 
     return $data;
   }
+
+
+  public function getExchangeRates2($url) {
+    try {
+      $request = $this->client->get($url)->getBody();
+      $exchangeRates = json_decode($request);
+      $i = 0;
+      foreach ($exchangeRates as $exchangeRate) {
+
+
+       // $data[$exchangeRate->cc][strtotime($exchangeRate->exchangedate)] = $exchangeRate->rate;
+        $data[$i]['currency'] = $exchangeRate->cc;
+        $data[$i]['date'] = strtotime($exchangeRate->exchangedate);
+        $data[$i]['rate'] = $exchangeRate->rate;
+
+        $i++;
+      }
+    }
+    catch (\Exception $e) {
+      $this->sendLog($e);
+      return;
+    }
+
+    return $data;
+  }
+
+
+
+
+
 
   /**
    * Checks API status code.
@@ -137,6 +199,36 @@ class ExchangeRatesService {
     ]);
 
     $this->logger->get('exchange_rates')->notice($message);
+  }
+
+  public function saveCurrency($currency) {
+    //$startOfRange = $this->getConfig('date');
+
+    $url = $this->buildUrl($this->getConfig('url'));
+    $data = $this->getExchangeRates2($url);
+
+
+
+//    // Range generator.
+//    $startOfRangUnixFormat = strtotime($startOfRange, );
+//    $unixRange[] = $startOfRangUnixFormat;
+//
+//    while ($startOfRangUnixFormat <= time()) {
+//      $unixRange[] += $startOfRangUnixFormat;
+//      $startOfRangUnixFormat = $startOfRangUnixFormat + (60*60*24);
+//    }
+
+//    $this->database->insert('exchange_rates')
+//      ->fields($data);
+
+$fields = ['currency', 'date', 'rate'];
+
+    $query = $this->database->insert('exchange_rates')
+      ->fields($fields);
+    foreach ($data as $record) {
+      $query->values($record);
+    }
+    $query->execute();
   }
 
 }
