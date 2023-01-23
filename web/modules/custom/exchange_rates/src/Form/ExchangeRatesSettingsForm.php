@@ -83,7 +83,7 @@ class ExchangeRatesSettingsForm extends ConfigFormBase {
 
     // If API set and return data will show this fieldset.
     if ($config->get('url')) {
-      $url = $this->exchangeRates->buildUrlForCheck($config->get('url'));
+      $url = $this->exchangeRates->buildUrl($config->get('url'));
       $checkUrl = $this->exchangeRates->checkRequest($url);
 
       if ($checkUrl) {
@@ -93,27 +93,26 @@ class ExchangeRatesSettingsForm extends ConfigFormBase {
           '#tree' => TRUE,
         ];
 
-      $enabledCurrency = $config->get('currency');
+        $enabledCurrency = $config->get('currency');
 
-      if ($enabledCurrency) {
-        foreach ($enabledCurrency as $currency => $status) {
-          $form['currency'][$currency] = [
-            '#type' => 'checkbox',
-            '#title' => $currency,
-            '#default_value' => $status ?? FALSE,
-          ];
+        if ($enabledCurrency) {
+          foreach ($enabledCurrency as $currency => $status) {
+            $form['currency'][$currency] = [
+              '#type' => 'checkbox',
+              '#title' => $currency,
+              '#default_value' => $status ?? FALSE,
+            ];
 
-        }
+          }
 
         } else {
-          $data = $this->exchangeRates->getExchangeRates2($url);
+          $data = $this->exchangeRates->getExchangeRates($url);
 
           foreach ($data as $currency ) {
             $form['currency'][$currency['currency']] = [
               '#type' => 'checkbox',
               '#title' => $currency['currency'],
-              // '#default_value' => $defaultValue[$currency] ?? FALSE,
-              '#default_value' => $defaultValue[$currency] ?? FALSE,
+              '#default_value' => FALSE,
             ];
 
           }
@@ -131,17 +130,6 @@ class ExchangeRatesSettingsForm extends ConfigFormBase {
    * {@inheritdoc}
    */
   public function validateForm(array &$form, FormStateInterface $form_state) {
-    if ($form_state->getValue('url')) {
-      $checkLink = $this->exchangeRates
-        ->checkRequest($this->exchangeRates->buildUrl($form_state->getValue('url')));
-
-      if (!$checkLink) {
-        $form_state->setErrorByName('url', $this->t('Wrong link or API don\'t work'));
-
-      }
-
-    }
-
     if ($form_state->getValue('date')) {
       if (!is_numeric($form_state->getValue('date'))) {
         $form_state->setErrorByName('date', $this->t('Needs to enter only numeric'));
@@ -155,6 +143,17 @@ class ExchangeRatesSettingsForm extends ConfigFormBase {
 
       if ($form_state->getValue('date') > date('Ymd')) {
         $form_state->setErrorByName('date', $this->t('The date isn\'t valid'));
+
+      }
+
+    }
+
+    if ($form_state->getValue('url')) {
+      $checkLink = $this->exchangeRates
+        ->checkRequest($this->exchangeRates->buildUrl($form_state->getValue('url')));
+
+      if (!$checkLink) {
+        $form_state->setErrorByName('url', $this->t('Wrong link or API don\'t work'));
 
       }
 
@@ -182,17 +181,6 @@ class ExchangeRatesSettingsForm extends ConfigFormBase {
       ->set('currency', $form_state->getValue('currency'))
       ->save();
     parent::submitForm($form, $form_state);
-
-    // Save enabled currency.
-    if ($form_state->getValue('currency')) {
-      foreach ($form_state->getValue('currency') as $currency => $status) {
-        if ($status) {
-          $enabled[$currency] = $status;
-        }
-      }
-      $this->exchangeRates->saveCurrency($enabled);
-    }
-
 
     // Compares currency settings and send user messages.
     $withForm = $form_state->getValue('currency');
@@ -229,6 +217,12 @@ class ExchangeRatesSettingsForm extends ConfigFormBase {
         }
 
       }
+
+    }
+
+    // Saving Exchange Rates to the Database if the block is enabled.
+    if ($form_state->getValue('show_block')) {
+      $this->exchangeRates->runSaveDataWithForm($form_state->getValue('date'));
 
     }
 

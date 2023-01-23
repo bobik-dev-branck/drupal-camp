@@ -55,63 +55,37 @@ class ExchangeRatesBlock extends BlockBase implements ContainerFactoryPluginInte
       return;
     }
 
-    if ($showBlock) {
+    // Auto update Exchange Rate.
+    $this->exchangeRates->autoUpdateExchangeRate();
 
-      $url = $this->exchangeRates->getConfig('url');
-      $url = $this->exchangeRates->buildUrl($url);
+    // Preparing data to render in the Exchange Rates block.
+    $exchangeRates = $this->exchangeRates->getSavedExchangeRates();
+    foreach ( $exchangeRates as $exchangeRate )  {
+      $toRender[$exchangeRate->currency][date('d.m.Y', $exchangeRate->date)] = $exchangeRate->rate;
 
-      if ($url) {
-        $data = $this->exchangeRates->getExchangeRates($url);
+    }
 
-        if (!empty($data)) {
-          $mustShow = $this->exchangeRates->getConfig('currency');
+    if (!empty($toRender)) {
+      $i = 0;
 
-          if ($mustShow) {
-            foreach ($mustShow as $currency => $shows) {
+      $renderable['#theme'][] = 'block_exchange_rates';
+      $renderable['#attached']['library'][] = 'exchange_rates/exchange_rates_chart';
 
-              if ($shows) {
-                $isShow[$currency] = $shows;
 
-              }
-
-            }
-
-          }
-
-          foreach ($data as $currency => $rate) {
-            if (isset($isShow[$currency]) && $isShow[$currency]) {
-              $validated[$currency] = $rate;
-
-            }
-
-          }
-
-          if (!empty($validated)) {
-            $i = 0;
-
-            $renderable['#theme'][] = 'block_exchange_rates';
-            $renderable['#attached']['library'][] = 'exchange_rates/exchange_rates_chart';
-
-            foreach ($validated as $currency => $currencyData) {
-              if (!isset($renderable['#attached']['drupalSettings']['exchange_rates']['currency_data']['date'])) {
-                $renderable['#attached']['drupalSettings']['currency_data']['date'] = array_keys($currencyData);
-
-              }
-
-              $renderable['#attached']['drupalSettings']['exchange_rates'][$i]['label'] = $currency;
-              $renderable['#attached']['drupalSettings']['exchange_rates'][$i]['borderWidth'] = 1;
-              $renderable['#attached']['drupalSettings']['exchange_rates'][$i]['data'] = array_values($currencyData);
-
-              $i++;
-            }
-
-            return $renderable;
-          }
+      foreach ($toRender as $currency => $currencyData) {
+        if ($renderable['#attached']['drupalSettings']['exchange_rates']['currency_data']['date']) {
+          $renderable['#attached']['drupalSettings']['currency_data']['date'] = array_keys($currencyData);
 
         }
 
+        $renderable['#attached']['drupalSettings']['exchange_rates'][$i]['label'] = $currency;
+        $renderable['#attached']['drupalSettings']['exchange_rates'][$i]['borderWidth'] = 1;
+        $renderable['#attached']['drupalSettings']['exchange_rates'][$i]['data'] = array_values($currencyData);
+
+        $i++;
       }
 
+      return $renderable;
     }
 
   }
