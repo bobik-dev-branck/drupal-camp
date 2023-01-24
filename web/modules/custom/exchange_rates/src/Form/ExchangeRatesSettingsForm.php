@@ -2,11 +2,16 @@
 
 namespace Drupal\exchange_rates\Form;
 
+use Drupal\Core\Ajax\HtmlCommand;
+use Drupal\Core\Ajax\MessageCommand;
+use Drupal\Core\Ajax\ReplaceCommand;
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\exchange_rates\ExchangeRatesService;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Drupal\Core\Ajax\AjaxResponse;
+use Drupal\Core\Ajax\InvokeCommand;
 
 /**
  * Configure Exchange rates settings for this site.
@@ -68,9 +73,18 @@ class ExchangeRatesSettingsForm extends ConfigFormBase {
       '#description' => $this
         ->t('WARNING! Use only JSON API and without get parameters'),
       '#default_value' => $config->get('url') ?? '',
+      '#ajax' => [
+        'callback' => '::urlAjaxCheck',
+        'wrapper' => 'test-test',
+        'event' => 'change',
+        'progress' => [
+          'type' => 'throbber',
+        ],
+      ],
       '#cache' => [
         'max-age' => 0,
       ],
+
     ];
 
     $form['date'] = [
@@ -82,17 +96,21 @@ class ExchangeRatesSettingsForm extends ConfigFormBase {
     ];
 
     // If API set and return data will show this fieldset.
-    if ($config->get('url')) {
-      $url = $this->exchangeRates->buildUrl($config->get('url'));
-      $checkUrl = $this->exchangeRates->checkRequest($url);
-
-      if ($checkUrl) {
+//    if ($config->get('url')) {
+//      $url = $this->exchangeRates->buildUrl($config->get('url'));
+//      $checkUrl = $this->exchangeRates->checkRequest($url);
+//
+//      if ($checkUrl) {
         $form['currency'] = [
           '#type' => 'fieldset',
-          '#title' => $this->t('Choose currency will show'),
+       //   '#title' => $this->t('Choose currency will show'),
+          '#attributes' => [
+            'id' => 'checkbox-container',
+            'class' => ['test-test']
+            ],
           '#tree' => TRUE,
         ];
-
+//
         $enabledCurrency = $config->get('currency');
 
         if ($enabledCurrency) {
@@ -106,23 +124,23 @@ class ExchangeRatesSettingsForm extends ConfigFormBase {
           }
 
         }
-        else {
-          $data = $this->exchangeRates->getExchangeRates($url);
+//        else {
+//          $data = $this->exchangeRates->getExchangeRates($url);
+//
+//          foreach ($data as $currency) {
+//            $form['currency'][$currency['currency']] = [
+//              '#type' => 'checkbox',
+//              '#title' => $currency['currency'],
+//              '#default_value' => FALSE,
+//            ];
+//
+//          }
+//
+//        }
 
-          foreach ($data as $currency) {
-            $form['currency'][$currency['currency']] = [
-              '#type' => 'checkbox',
-              '#title' => $currency['currency'],
-              '#default_value' => FALSE,
-            ];
-
-          }
-
-        }
-
-      }
-
-    }
+//      }
+//
+//    }
 
     return parent::buildForm($form, $form_state);
   }
@@ -227,6 +245,34 @@ class ExchangeRatesSettingsForm extends ConfigFormBase {
 
     }
 
+  }
+
+  public function urlAjaxCheck(array &$form, FormStateInterface $form_state) {
+    $ajax_response = new AjaxResponse();
+    $url = $this->exchangeRates->buildUrl($form_state->getValue('url'));
+    $checkLink = $this->exchangeRates->checkRequest($url);
+
+  if (!$checkLink) {
+    $message = 'Wrong link or API do not work';
+    return $ajax_response->addCommand(new MessageCommand($message, NULL, ['type' => 'error']));
+
+  }
+
+  $data = $this->exchangeRates->getExchangeRates($url);
+//  $form['currency'] = [];
+  foreach ($data as $currency) {
+    $form['currency'][$currency['currency']] = [
+      '#type' => 'checkbox',
+      '#title' => $currency['currency'],
+      '#default_value' => FALSE,
+    ];
+
+  }
+
+  $form_state->setRebuild();
+  return $form;
+
+//  return $ajax_response->addCommand(new HtmlCommand('#checkbox-container', $form['currency']));
   }
 
 }
