@@ -29,6 +29,13 @@ class ExchangeRatesService {
   protected $configFactory;
 
   /**
+   * Logger Factory.
+   *
+   * @var \Drupal\Core\Logger\LoggerChannelFactoryInterface
+   */
+  protected $logger;
+
+  /**
    * Constructs an ExchangeRatesService object.
    *
    * @param \GuzzleHttp\ClientInterface $client

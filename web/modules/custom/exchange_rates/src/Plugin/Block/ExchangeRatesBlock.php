@@ -79,7 +79,7 @@ class ExchangeRatesBlock extends BlockBase implements ContainerFactoryPluginInte
           }
 
           foreach ($data as $currency => $rate) {
-            if (isset($isShow[$currency]) && $isShow[$currency]) {
+            if ($isShow[$currency] && $isShow[$currency]) {
               $validated[$currency] = $rate;
 
             }
@@ -93,7 +93,7 @@ class ExchangeRatesBlock extends BlockBase implements ContainerFactoryPluginInte
             $renderable['#attached']['library'][] = 'exchange_rates/exchange_rates_chart';
 
             foreach ($validated as $currency => $currencyData) {
-              if (!isset($renderable['#attached']['drupalSettings']['exchange_rates']['currency_data']['date'])) {
+              if (!$renderable['#attached']['drupalSettings']['currency_data']['date']) {
                 $renderable['#attached']['drupalSettings']['currency_data']['date'] = array_keys($currencyData);
 
               }
