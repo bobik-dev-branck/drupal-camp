@@ -61,7 +61,7 @@ class ExchangeRatesBlock extends BlockBase implements ContainerFactoryPluginInte
 
     // Preparing data to render in the Exchange Rates block.
     $exchangeRates = $this->exchangeRates->getSavedExchangeRates();
-    foreach ( $exchangeRates as $exchangeRate) {
+    foreach ($exchangeRates as $exchangeRate) {
       $toRender[$exchangeRate->currency][date('d.m.Y', $exchangeRate->date)] = $exchangeRate->rate;
 
     }
