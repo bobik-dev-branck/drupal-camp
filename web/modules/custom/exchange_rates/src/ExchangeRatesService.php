@@ -237,10 +237,9 @@ class ExchangeRatesService {
     $query->condition('currency', $isShow, 'IN');
     $query->orderBy('date', 'DESK');
 
-    $query->execute()->fetchAll();
+    return $query->execute()->fetchAll();
 
   }
-
 
   /**
    * Returns the minimum date in the database for which has exchange rates in timestamp format.

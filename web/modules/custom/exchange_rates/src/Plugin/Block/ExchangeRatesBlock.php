@@ -2,6 +2,7 @@
 
 namespace Drupal\exchange_rates\Plugin\Block;
 
+use Drupal\Component\Utility\NestedArray;
 use Drupal\Core\Block\BlockBase;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\exchange_rates\ExchangeRatesService;
@@ -12,7 +13,7 @@ use Psr\Container\ContainerInterface;
  *
  * @Block(
  *   id = "exchange_rates",
- *   admin_label = @Translation("Exchange_rates"),
+ *   admin_label = @Translation("Exchange rates"),
  * )
  */
 class ExchangeRatesBlock extends BlockBase implements ContainerFactoryPluginInterface {
@@ -73,8 +74,12 @@ class ExchangeRatesBlock extends BlockBase implements ContainerFactoryPluginInte
 
 
       foreach ($toRender as $currency => $currencyData) {
-        if ($renderable['#attached']['drupalSettings']['exchange_rates']['currency_data']['date']) {
-          $renderable['#attached']['drupalSettings']['currency_data']['date'] = array_keys($currencyData);
+
+        $parents = ['#attached', 'drupalSettings', 'currency_data', 'date'];
+        $override_exists = NestedArray::keyExists($renderable, $parents);
+
+        if (!$override_exists) {
+          NestedArray::setValue($renderable, $parents, array_keys($currencyData));
 
         }
 
