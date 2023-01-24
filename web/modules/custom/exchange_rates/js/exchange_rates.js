@@ -9,14 +9,14 @@
         }
 
         const ctx = context.getElementById('exchangeRates');
-        const obj = drupalSettings.exchange_rates;
+        const toRender = drupalSettings.exchange_rates;
         const date = drupalSettings.currency_data.date;
 
         new Chart(ctx, {
           type: 'line',
           data: {
             labels: date,
-            datasets: obj,
+            datasets: toRender,
           },
           options: {
             scales: {
