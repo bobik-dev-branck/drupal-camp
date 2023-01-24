@@ -105,10 +105,11 @@ class ExchangeRatesSettingsForm extends ConfigFormBase {
 
           }
 
-        } else {
+        }
+        else {
           $data = $this->exchangeRates->getExchangeRates($url);
 
-          foreach ($data as $currency ) {
+          foreach ($data as $currency) {
             $form['currency'][$currency['currency']] = [
               '#type' => 'checkbox',
               '#title' => $currency['currency'],

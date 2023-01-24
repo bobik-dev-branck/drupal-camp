@@ -41,7 +41,7 @@ class ExchangeRatesService {
    * @param \Drupal\Core\Database\Connection $database
    *   The database connection.
    */
-  public function __construct(ClientInterface $client, ConfigFactoryInterface $config_factory, LoggerChannelFactoryInterface $logger,  Connection $database ) {
+  public function __construct(ClientInterface $client, ConfigFactoryInterface $config_factory, LoggerChannelFactoryInterface $logger, Connection $database) {
     $this->client = $client;
     $this->configFactory = $config_factory;
     $this->logger = $logger;
@@ -66,7 +66,7 @@ class ExchangeRatesService {
   /**
    * Builds URL with all get parameters.
    *
-   * @param $url
+   * @param string $url
    *   The static part of URL for API.
    * @param string|null $startRange
    *   Start of range in parameters.
