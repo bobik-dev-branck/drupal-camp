@@ -98,7 +98,8 @@ class ExchangeRatesSettingsForm extends ConfigFormBase {
       '#tree' => TRUE,
     ];
 
-    // If used AJAX builds checkboxes with API data else it builds with config data.
+    // If used AJAX builds checkboxes with API data.
+    // Else they build with config data.
     $isTriger = $form_state->getTriggeringElement();
 
     if ($isTriger) {
@@ -154,7 +155,7 @@ class ExchangeRatesSettingsForm extends ConfigFormBase {
       }
 
       if ($form_state->getValue('date') > date('Ymd')) {
-        $form_state->setErrorByName('date', $this->t('The date isn\'t valid'));
+        $form_state->setErrorByName('date', $this->t('The date is not valid'));
 
       }
 
@@ -165,7 +166,7 @@ class ExchangeRatesSettingsForm extends ConfigFormBase {
         ->checkRequest($this->exchangeRates->buildUrl($form_state->getValue('url')));
 
       if (!$checkLink) {
-        $form_state->setErrorByName('url', $this->t('Wrong link or API don\'t work'));
+        $form_state->setErrorByName('url', $this->t('Wrong link or API do not work'));
 
       }
 
@@ -249,7 +250,7 @@ class ExchangeRatesSettingsForm extends ConfigFormBase {
    *   The current state of the form.
    *
    * @return array
-   *  The form part will need to be rebuilt.
+   *   The form part will need to be rebuilt.
    */
   public function urlAjaxCheck(array &$form, FormStateInterface $form_state) {
     $url = $this->exchangeRates->buildUrl($form_state->getValue('url'));
@@ -258,11 +259,11 @@ class ExchangeRatesSettingsForm extends ConfigFormBase {
     if (!$checkLink) {
       $message = 'Wrong link or API do not work';
       $this->messenger()->addError($message);
-      return  $form['currency'];
+      return $form['currency'];
 
     }
 
-    return  $form['currency'];
+    return $form['currency'];
 
   }
 
