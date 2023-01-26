@@ -93,12 +93,12 @@ class ExchangeRatesSettingsForm extends ConfigFormBase {
     $form['currency'] = [
       '#type' => 'container',
       '#attributes' => [
-      'id' => 'checkbox-container',
+        'id' => 'checkbox-container',
       ],
       '#tree' => TRUE,
     ];
 
-    // If API set and return data will show this fieldset.
+    // If used AJAX builds checkboxes with API data else it builds with config data.
     $isTriger = $form_state->getTriggeringElement();
 
     if ($isTriger) {
@@ -106,19 +106,15 @@ class ExchangeRatesSettingsForm extends ConfigFormBase {
       $data = $this->exchangeRates->getExchangeRates($url);
 
       if ($data) {
-        //TODO Needs to check message about with API data.
-        foreach ($data as $messengeBody) {
-          $messenge = $messengeBody['date'] . '-' . $messengeBody['currency'] . '-' . $messengeBody['rate'];
-          $this->messenger()->addStatus($messenge);
-
-        }
-
         foreach ($data as $currency) {
           $form['currency'][$currency['currency']] = [
             '#type' => 'checkbox',
             '#title' => $currency['currency'],
             '#default_value' => FALSE,
           ];
+
+          $messenge = $currency['date'] . ' - ' . $currency['currency'] . ' - ' . $currency['rate'];
+          $this->messenger()->addStatus($messenge);
 
         }
 
@@ -244,9 +240,21 @@ class ExchangeRatesSettingsForm extends ConfigFormBase {
 
   }
 
+  /**
+   * AJAX callback function for 'url' form field.
+   *
+   * @param array $form
+   *   An associative array containing the structure of the form.
+   * @param \Drupal\Core\Form\FormStateInterface $form_state
+   *   The current state of the form.
+   *
+   * @return array
+   *  The form part will need to be rebuilt.
+   */
   public function urlAjaxCheck(array &$form, FormStateInterface $form_state) {
     $url = $this->exchangeRates->buildUrl($form_state->getValue('url'));
     $checkLink = $this->exchangeRates->checkRequest($url);
+
     if (!$checkLink) {
       $message = 'Wrong link or API do not work';
       $this->messenger()->addError($message);
