@@ -205,7 +205,7 @@ class ExchangeRatesService {
    */
   public function getSavedExchangeRates() {
     $fields = ['currency', 'date', 'rate'];
-    $startOfRange =  strtotime($this->getConfig('date'));
+    $startOfRange = strtotime($this->getConfig('date'));
     $currentTime = new DrupalDateTime('', 'UTC');
     $endOfRange = $currentTime->getTimestamp();
 
@@ -234,7 +234,8 @@ class ExchangeRatesService {
   }
 
   /**
-   * Returns the minimum date in the database for which has exchange rates in timestamp format.
+   * Returns the minimum date in the database for which has exchange rates
+   * in timestamp format.
    *
    * @return int
    *   The minimum date in the database.
@@ -248,7 +249,8 @@ class ExchangeRatesService {
   }
 
   /**
-   * Returns the maximum date in the database for which has exchange rates in timestamp format.
+   * Returns the maximum date in the database for which has exchange rates
+   * in timestamp format.
    *
    * @return int
    *   The maximum date in the database.
@@ -289,11 +291,10 @@ class ExchangeRatesService {
 
   /**
    * Runs auto-update ExchangeRate.
-   *
    */
   public function autoUpdateExchangeRate() {
     $hasDataOn = DrupalDateTime::createFromTimestamp($this->getEndRangeDate(), 'UTC');
-    $hasDataOn = $hasDataOn->format('Ymd' );
+    $hasDataOn = $hasDataOn->format('Ymd');
 
     $currentDate = new DrupalDateTime('', 'UTC');
     $currentDate = $currentDate->format('Ymd');
