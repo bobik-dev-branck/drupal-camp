@@ -123,12 +123,15 @@ class ExchangeRatesSettingsForm extends ConfigFormBase {
     else {
       $enabledCurrency = $config->get('currency');
 
-      foreach ($enabledCurrency as $currency => $status) {
-        $form['currency'][$currency] = [
-          '#type' => 'checkbox',
-          '#title' => $currency,
-          '#default_value' => $status,
-        ];
+      if ($enabledCurrency) {
+        foreach ($enabledCurrency as $currency => $status) {
+          $form['currency'][$currency] = [
+            '#type' => 'checkbox',
+            '#title' => $currency,
+            '#default_value' => $status,
+          ];
+
+        }
 
       }
 
