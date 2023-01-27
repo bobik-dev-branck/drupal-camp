@@ -3,6 +3,7 @@
 namespace Drupal\exchange_rates\Form;
 
 use Drupal\Core\Config\ConfigFactoryInterface;
+use Drupal\Core\Datetime\DrupalDateTime;
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\exchange_rates\ExchangeRatesService;
@@ -55,6 +56,7 @@ class ExchangeRatesSettingsForm extends ConfigFormBase {
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
     $config = $this->config('exchange_rates.settings');
+    $date = new DrupalDateTime('', 'UTC');
 
     $form['show_block'] = [
       '#type' => 'checkbox',
@@ -76,16 +78,12 @@ class ExchangeRatesSettingsForm extends ConfigFormBase {
           'type' => 'throbber',
         ],
       ],
-      '#cache' => [
-        'max-age' => 0,
-      ],
-
     ];
 
     $form['date'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Set start range get data'),
-      '#default_value' => $config->get('date') ?? date('Ymd'),
+      '#default_value' => $config->get('date') ?? $date->format('Ymd'),
       '#description' => $this->t('WARNING! Write date in format - 20230101'),
       '#maxlength' => 8,
     ];
@@ -144,6 +142,8 @@ class ExchangeRatesSettingsForm extends ConfigFormBase {
    */
   public function validateForm(array &$form, FormStateInterface $form_state) {
     if ($form_state->getValue('date')) {
+      $date = new DrupalDateTime('', 'UTC');
+
       if (!is_numeric($form_state->getValue('date'))) {
         $form_state->setErrorByName('date', $this->t('Needs to enter only numeric'));
 
@@ -154,7 +154,7 @@ class ExchangeRatesSettingsForm extends ConfigFormBase {
 
       }
 
-      if ($form_state->getValue('date') > date('Ymd')) {
+      if ($form_state->getValue('date') > $date->format('Ymd')) {
         $form_state->setErrorByName('date', $this->t('The date is not valid'));
 
       }
@@ -180,12 +180,7 @@ class ExchangeRatesSettingsForm extends ConfigFormBase {
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
     // Gets default settings for currency.
-    $defaultSettings = $this->exchangeRates->getConfig('currency');
-    if ($defaultSettings) {
-      foreach ($defaultSettings as $currency => $shows) {
-        $isShow[$currency] = $shows;
-      }
-    }
+    $isShow = $this->exchangeRates->getConfig('currency');
 
     $this->config('exchange_rates.settings')
       ->set('show_block', $form_state->getValue('show_block'))
@@ -197,30 +192,26 @@ class ExchangeRatesSettingsForm extends ConfigFormBase {
 
     // Compares currency settings and send user messages.
     $withForm = $form_state->getValue('currency');
-    if (!empty($withForm) && isset($isShow)) {
+    if (!empty($withForm) && $isShow) {
       foreach ($withForm as $currency => $show) {
         if ($show != $isShow[$currency]) {
 
-          // Message for Settings form.
+          // Sends messages for Settings form and writes logs.
           if ($show) {
             $this->messenger->addWarning($this->t('The @currency has been enabled', [
               '@currency' => $currency,
             ]));
-          }
-          else {
-            $this->messenger->addWarning($this->t('The @currency has been disabled', [
-              '@currency' => $currency,
-            ]));
-          }
 
-          // Message for Logs.
-          if ($show) {
             $this->logger('exchange_rates')
               ->info($this->t('The @currency has been enabled', [
                 '@currency' => $currency,
               ]));
           }
           else {
+            $this->messenger->addWarning($this->t('The @currency has been disabled', [
+              '@currency' => $currency,
+            ]));
+
             $this->logger('exchange_rates')
               ->info($this->t('The @currency has been disabled', [
                 '@currency' => $currency,

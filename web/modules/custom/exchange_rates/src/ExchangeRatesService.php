@@ -3,6 +3,7 @@
 namespace Drupal\exchange_rates;
 
 use Drupal\Core\Config\ConfigFactoryInterface;
+use Drupal\Core\Datetime\DrupalDateTime;
 use Drupal\Core\Logger\LoggerChannelFactoryInterface;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
 use GuzzleHttp\ClientInterface;
@@ -78,11 +79,13 @@ class ExchangeRatesService {
    */
   public function buildUrl($url, $startRange = NULL, $endRange = NULL) {
     if (!$startRange) {
-      $startRange = date('Ymd');
+      $startRange = new DrupalDateTime('', 'UTC');
+      $startRange = $startRange->format('Ymd');
     }
 
     if (!$endRange) {
-      $endRange = date('Ymd');
+      $endRange = new DrupalDateTime('', 'UTC');
+      $endRange = $endRange->format('Ymd');
     }
 
     $tail = '&sort=exchangedate&order=desc&json';
@@ -98,7 +101,7 @@ class ExchangeRatesService {
    * @param string $url
    *   The url to API Exchange Rates.
    *
-   * @return array|null
+   * @return array
    *   The data with API, NULL otherwise.
    */
   public function getExchangeRates($url) {
@@ -118,7 +121,7 @@ class ExchangeRatesService {
     }
     catch (\Exception $e) {
       $this->sendLog($e);
-      return;
+      return [];
     }
 
     return $data;
@@ -153,7 +156,7 @@ class ExchangeRatesService {
    *   The Exceptions.
    */
   public function sendLog($error) {
-    $message = $this->t('API isn\'t available - @error', [
+    $message = $this->t('API is not available - @error', [
       '@error' => $error->getMessage(),
     ]);
 
@@ -170,12 +173,14 @@ class ExchangeRatesService {
    */
   public function saveExchangeRates($startOfRange = NULL, $endOfRange = NULL) {
     if (!$startOfRange) {
-      $startOfRange = date('Ymd');
+      $startOfRange = new DrupalDateTime('', 'UTC');
+      $startOfRange = $startOfRange->format('Ymd');
 
     }
 
     if (!$endOfRange) {
-      $endOfRange = date('Ymd');
+      $endOfRange = new DrupalDateTime('', 'UTC');
+      $endOfRange = $endOfRange->format('Ymd');
 
     }
 
@@ -200,8 +205,9 @@ class ExchangeRatesService {
    */
   public function getSavedExchangeRates() {
     $fields = ['currency', 'date', 'rate'];
-    $startOfRange = strtotime($this->getConfig('date'));
-    $endOfRange = time();
+    $startOfRange =  strtotime($this->getConfig('date'));
+    $currentTime = new DrupalDateTime('', 'UTC');
+    $endOfRange = $currentTime->getTimestamp();
 
     $query = $this->database->select('exchange_rates', 'e')->fields('e', $fields);
     $query->condition('date', [$startOfRange, $endOfRange], 'BETWEEN');
@@ -233,7 +239,7 @@ class ExchangeRatesService {
    * @return int
    *   The minimum date in the database.
    */
-  public function getStartRangeDate () {
+  public function getStartRangeDate() {
     $select = $this->database->select('exchange_rates', 'e');
     $select->addExpression('MIN(date)');
     $date = $select->execute()->fetchField();
@@ -247,7 +253,7 @@ class ExchangeRatesService {
    * @return int
    *   The maximum date in the database.
    */
-  public function getEndRangeDate () {
+  public function getEndRangeDate() {
     $select = $this->database->select('exchange_rates', 'e');
     $select->addExpression('MAX(date)');
     $date = $select->execute()->fetchField();
@@ -264,21 +270,18 @@ class ExchangeRatesService {
   public function runSaveDataWithForm($startOfRange) {
     $savedExchangeRatesOnDate = $this->getStartRangeDate();
     if (!$savedExchangeRatesOnDate) {
-      $endOfRange = date('Ymd');
+      $date = new DrupalDateTime('', 'UTC');
+      $endOfRange = $date->format('Ymd');
 
     }
     else {
-      $endOfRange = date('Ymd', $savedExchangeRatesOnDate);
+      $date = DrupalDateTime::createFromTimestamp($savedExchangeRatesOnDate, 'UTC');
+      $endOfRange = $date->format('Ymd') - 1;
 
     }
 
+    // Save data in DB will run if only was not saved early for this date.
     if ($startOfRange <= $endOfRange) {
-
-      if ($startOfRange < $endOfRange) {
-        $endOfRange = $endOfRange - 1;
-
-      }
-
       $this->saveExchangeRates($startOfRange, $endOfRange);
     }
 
@@ -289,11 +292,14 @@ class ExchangeRatesService {
    *
    */
   public function autoUpdateExchangeRate() {
-    $hasDataOn = $this->getEndRangeDate();
-    $currentDate = date('Ymd');
+    $hasDataOn = DrupalDateTime::createFromTimestamp($this->getEndRangeDate(), 'UTC');
+    $hasDataOn = $hasDataOn->format('Ymd' );
 
-    if ($hasDataOn < strtotime($currentDate)) {
-      $startOfRange = date('Ymd', $hasDataOn) + 1;
+    $currentDate = new DrupalDateTime('', 'UTC');
+    $currentDate = $currentDate->format('Ymd');
+
+    if ($hasDataOn < $currentDate) {
+      $startOfRange = $hasDataOn + 1;
       $this->saveExchangeRates($startOfRange, $currentDate);
 
     }
