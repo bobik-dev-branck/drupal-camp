@@ -234,11 +234,10 @@ class ExchangeRatesService {
   }
 
   /**
-   * Returns the minimum date in the database for which has exchange rates
-   * in timestamp format.
+   * Returns the minimum date in the database for which has exchange rates.
    *
    * @return int
-   *   The minimum date in the database.
+   *   The minimum date in the database is in timestamp format.
    */
   public function getStartRangeDate() {
     $select = $this->database->select('exchange_rates', 'e');
@@ -249,11 +248,10 @@ class ExchangeRatesService {
   }
 
   /**
-   * Returns the maximum date in the database for which has exchange rates
-   * in timestamp format.
+   * Returns the maximum date in the database for which has exchange rates.
    *
    * @return int
-   *   The maximum date in the database.
+   *   The maximum date in the database is in timestamp format.
    */
   public function getEndRangeDate() {
     $select = $this->database->select('exchange_rates', 'e');
