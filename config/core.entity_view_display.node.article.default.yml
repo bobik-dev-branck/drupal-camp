@@ -7,6 +7,7 @@ dependencies:
     - field.field.node.article.body
     - field.field.node.article.comment
     - field.field.node.article.field_image
+    - field.field.node.article.field_seo_title
     - field.field.node.article.field_tags
     - image.style.wide
     - node.type.article
@@ -27,7 +28,7 @@ content:
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    weight: 1
+    weight: 2
     region: content
   comment:
     type: comment_default
@@ -47,6 +48,13 @@ content:
       image_loading:
         attribute: lazy
     third_party_settings: {  }
+    weight: 1
+    region: content
+  field_seo_title:
+    type: text_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
     weight: 0
     region: content
   field_tags:
@@ -55,11 +63,11 @@ content:
     settings:
       link: true
     third_party_settings: {  }
-    weight: 2
+    weight: 3
     region: content
   links:
     settings: {  }
     third_party_settings: {  }
-    weight: 3
+    weight: 4
     region: content
 hidden: {  }
