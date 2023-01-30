@@ -6,6 +6,8 @@
  */
 
 use Drupal\Component\Utility\NestedArray;
+use Drupal\Core\Datetime\DrupalDateTime;
+use Drupal\Core\Entity\EntityInterface;
 
 /**
  * Implements hook_preprocess_HOOK().
@@ -19,4 +21,28 @@ function article_title_override_preprocess_page(&$variables) {
 
   }
 
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_presave().
+ */
+function article_title_override_node_presave(EntityInterface $entity) {
+  if ($entity->getEntityTypeId() == 'node' || $entity->getType() == 'article') {
+    $referenced_entities = $entity->referencedEntities();
+
+    foreach ($referenced_entities as $referenced_entitie) {
+      if ($referenced_entitie->getEntityTypeId() == 'taxonomy_term') {
+        $taxonomy_term = $referenced_entitie->label();
+        break;
+
+      }
+
+    }
+
+    $timestamp_of_creation = $entity->get('created')->value;
+    $date_of_the_creation = DrupalDateTime::createFromTimestamp($timestamp_of_creation);
+
+    $entity->set('field_seo_title', $taxonomy_term . ' - ' . $date_of_the_creation->format('Y-m-d H:i:s'));
+
+  }
 }
