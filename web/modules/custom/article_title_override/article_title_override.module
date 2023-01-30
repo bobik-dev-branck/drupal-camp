@@ -1,12 +1,11 @@
 <?php
 
-use Drupal\Component\Utility\NestedArray;
-use Drupal\node\Entity\Node;
-
 /**
  * @file
  * Primary module hooks for Article Title Override module.
  */
+
+use Drupal\Component\Utility\NestedArray;
 
 /**
  * Implements hook_preprocess_HOOK().
@@ -21,5 +20,3 @@ function article_title_override_preprocess_page(&$variables) {
   }
 
 }
-
-
