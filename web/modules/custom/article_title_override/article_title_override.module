@@ -5,6 +5,7 @@
  * Primary module hooks for Article Title Override module.
  */
 
+use Drupal\article_title_override\Event\NodePresaveEvent;
 use Drupal\Component\Utility\NestedArray;
 use Drupal\Core\Datetime\DrupalDateTime;
 use Drupal\Core\Entity\EntityInterface;
@@ -24,25 +25,17 @@ function article_title_override_preprocess_page(&$variables) {
 }
 
 /**
- * Implements hook_ENTITY_TYPE_presave().
+ * Implements hook_entity_insert().
  */
-function article_title_override_node_presave(EntityInterface $entity) {
+function article_title_override_entity_insert(EntityInterface $entity) {
   if ($entity->getEntityTypeId() == 'node' || $entity->getType() == 'article') {
-    $referenced_entities = $entity->referencedEntities();
+    /** @var \Drupal\Component\EventDispatcher\ContainerAwareEventDispatcher $event_dispatcher */
+    $event_dispatcher = Drupal::service('event_dispatcher');
 
-    foreach ($referenced_entities as $referenced_entitie) {
-      if ($referenced_entitie->getEntityTypeId() == 'taxonomy_term') {
-        $taxonomy_term = $referenced_entitie->label();
-        break;
+    $event = new NodePresaveEvent($entity);
 
-      }
-
-    }
-
-    $timestamp_of_creation = $entity->get('created')->value;
-    $date_of_the_creation = DrupalDateTime::createFromTimestamp($timestamp_of_creation);
-
-    $entity->set('field_seo_title', $taxonomy_term . ' - ' . $date_of_the_creation->format('Y-m-d H:i:s'));
+    $event_dispatcher->dispatch(NodePresaveEvent::NODE_PRESAVE, $event );
 
   }
+
 }

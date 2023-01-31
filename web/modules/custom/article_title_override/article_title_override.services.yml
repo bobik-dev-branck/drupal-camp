@@ -1,0 +1,5 @@
+services:
+  article_title_override.event_subscriber:
+    class: Drupal\article_title_override\EventSubscriber\NodePresaveSubscriber
+    tags:
+      - { name: event_subscriber }
