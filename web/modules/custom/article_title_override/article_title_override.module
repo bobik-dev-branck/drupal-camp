@@ -25,7 +25,7 @@ function article_title_override_preprocess_page(&$variables) {
 }
 
 /**
- * Implements hook_form_alter().
+ * Implements hook_FORM_ID_alter().
  */
 function article_title_override_form_node_article_form_alter(&$form, FormStateInterface $form_state, $form_id) {
   $form['title'] = [
@@ -37,7 +37,7 @@ function article_title_override_form_node_article_form_alter(&$form, FormStateIn
 /**
  * Automatically populates node title.
  *
- * @param string$entity_type
+ * @param string $entity_type
  *   The Entity type.
  * @param \Drupal\node\NodeInterface $node
  *   The node.
@@ -46,7 +46,7 @@ function article_title_override_form_node_article_form_alter(&$form, FormStateIn
  * @param \Drupal\Core\Form\FormStateInterface $form_state
  *   The form state.
  */
-function populate_node_title($entity_type, NodeInterface $node, $form, FormStateInterface $form_state) {
+function populate_node_title($entity_type, NodeInterface $node, array $form, FormStateInterface $form_state) {
   if ($node->getEntityTypeId() == 'node' || $node->getType() == 'article') {
     $referenced_entitys = $node->referencedEntities();
 
