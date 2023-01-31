@@ -17,7 +17,7 @@ class NodePresaveSubscriber implements EventSubscriberInterface {
    * @param \Drupal\article_title_override\Event\NodePresaveEvent $event
    *   The Node Presave event.
    */
-  public function nodeSeotitleGenetator($event) {
+  public function nodeSeotitleGenetator(NodePresaveEvent $event) {
     $node = $event->getNode();
     $referenced_entities = $node->referencedEntities();
 

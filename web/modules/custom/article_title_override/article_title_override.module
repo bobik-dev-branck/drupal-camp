@@ -7,7 +7,6 @@
 
 use Drupal\article_title_override\Event\NodePresaveEvent;
 use Drupal\Component\Utility\NestedArray;
-use Drupal\Core\Datetime\DrupalDateTime;
 use Drupal\Core\Entity\EntityInterface;
 
 /**
@@ -34,7 +33,7 @@ function article_title_override_entity_insert(EntityInterface $entity) {
 
     $event = new NodePresaveEvent($entity);
 
-    $event_dispatcher->dispatch(NodePresaveEvent::NODE_PRESAVE, $event );
+    $event_dispatcher->dispatch(NodePresaveEvent::NODE_PRESAVE, $event);
 
   }
 
