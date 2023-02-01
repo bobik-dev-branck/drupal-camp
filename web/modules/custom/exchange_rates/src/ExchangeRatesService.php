@@ -49,7 +49,7 @@ class ExchangeRatesService {
    *   The logger factory.
    * @param \Drupal\Core\Database\Connection $database
    *   The database connection.
-   * @param \Drupal\Core\Session\AccountProxyInterface $currentUser
+   * @param \Drupal\Core\Session\AccountProxyInterface $current_user
    *   The current user.
    */
   public function __construct(ClientInterface $client, ConfigFactoryInterface $config_factory, LoggerChannelFactoryInterface $logger, Connection $database, AccountProxyInterface $current_user) {
