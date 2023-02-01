@@ -34,7 +34,7 @@ class ExchangeRatesService {
   /**
    * The current user.
    *
-   * @var \Drupal\Core\Session\AccountProxyInterface $currentUser
+   * @var \Drupal\Core\Session\AccountProxyInterface
    */
   protected $currentUser;
 
