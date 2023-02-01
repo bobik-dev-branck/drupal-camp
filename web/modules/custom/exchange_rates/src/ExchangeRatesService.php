@@ -123,7 +123,7 @@ class ExchangeRatesService {
 
       foreach ($exchangeRates as $exchangeRate) {
         $data[$i]['currency'] = $exchangeRate->cc;
-        $data[$i]['date'] = strtotime($exchangeRate->exchangedate);
+        $data[$i]['date'] = DrupalDateTime::createFromFormat('d.m.Y', $exchangeRate->exchangedate, 'UTC')->getTimestamp();
         $data[$i]['rate'] = $exchangeRate->rate;
 
         $i++;
@@ -297,8 +297,8 @@ class ExchangeRatesService {
 
     }
     else {
-      $date = DrupalDateTime::createFromTimestamp($savedExchangeRatesOnDate, 'UTC');
-      $endOfRange = $date->format('Ymd') - 1;
+      $date = DrupalDateTime::createFromTimestamp(($savedExchangeRatesOnDate - 86400), 'UTC');
+      $endOfRange = $date->format('Ymd');
 
     }
 
@@ -313,14 +313,14 @@ class ExchangeRatesService {
    * Runs auto-update ExchangeRate.
    */
   public function autoUpdateExchangeRate() {
-    $hasDataOn = DrupalDateTime::createFromTimestamp($this->getEndRangeDate(), 'UTC');
-    $hasDataOn = $hasDataOn->format('Ymd');
+    $dateNextUpdate = DrupalDateTime::createFromTimestamp(($this->getEndRangeDate() + 86400), 'UTC');
+    $dateNextUpdate = $dateNextUpdate->format('Ymd');
 
     $currentDate = new DrupalDateTime('', 'UTC');
     $currentDate = $currentDate->format('Ymd');
 
-    if ($hasDataOn < $currentDate) {
-      $startOfRange = $hasDataOn + 1;
+    if ($dateNextUpdate < $currentDate) {
+      $startOfRange = $dateNextUpdate;
       $this->saveExchangeRates($startOfRange, $currentDate);
 
     }
