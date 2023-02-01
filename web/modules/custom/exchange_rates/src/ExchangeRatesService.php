@@ -5,6 +5,7 @@ namespace Drupal\exchange_rates;
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Datetime\DrupalDateTime;
 use Drupal\Core\Logger\LoggerChannelFactoryInterface;
+use Drupal\Core\Session\AccountProxyInterface;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
 use GuzzleHttp\ClientInterface;
 use Drupal\Core\Database\Connection;
@@ -31,6 +32,13 @@ class ExchangeRatesService {
   protected $configFactory;
 
   /**
+   * Drupal\Core\Session\AccountProxyInterface definition.
+   *
+   * @var \Drupal\Core\Session\AccountProxyInterface $currentUser
+   */
+  protected $currentUser;
+
+  /**
    * Constructs an ExchangeRatesService object.
    *
    * @param \GuzzleHttp\ClientInterface $client
@@ -41,12 +49,15 @@ class ExchangeRatesService {
    *   The logger factory.
    * @param \Drupal\Core\Database\Connection $database
    *   The database connection.
+   * @param \Drupal\Core\Session\AccountProxyInterface $currentUser
+   *   The current user.
    */
-  public function __construct(ClientInterface $client, ConfigFactoryInterface $config_factory, LoggerChannelFactoryInterface $logger, Connection $database) {
+  public function __construct(ClientInterface $client, ConfigFactoryInterface $config_factory, LoggerChannelFactoryInterface $logger, Connection $database, AccountProxyInterface $current_user) {
     $this->client = $client;
     $this->configFactory = $config_factory;
     $this->logger = $logger;
     $this->database = $database;
+    $this->currentUser = $current_user;
   }
 
   /**
@@ -205,8 +216,19 @@ class ExchangeRatesService {
    */
   public function getSavedExchangeRates() {
     $fields = ['currency', 'date', 'rate'];
-    $startOfRange = strtotime($this->getConfig('date'));
     $currentTime = new DrupalDateTime('', 'UTC');
+
+    if (in_array('premium_user', $this->currentUser->getRoles())) {
+      $startOfRange = $currentTime->getTimestamp();
+      $startOfRange = $startOfRange - ($this->getConfig('premium_user_range') * (60 * 60 * 24));
+
+    }
+    else {
+      $startOfRange = $currentTime->getTimestamp();
+      $startOfRange = $startOfRange - ($this->getConfig('simple_user_range') * (60 * 60 * 24));
+
+    }
+
     $endOfRange = $currentTime->getTimestamp();
 
     $query = $this->database->select('exchange_rates', 'e')->fields('e', $fields);

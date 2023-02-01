@@ -1,0 +1,9 @@
+uuid: f133cd29-ef1a-48a4-b1fc-d221ba586b86
+langcode: en
+status: true
+dependencies: {  }
+id: premium_user
+label: 'Premium User'
+weight: 4
+is_admin: null
+permissions: {  }

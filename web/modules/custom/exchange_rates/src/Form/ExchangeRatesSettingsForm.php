@@ -64,6 +64,20 @@ class ExchangeRatesSettingsForm extends ConfigFormBase {
       '#default_value' => $config->get('show_block') ?? FALSE,
     ];
 
+    $form['premium_user_range'] = [
+      '#type' => 'number',
+      '#title' => $this->t('The range for Premium users'),
+      '#description' => $this->t('The range of Exchange rates that will be shown'),
+      '#default_value' => $config->get('premium_user_range') ?? 7,
+    ];
+
+    $form['simple_user_range'] = [
+      '#type' => 'number',
+      '#title' => $this->t('The range for all visitors'),
+      '#description' => $this->t('The range of Exchange rates that will be shown'),
+      '#default_value' => $config->get('simple_user_range') ?? 2,
+    ];
+
     $form['url'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Exchange rates API'),
@@ -144,6 +158,14 @@ class ExchangeRatesSettingsForm extends ConfigFormBase {
    * {@inheritdoc}
    */
   public function validateForm(array &$form, FormStateInterface $form_state) {
+    if ($form_state->getValue('premium_user_range') < 0) {
+      $form_state->setErrorByName('premium_user_range', $this->t('Incorrect range'));
+    }
+
+    if ($form_state->getValue('simple_user_range') < 0) {
+      $form_state->setErrorByName('simple_user_range', $this->t('Incorrect range'));
+    }
+
     if ($form_state->getValue('date')) {
       $date = new DrupalDateTime('', 'UTC');
 
@@ -188,6 +210,8 @@ class ExchangeRatesSettingsForm extends ConfigFormBase {
     $this->config('exchange_rates.settings')
       ->set('show_block', $form_state->getValue('show_block'))
       ->set('url', $form_state->getValue('url'))
+      ->set('premium_user_range', $form_state->getValue('premium_user_range'))
+      ->set('simple_user_range', $form_state->getValue('simple_user_range'))
       ->set('date', $form_state->getValue('date'))
       ->set('currency', $form_state->getValue('currency'))
       ->save();
