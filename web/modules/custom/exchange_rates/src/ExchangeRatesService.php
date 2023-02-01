@@ -32,7 +32,7 @@ class ExchangeRatesService {
   protected $configFactory;
 
   /**
-   * Drupal\Core\Session\AccountProxyInterface definition.
+   * The current user.
    *
    * @var \Drupal\Core\Session\AccountProxyInterface $currentUser
    */
