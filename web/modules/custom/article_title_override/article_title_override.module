@@ -50,15 +50,15 @@ function populate_node_title($entity_type, NodeInterface $node, array $form, For
   if ($node->getEntityTypeId() == 'node' && $node->getType() == 'article') {
 
     if (!$node->get('field_tags')->isEmpty()) {
-      $taxonomy_term_id = $node->get('field_tags')->getString();
-      $taxonomy_term = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($taxonomy_term_id);
+      $taxonomy_term_id = $node->get('field_tags')->referencedEntities();
+      $taxonomy_term = array_shift($taxonomy_term_id)->label();
 
     }
 
     $timestamp_of_creation = $node->get('created')->getString();
     $date_of_the_creation = DrupalDateTime::createFromTimestamp($timestamp_of_creation);
 
-    $node->set('title', $taxonomy_term->label() . ' - ' . $date_of_the_creation->format('Y-m-d H:i:s'));
+    $node->set('title', $taxonomy_term . ' - ' . $date_of_the_creation->format('Y-m-d H:i:s'));
 
   }
 
