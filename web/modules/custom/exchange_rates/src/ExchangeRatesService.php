@@ -218,7 +218,7 @@ class ExchangeRatesService {
     $fields = ['currency', 'date', 'rate'];
     $currentTime = new DrupalDateTime('', 'UTC');
 
-    if ($this->currentUser->hasPermission('premium user')) {
+    if ($this->currentUser->hasPermission('exchange_rates.premium_user')) {
       $startOfRange = $currentTime->getTimestamp();
       $startOfRange = $startOfRange - ($this->getConfig('premium_user_range') * (60 * 60 * 24));
 
