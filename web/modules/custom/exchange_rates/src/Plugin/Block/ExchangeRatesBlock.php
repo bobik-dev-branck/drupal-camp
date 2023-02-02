@@ -73,6 +73,9 @@ class ExchangeRatesBlock extends BlockBase implements ContainerFactoryPluginInte
 
       $renderable['#theme'][] = 'block_exchange_rates';
       $renderable['#attached']['library'][] = 'exchange_rates/exchange_rates_chart';
+      $renderable['#cache']['tags'] = ['config:exchange_rates.settings'];
+      $renderable['#cache']['contexts'] = ['user.permissions'];
+      $renderable['#cache']['max-age'] = 86400;
 
       foreach ($toRender as $currency => $currencyData) {
         $parents = ['#attached', 'drupalSettings', 'currency_data', 'date'];
