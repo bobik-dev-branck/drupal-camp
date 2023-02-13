@@ -35,6 +35,9 @@ web/web.config
 # Ignore specific configuration
 config/ath_courts.import_courts.batch.yml
 
+# Ignore contrib libraries.
+/web/libraries
+
 # Ignore contrib modules and themes.
 web/modules/contrib/**
 web/themes/contrib/**

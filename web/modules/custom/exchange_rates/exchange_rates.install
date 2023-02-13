@@ -1,0 +1,37 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the Exchange Rates module.
+ */
+
+/**
+ * Implements hook_schema().
+ */
+function exchange_rates_schema() {
+  $schema['exchange_rates'] = [
+    'description' => 'Exchange Rates list',
+    'fields' => [
+      'currency' => [
+        'type' => 'varchar',
+        'length' => 5,
+        'not null' => TRUE,
+        'description' => 'Name of the currency.',
+      ],
+      'date' => [
+        'type' => 'int',
+        'length' => 10,
+        'not null' => TRUE,
+        'description' => 'Exchange Rates date.',
+      ],
+      'rate' => [
+        'type' => 'varchar',
+        'length' => 10,
+        'not null' => TRUE,
+        'description' => 'The Exchange Rate.',
+      ],
+    ],
+  ];
+
+  return $schema;
+}
