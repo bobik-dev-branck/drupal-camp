@@ -3,6 +3,7 @@
 namespace Drupal\exchange_rates\Form;
 
 use Drupal\Core\Config\ConfigFactoryInterface;
+use Drupal\Core\Datetime\DrupalDateTime;
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\exchange_rates\ExchangeRatesService;
@@ -55,11 +56,26 @@ class ExchangeRatesSettingsForm extends ConfigFormBase {
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
     $config = $this->config('exchange_rates.settings');
+    $date = new DrupalDateTime('', 'UTC');
 
     $form['show_block'] = [
       '#type' => 'checkbox',
       '#title' => $this->t('Do you want to show block?'),
       '#default_value' => $config->get('show_block') ?? FALSE,
+    ];
+
+    $form['premium_user_range'] = [
+      '#type' => 'number',
+      '#title' => $this->t('The range for Premium users'),
+      '#description' => $this->t('The range of Exchange rates that will be shown'),
+      '#default_value' => $config->get('premium_user_range') ?? 7,
+    ];
+
+    $form['simple_user_range'] = [
+      '#type' => 'number',
+      '#title' => $this->t('The range for all visitors'),
+      '#description' => $this->t('The range of Exchange rates that will be shown'),
+      '#default_value' => $config->get('simple_user_range') ?? 2,
     ];
 
     $form['url'] = [
@@ -68,55 +84,66 @@ class ExchangeRatesSettingsForm extends ConfigFormBase {
       '#description' => $this
         ->t('WARNING! Use only JSON API and without get parameters'),
       '#default_value' => $config->get('url') ?? '',
-      '#cache' => [
-        'max-age' => 0,
+      '#ajax' => [
+        'callback' => '::urlAjaxCheck',
+        'wrapper' => 'checkbox-container',
+        'event' => 'change',
+        'progress' => [
+          'type' => 'throbber',
+        ],
       ],
     ];
 
     $form['date'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Set start range get data'),
-      '#default_value' => $config->get('date') ?? date('Ymd'),
+      '#default_value' => $config->get('date') ?? $date->format('Ymd'),
       '#description' => $this->t('WARNING! Write date in format - 20230101'),
       '#maxlength' => 8,
     ];
 
-    // If API set and return data will show this fieldset.
-    if ($config->get('url')) {
-      $url = $this->exchangeRates->buildUrl($config->get('url'));
-      $checkUrl = $this->exchangeRates->checkRequest($url);
+    $form['currency'] = [
+      '#type' => 'container',
+      '#attributes' => [
+        'id' => 'checkbox-container',
+      ],
+      '#tree' => TRUE,
+    ];
 
-      if ($checkUrl) {
-        $form['currency'] = [
-          '#type' => 'fieldset',
-          '#title' => $this->t('Choose currency will show'),
-          '#tree' => TRUE,
-        ];
+    // If used AJAX builds checkboxes with API data.
+    // Else they build with config data.
+    $isTriger = $form_state->getTriggeringElement();
 
-        $enabledCurrency = $config->get('currency');
+    if ($isTriger) {
+      $url = $this->exchangeRates->buildUrl($form_state->getValue('url'));
+      $data = $this->exchangeRates->getExchangeRates($url);
 
-        if ($enabledCurrency) {
-          foreach ($enabledCurrency as $currency => $status) {
-            $form['currency'][$currency] = [
-              '#type' => 'checkbox',
-              '#title' => $currency,
-              '#default_value' => $status ?? FALSE,
-            ];
+      if ($data) {
+        foreach ($data as $currency) {
+          $form['currency'][$currency['currency']] = [
+            '#type' => 'checkbox',
+            '#title' => $currency['currency'],
+            '#default_value' => FALSE,
+          ];
 
-          }
+          $messenge = $currency['date'] . ' - ' . $currency['currency'] . ' - ' . $currency['rate'];
+          $this->messenger()->addStatus($messenge);
 
         }
-        else {
-          $data = $this->exchangeRates->getExchangeRates($url);
 
-          foreach ($data as $currency) {
-            $form['currency'][$currency['currency']] = [
-              '#type' => 'checkbox',
-              '#title' => $currency['currency'],
-              '#default_value' => FALSE,
-            ];
+      }
 
-          }
+    }
+    else {
+      $enabledCurrency = $config->get('currency');
+
+      if ($enabledCurrency) {
+        foreach ($enabledCurrency as $currency => $status) {
+          $form['currency'][$currency] = [
+            '#type' => 'checkbox',
+            '#title' => $currency,
+            '#default_value' => $status,
+          ];
 
         }
 
@@ -131,7 +158,17 @@ class ExchangeRatesSettingsForm extends ConfigFormBase {
    * {@inheritdoc}
    */
   public function validateForm(array &$form, FormStateInterface $form_state) {
+    if ($form_state->getValue('premium_user_range') < 0) {
+      $form_state->setErrorByName('premium_user_range', $this->t('Incorrect range'));
+    }
+
+    if ($form_state->getValue('simple_user_range') < 0) {
+      $form_state->setErrorByName('simple_user_range', $this->t('Incorrect range'));
+    }
+
     if ($form_state->getValue('date')) {
+      $date = new DrupalDateTime('', 'UTC');
+
       if (!is_numeric($form_state->getValue('date'))) {
         $form_state->setErrorByName('date', $this->t('Needs to enter only numeric'));
 
@@ -142,8 +179,8 @@ class ExchangeRatesSettingsForm extends ConfigFormBase {
 
       }
 
-      if ($form_state->getValue('date') > date('Ymd')) {
-        $form_state->setErrorByName('date', $this->t('The date isn\'t valid'));
+      if ($form_state->getValue('date') > $date->format('Ymd')) {
+        $form_state->setErrorByName('date', $this->t('The date is not valid'));
 
       }
 
@@ -154,7 +191,7 @@ class ExchangeRatesSettingsForm extends ConfigFormBase {
         ->checkRequest($this->exchangeRates->buildUrl($form_state->getValue('url')));
 
       if (!$checkLink) {
-        $form_state->setErrorByName('url', $this->t('Wrong link or API don\'t work'));
+        $form_state->setErrorByName('url', $this->t('Wrong link or API do not work'));
 
       }
 
@@ -168,16 +205,13 @@ class ExchangeRatesSettingsForm extends ConfigFormBase {
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
     // Gets default settings for currency.
-    $defaultSettings = $this->exchangeRates->getConfig('currency');
-    if ($defaultSettings) {
-      foreach ($defaultSettings as $currency => $shows) {
-        $isShow[$currency] = $shows;
-      }
-    }
+    $isShow = $this->exchangeRates->getConfig('currency');
 
     $this->config('exchange_rates.settings')
       ->set('show_block', $form_state->getValue('show_block'))
       ->set('url', $form_state->getValue('url'))
+      ->set('premium_user_range', $form_state->getValue('premium_user_range'))
+      ->set('simple_user_range', $form_state->getValue('simple_user_range'))
       ->set('date', $form_state->getValue('date'))
       ->set('currency', $form_state->getValue('currency'))
       ->save();
@@ -185,30 +219,26 @@ class ExchangeRatesSettingsForm extends ConfigFormBase {
 
     // Compares currency settings and send user messages.
     $withForm = $form_state->getValue('currency');
-    if (!empty($withForm) && isset($isShow)) {
+    if (!empty($withForm) && $isShow) {
       foreach ($withForm as $currency => $show) {
         if ($show != $isShow[$currency]) {
 
-          // Message for Settings form.
+          // Sends messages for Settings form and writes logs.
           if ($show) {
             $this->messenger->addWarning($this->t('The @currency has been enabled', [
               '@currency' => $currency,
             ]));
-          }
-          else {
-            $this->messenger->addWarning($this->t('The @currency has been disabled', [
-              '@currency' => $currency,
-            ]));
-          }
 
-          // Message for Logs.
-          if ($show) {
             $this->logger('exchange_rates')
               ->info($this->t('The @currency has been enabled', [
                 '@currency' => $currency,
               ]));
           }
           else {
+            $this->messenger->addWarning($this->t('The @currency has been disabled', [
+              '@currency' => $currency,
+            ]));
+
             $this->logger('exchange_rates')
               ->info($this->t('The @currency has been disabled', [
                 '@currency' => $currency,
@@ -226,6 +256,32 @@ class ExchangeRatesSettingsForm extends ConfigFormBase {
       $this->exchangeRates->runSaveDataWithForm($form_state->getValue('date'));
 
     }
+
+  }
+
+  /**
+   * AJAX callback function for 'url' form field.
+   *
+   * @param array $form
+   *   An associative array containing the structure of the form.
+   * @param \Drupal\Core\Form\FormStateInterface $form_state
+   *   The current state of the form.
+   *
+   * @return array
+   *   The form part will need to be rebuilt.
+   */
+  public function urlAjaxCheck(array &$form, FormStateInterface $form_state) {
+    $url = $this->exchangeRates->buildUrl($form_state->getValue('url'));
+    $checkLink = $this->exchangeRates->checkRequest($url);
+
+    if (!$checkLink) {
+      $message = 'Wrong link or API do not work';
+      $this->messenger()->addError($message);
+      return $form['currency'];
+
+    }
+
+    return $form['currency'];
 
   }
 
