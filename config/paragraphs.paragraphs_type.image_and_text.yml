@@ -1,10 +1,14 @@
 uuid: c0610a4b-fd54-4d08-bc22-d0b18350a5a6
 langcode: en
 status: true
-dependencies: {  }
+dependencies:
+  module:
+    - newsweek_paragraphs_behavior
 id: image_and_text
 label: 'image and text'
 icon_uuid: null
 icon_default: null
 description: ''
-behavior_plugins: {  }
+behavior_plugins:
+  newsweek_paragraphs_behavior_image_and_text:
+    enabled: true
