@@ -6,6 +6,9 @@
  */
 
 use Drupal\Component\Utility\NestedArray;
+use Drupal\Core\Datetime\DrupalDateTime;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\node\NodeInterface;
 
 /**
  * Implements hook_preprocess_HOOK().
@@ -16,6 +19,46 @@ function article_title_override_preprocess_page(&$variables) {
 
   if ($block_title) {
     $variables['page']['content']['bartik_page_title']['#block'] = NULL;
+
+  }
+
+}
+
+/**
+ * Implements hook_FORM_ID_alter().
+ */
+function article_title_override_form_node_article_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  $form['title'] = [
+    '#access' => FALSE,
+  ];
+  $form['#entity_builders'][] = 'populate_node_title';
+}
+
+/**
+ * Automatically populates node title.
+ *
+ * @param string $entity_type
+ *   The Entity type.
+ * @param \Drupal\node\NodeInterface $node
+ *   The node.
+ * @param array $form
+ *   The form.
+ * @param \Drupal\Core\Form\FormStateInterface $form_state
+ *   The form state.
+ */
+function populate_node_title($entity_type, NodeInterface $node, array $form, FormStateInterface $form_state) {
+  if ($node->getEntityTypeId() == 'node' && $node->getType() == 'article') {
+
+    if (!$node->get('field_tags')->isEmpty()) {
+      $taxonomy_term_id = $node->get('field_tags')->referencedEntities();
+      $taxonomy_term = array_shift($taxonomy_term_id)->label();
+
+    }
+
+    $timestamp_of_creation = $node->get('created')->getString();
+    $date_of_the_creation = DrupalDateTime::createFromTimestamp($timestamp_of_creation);
+
+    $node->set('title', $taxonomy_term . ' - ' . $date_of_the_creation->format('Y-m-d H:i:s'));
 
   }
 
