@@ -4,6 +4,7 @@ namespace Drupal\exchange_rates\Plugin\Block;
 
 use Drupal\Component\Utility\NestedArray;
 use Drupal\Core\Block\BlockBase;
+use Drupal\Core\Datetime\DrupalDateTime;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\exchange_rates\ExchangeRatesService;
 use Psr\Container\ContainerInterface;
@@ -62,7 +63,8 @@ class ExchangeRatesBlock extends BlockBase implements ContainerFactoryPluginInte
     // Preparing data to render in the Exchange Rates block.
     $exchangeRates = $this->exchangeRates->getSavedExchangeRates();
     foreach ($exchangeRates as $exchangeRate) {
-      $toRender[$exchangeRate->currency][date('d.m.Y', $exchangeRate->date)] = $exchangeRate->rate;
+      $date = DrupalDateTime::createFromTimestamp($exchangeRate->date);
+      $toRender[$exchangeRate->currency][$date->format('d.m.Y')] = $exchangeRate->rate;
 
     }
 
@@ -71,9 +73,11 @@ class ExchangeRatesBlock extends BlockBase implements ContainerFactoryPluginInte
 
       $renderable['#theme'][] = 'block_exchange_rates';
       $renderable['#attached']['library'][] = 'exchange_rates/exchange_rates_chart';
+      $renderable['#cache']['tags'] = ['config:exchange_rates.settings'];
+      $renderable['#cache']['contexts'] = ['user.permissions'];
+      $renderable['#cache']['max-age'] = 86400;
 
       foreach ($toRender as $currency => $currencyData) {
-
         $parents = ['#attached', 'drupalSettings', 'currency_data', 'date'];
         $override_exists = NestedArray::keyExists($renderable, $parents);
 
