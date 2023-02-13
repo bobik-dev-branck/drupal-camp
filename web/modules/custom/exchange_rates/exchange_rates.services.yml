@@ -1,4 +1,4 @@
 services:
   exchange_rates.service:
     class: Drupal\exchange_rates\ExchangeRatesService
-    arguments: ['@http_client', '@config.factory']
+    arguments: ['@http_client', '@config.factory','@logger.factory', '@database', '@current_user']

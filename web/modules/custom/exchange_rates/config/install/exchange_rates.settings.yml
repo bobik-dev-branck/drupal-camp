@@ -1,2 +1,2 @@
 show_block: 0
-url: 'https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?json'
+url: 'https://bank.gov.ua/NBU_Exchange/exchange_site'
