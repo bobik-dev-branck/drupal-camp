@@ -1,15 +1,4 @@
-{% if data %}
-  <h2>Exchanges rate</h2>
-  {% for currency, currencyData in data %}
-    <div class="currency">
-      <div>
-        <p class="currency-one ">{{ currency }}</p>
-        {% for date, rate in currencyData %}
-          <div class="currency-data">
-            <span>{{ date }}</span> - <span>{{ rate }}</span>
-          </div>
-        {% endfor%}
-      </div>
-    </div>
-  {% endfor %}
-{% endif %}
+<div>
+  <canvas id="exchangeRates"></canvas>
+</div>
+
