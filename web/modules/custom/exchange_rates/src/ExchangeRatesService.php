@@ -5,6 +5,7 @@ namespace Drupal\exchange_rates;
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Datetime\DrupalDateTime;
 use Drupal\Core\Logger\LoggerChannelFactoryInterface;
+use Drupal\Core\Session\AccountProxyInterface;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
 use GuzzleHttp\ClientInterface;
 use Drupal\Core\Database\Connection;
@@ -31,6 +32,13 @@ class ExchangeRatesService {
   protected $configFactory;
 
   /**
+   * The current user.
+   *
+   * @var \Drupal\Core\Session\AccountProxyInterface
+   */
+  protected $currentUser;
+
+  /**
    * Constructs an ExchangeRatesService object.
    *
    * @param \GuzzleHttp\ClientInterface $client
@@ -41,12 +49,15 @@ class ExchangeRatesService {
    *   The logger factory.
    * @param \Drupal\Core\Database\Connection $database
    *   The database connection.
+   * @param \Drupal\Core\Session\AccountProxyInterface $current_user
+   *   The current user.
    */
-  public function __construct(ClientInterface $client, ConfigFactoryInterface $config_factory, LoggerChannelFactoryInterface $logger, Connection $database) {
+  public function __construct(ClientInterface $client, ConfigFactoryInterface $config_factory, LoggerChannelFactoryInterface $logger, Connection $database, AccountProxyInterface $current_user) {
     $this->client = $client;
     $this->configFactory = $config_factory;
     $this->logger = $logger;
     $this->database = $database;
+    $this->currentUser = $current_user;
   }
 
   /**
@@ -112,7 +123,7 @@ class ExchangeRatesService {
 
       foreach ($exchangeRates as $exchangeRate) {
         $data[$i]['currency'] = $exchangeRate->cc;
-        $data[$i]['date'] = strtotime($exchangeRate->exchangedate);
+        $data[$i]['date'] = DrupalDateTime::createFromFormat('d.m.Y', $exchangeRate->exchangedate, 'UTC')->getTimestamp();
         $data[$i]['rate'] = $exchangeRate->rate;
 
         $i++;
@@ -205,8 +216,19 @@ class ExchangeRatesService {
    */
   public function getSavedExchangeRates() {
     $fields = ['currency', 'date', 'rate'];
-    $startOfRange = strtotime($this->getConfig('date'));
     $currentTime = new DrupalDateTime('', 'UTC');
+
+    if ($this->currentUser->hasPermission('exchange_rates.premium_user')) {
+      $startOfRange = $currentTime->getTimestamp();
+      $startOfRange = $startOfRange - ($this->getConfig('premium_user_range') * (60 * 60 * 24));
+
+    }
+    else {
+      $startOfRange = $currentTime->getTimestamp();
+      $startOfRange = $startOfRange - ($this->getConfig('simple_user_range') * (60 * 60 * 24));
+
+    }
+
     $endOfRange = $currentTime->getTimestamp();
 
     $query = $this->database->select('exchange_rates', 'e')->fields('e', $fields);
@@ -275,8 +297,8 @@ class ExchangeRatesService {
 
     }
     else {
-      $date = DrupalDateTime::createFromTimestamp($savedExchangeRatesOnDate, 'UTC');
-      $endOfRange = $date->format('Ymd') - 1;
+      $date = DrupalDateTime::createFromTimestamp(($savedExchangeRatesOnDate - 86400), 'UTC');
+      $endOfRange = $date->format('Ymd');
 
     }
 
@@ -291,14 +313,14 @@ class ExchangeRatesService {
    * Runs auto-update ExchangeRate.
    */
   public function autoUpdateExchangeRate() {
-    $hasDataOn = DrupalDateTime::createFromTimestamp($this->getEndRangeDate(), 'UTC');
-    $hasDataOn = $hasDataOn->format('Ymd');
+    $dateNextUpdate = DrupalDateTime::createFromTimestamp(($this->getEndRangeDate() + 86400), 'UTC');
+    $dateNextUpdate = $dateNextUpdate->format('Ymd');
 
     $currentDate = new DrupalDateTime('', 'UTC');
     $currentDate = $currentDate->format('Ymd');
 
-    if ($hasDataOn < $currentDate) {
-      $startOfRange = $hasDataOn + 1;
+    if ($dateNextUpdate < $currentDate) {
+      $startOfRange = $dateNextUpdate;
       $this->saveExchangeRates($startOfRange, $currentDate);
 
     }
