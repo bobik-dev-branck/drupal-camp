@@ -1,0 +1,5 @@
+name: Article Title Override
+type: module
+description: Override default article title and custom.
+package: Custom
+core_version_requirement: ^9 || ^10
