@@ -1,9 +1,15 @@
 uuid: f133cd29-ef1a-48a4-b1fc-d221ba586b86
 langcode: en
 status: true
-dependencies: {  }
+dependencies:
+  module:
+    - exchange_rates
 id: premium_user
 label: 'Premium User'
 weight: 4
 is_admin: null
-permissions: {  }
+permissions:
+  - 'access user profiles'
+  - 'change own username'
+  - exchange_rates.premium_user
+  - 'premium user'
