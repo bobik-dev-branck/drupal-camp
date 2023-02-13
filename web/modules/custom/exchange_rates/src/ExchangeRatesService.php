@@ -3,9 +3,12 @@
 namespace Drupal\exchange_rates;
 
 use Drupal\Core\Config\ConfigFactoryInterface;
+use Drupal\Core\Datetime\DrupalDateTime;
 use Drupal\Core\Logger\LoggerChannelFactoryInterface;
+use Drupal\Core\Session\AccountProxyInterface;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
 use GuzzleHttp\ClientInterface;
+use Drupal\Core\Database\Connection;
 
 /**
  * Provides functionality for fetching exchange rates via API.
@@ -29,11 +32,11 @@ class ExchangeRatesService {
   protected $configFactory;
 
   /**
-   * Logger Factory.
+   * The current user.
    *
-   * @var \Drupal\Core\Logger\LoggerChannelFactoryInterface
+   * @var \Drupal\Core\Session\AccountProxyInterface
    */
-  protected $logger;
+  protected $currentUser;
 
   /**
    * Constructs an ExchangeRatesService object.
@@ -44,11 +47,17 @@ class ExchangeRatesService {
    *   The config factory.
    * @param \Drupal\Core\Logger\LoggerChannelFactoryInterface $logger
    *   The logger factory.
+   * @param \Drupal\Core\Database\Connection $database
+   *   The database connection.
+   * @param \Drupal\Core\Session\AccountProxyInterface $current_user
+   *   The current user.
    */
-  public function __construct(ClientInterface $client, ConfigFactoryInterface $config_factory, LoggerChannelFactoryInterface $logger) {
+  public function __construct(ClientInterface $client, ConfigFactoryInterface $config_factory, LoggerChannelFactoryInterface $logger, Connection $database, AccountProxyInterface $current_user) {
     $this->client = $client;
     $this->configFactory = $config_factory;
     $this->logger = $logger;
+    $this->database = $database;
+    $this->currentUser = $current_user;
   }
 
   /**
@@ -71,15 +80,28 @@ class ExchangeRatesService {
    *
    * @param string $url
    *   The static part of URL for API.
+   * @param string|null $startRange
+   *   Start of range in parameters.
+   * @param string|null $endRange
+   *   End of range in parameters.
    *
    * @return string
    *   The full URL for API.
    */
-  public function buildUrl($url) {
-    $defaultDate = $this->getConfig('date');
+  public function buildUrl($url, $startRange = NULL, $endRange = NULL) {
+    if (!$startRange) {
+      $startRange = new DrupalDateTime('', 'UTC');
+      $startRange = $startRange->format('Ymd');
+    }
+
+    if (!$endRange) {
+      $endRange = new DrupalDateTime('', 'UTC');
+      $endRange = $endRange->format('Ymd');
+    }
+
     $tail = '&sort=exchangedate&order=desc&json';
 
-    $fullUrl = $url . '?start=' . $defaultDate . '&end=' . date('Ymd') . $tail;
+    $fullUrl = $url . '?start=' . $startRange . '&end=' . $endRange . $tail;
 
     return $fullUrl;
   }
@@ -90,21 +112,27 @@ class ExchangeRatesService {
    * @param string $url
    *   The url to API Exchange Rates.
    *
-   * @return array|null
-   *   The uri link, NULL otherwise.
+   * @return array
+   *   The data with API, NULL otherwise.
    */
   public function getExchangeRates($url) {
     try {
       $request = $this->client->get($url)->getBody();
       $exchangeRates = json_decode($request);
-      foreach ($exchangeRates as $exchangeRate) {
+      $i = 0;
 
-        $data[$exchangeRate->cc][$exchangeRate->exchangedate] = $exchangeRate->rate;
+      foreach ($exchangeRates as $exchangeRate) {
+        $data[$i]['currency'] = $exchangeRate->cc;
+        $data[$i]['date'] = DrupalDateTime::createFromFormat('d.m.Y', $exchangeRate->exchangedate, 'UTC')->getTimestamp();
+        $data[$i]['rate'] = $exchangeRate->rate;
+
+        $i++;
       }
+
     }
     catch (\Exception $e) {
       $this->sendLog($e);
-      return;
+      return [];
     }
 
     return $data;
@@ -139,11 +167,164 @@ class ExchangeRatesService {
    *   The Exceptions.
    */
   public function sendLog($error) {
-    $message = $this->t('API isn\'t available - @error', [
+    $message = $this->t('API is not available - @error', [
       '@error' => $error->getMessage(),
     ]);
 
     $this->logger->get('exchange_rates')->notice($message);
+  }
+
+  /**
+   * Saves data got with API to Database.
+   *
+   * @param int $startOfRange
+   *   Start of range in query.
+   * @param int $endOfRange
+   *   End of range in query.
+   */
+  public function saveExchangeRates($startOfRange = NULL, $endOfRange = NULL) {
+    if (!$startOfRange) {
+      $startOfRange = new DrupalDateTime('', 'UTC');
+      $startOfRange = $startOfRange->format('Ymd');
+
+    }
+
+    if (!$endOfRange) {
+      $endOfRange = new DrupalDateTime('', 'UTC');
+      $endOfRange = $endOfRange->format('Ymd');
+
+    }
+
+    $url = $this->buildUrl($this->getConfig('url'), $startOfRange, $endOfRange);
+    $data = $this->getExchangeRates($url);
+    $fields = ['currency', 'date', 'rate'];
+
+    $query = $this->database->insert('exchange_rates')->fields($fields);
+    foreach ($data as $record) {
+      $query->values($record);
+    }
+
+    $query->execute();
+
+  }
+
+  /**
+   * Gets data saved in Database.
+   *
+   * @return array
+   *   The data from Database.
+   */
+  public function getSavedExchangeRates() {
+    $fields = ['currency', 'date', 'rate'];
+    $currentTime = new DrupalDateTime('', 'UTC');
+
+    if ($this->currentUser->hasPermission('exchange_rates.premium_user')) {
+      $startOfRange = $currentTime->getTimestamp();
+      $startOfRange = $startOfRange - ($this->getConfig('premium_user_range') * (60 * 60 * 24));
+
+    }
+    else {
+      $startOfRange = $currentTime->getTimestamp();
+      $startOfRange = $startOfRange - ($this->getConfig('simple_user_range') * (60 * 60 * 24));
+
+    }
+
+    $endOfRange = $currentTime->getTimestamp();
+
+    $query = $this->database->select('exchange_rates', 'e')->fields('e', $fields);
+    $query->condition('date', [$startOfRange, $endOfRange], 'BETWEEN');
+
+    // Gets enabled currency.
+    $mustShow = $this->getConfig('currency');
+    if ($mustShow) {
+      foreach ($mustShow as $currency => $shows) {
+
+        if ($shows) {
+          $isShow[] = $currency;
+
+        }
+
+      }
+
+    }
+
+    $query->condition('currency', $isShow, 'IN');
+    $query->orderBy('date', 'DESK');
+
+    return $query->execute()->fetchAll();
+
+  }
+
+  /**
+   * Returns the minimum date in the database for which has exchange rates.
+   *
+   * @return int
+   *   The minimum date in the database is in timestamp format.
+   */
+  public function getStartRangeDate() {
+    $select = $this->database->select('exchange_rates', 'e');
+    $select->addExpression('MIN(date)');
+    $date = $select->execute()->fetchField();
+
+    return $date;
+  }
+
+  /**
+   * Returns the maximum date in the database for which has exchange rates.
+   *
+   * @return int
+   *   The maximum date in the database is in timestamp format.
+   */
+  public function getEndRangeDate() {
+    $select = $this->database->select('exchange_rates', 'e');
+    $select->addExpression('MAX(date)');
+    $date = $select->execute()->fetchField();
+
+    return $date;
+  }
+
+  /**
+   * Runs Save Data With 'Exchange rates API URL' Form.
+   *
+   * @param int $startOfRange
+   *   Start of range save data.
+   */
+  public function runSaveDataWithForm($startOfRange) {
+    $savedExchangeRatesOnDate = $this->getStartRangeDate();
+    if (!$savedExchangeRatesOnDate) {
+      $date = new DrupalDateTime('', 'UTC');
+      $endOfRange = $date->format('Ymd');
+
+    }
+    else {
+      $date = DrupalDateTime::createFromTimestamp(($savedExchangeRatesOnDate - 86400), 'UTC');
+      $endOfRange = $date->format('Ymd');
+
+    }
+
+    // Save data in DB will run if only was not saved early for this date.
+    if ($startOfRange <= $endOfRange) {
+      $this->saveExchangeRates($startOfRange, $endOfRange);
+    }
+
+  }
+
+  /**
+   * Runs auto-update ExchangeRate.
+   */
+  public function autoUpdateExchangeRate() {
+    $dateNextUpdate = DrupalDateTime::createFromTimestamp(($this->getEndRangeDate() + 86400), 'UTC');
+    $dateNextUpdate = $dateNextUpdate->format('Ymd');
+
+    $currentDate = new DrupalDateTime('', 'UTC');
+    $currentDate = $currentDate->format('Ymd');
+
+    if ($dateNextUpdate < $currentDate) {
+      $startOfRange = $dateNextUpdate;
+      $this->saveExchangeRates($startOfRange, $currentDate);
+
+    }
+
   }
 
 }
